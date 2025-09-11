@@ -1,0 +1,11 @@
+D:\0.StudentClub\src\StudentClub.Domain\bin\Debug\net9.0\StudentClub.Domain.deps.json
+D:\0.StudentClub\src\StudentClub.Domain\bin\Debug\net9.0\StudentClub.Domain.dll
+D:\0.StudentClub\src\StudentClub.Domain\bin\Debug\net9.0\StudentClub.Domain.pdb
+D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\StudentClub.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\StudentClub.Domain.AssemblyInfoInputs.cache
+D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\StudentClub.Domain.AssemblyInfo.cs
+D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\StudentClub.Domain.csproj.CoreCompileInputs.cache
+D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\StudentClub.Domain.dll
+D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\refint\StudentClub.Domain.dll
+D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\StudentClub.Domain.pdb
+D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\ref\StudentClub.Domain.dll

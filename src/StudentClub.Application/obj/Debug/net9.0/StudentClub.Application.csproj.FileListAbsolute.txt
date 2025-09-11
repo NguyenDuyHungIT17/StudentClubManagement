@@ -1,0 +1,15 @@
+D:\0.StudentClub\src\StudentClub.Application\bin\Debug\net9.0\StudentClub.Application.deps.json
+D:\0.StudentClub\src\StudentClub.Application\bin\Debug\net9.0\StudentClub.Application.dll
+D:\0.StudentClub\src\StudentClub.Application\bin\Debug\net9.0\StudentClub.Application.pdb
+D:\0.StudentClub\src\StudentClub.Application\bin\Debug\net9.0\StudentClub.Domain.dll
+D:\0.StudentClub\src\StudentClub.Application\bin\Debug\net9.0\StudentClub.Domain.pdb
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentClub.Application.csproj.AssemblyReference.cache
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentClub.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentClub.Application.AssemblyInfoInputs.cache
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentClub.Application.AssemblyInfo.cs
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentClub.Application.csproj.CoreCompileInputs.cache
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentC.DDB7CCFF.Up2Date
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentClub.Application.dll
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\refint\StudentClub.Application.dll
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentClub.Application.pdb
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\ref\StudentClub.Application.dll

@@ -1,0 +1,6 @@
+@StudentClub.API_HostAddress = http://localhost:5207
+
+GET {{StudentClub.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
