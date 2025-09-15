@@ -13,3 +13,4 @@ D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentClub.Applic
 D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\refint\StudentClub.Application.dll
 D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentClub.Application.pdb
 D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\ref\StudentClub.Application.dll
+D:\0.StudentClub\src\StudentClub.Application\obj\Debug\net9.0\StudentClub.Application.sourcelink.json

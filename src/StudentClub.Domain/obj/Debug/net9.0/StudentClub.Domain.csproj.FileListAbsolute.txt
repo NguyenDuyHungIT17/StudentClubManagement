@@ -9,3 +9,4 @@ D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\StudentClub.Domain.dll
 D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\refint\StudentClub.Domain.dll
 D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\StudentClub.Domain.pdb
 D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\ref\StudentClub.Domain.dll
+D:\0.StudentClub\src\StudentClub.Domain\obj\Debug\net9.0\StudentClub.Domain.sourcelink.json

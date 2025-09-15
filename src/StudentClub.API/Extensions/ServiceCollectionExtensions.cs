@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.IdentityModel.Tokens.Experimental;
 using System.Text;
 
 namespace StudentClub.API.Extensions
@@ -22,13 +21,39 @@ namespace StudentClub.API.Extensions
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true, // kiểm tra nhà phát hành
-                    ValidateAudience = true,// kiểm tra đúng đối tuwognj nhận
-                    ValidateLifetime = true, // kiểm tra thời gian token
-                    ValidateIssuerSigningKey = true, // kiểm tra chữ ký
-                    ValidIssuer = configuration["Jwt:Issue"],
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = configuration["Jwt:Issuer"],
                     ValidAudience = configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(key) //  khóa bí mật
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                };
+
+                // 🔹 Thêm event để debug
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine("JWT Authentication Failed:");
+                        Console.WriteLine(context.Exception); // in ra lỗi chi tiết
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
+                    {
+                        Console.WriteLine("JWT Token Validated:");
+                        foreach (var c in context.Principal.Claims)
+                        {
+                            Console.WriteLine($"{c.Type}: {c.Value}");
+                        }
+                        return Task.CompletedTask;
+                    },
+                    OnMessageReceived = context =>
+                    {
+                        Console.WriteLine("JWT Received:");
+                        Console.WriteLine($"Token: {context.Token}");
+                        return Task.CompletedTask;
+                    }
                 };
             });
 
