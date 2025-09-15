@@ -17,3 +17,4 @@ D:\0.StudentClub\src\StudentClub.Infrastructure\obj\Debug\net9.0\refint\StudentC
 D:\0.StudentClub\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.pdb
 D:\0.StudentClub\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.genruntimeconfig.cache
 D:\0.StudentClub\src\StudentClub.Infrastructure\obj\Debug\net9.0\ref\StudentClub.Infrastructure.dll
+D:\0.StudentClub\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.sourcelink.json

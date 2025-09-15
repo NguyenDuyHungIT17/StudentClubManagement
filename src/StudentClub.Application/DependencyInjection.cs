@@ -9,7 +9,9 @@ namespace StudentClub.Application
         {
           
             services.AddScoped<AuthService, AuthService>();
-
+            services.AddScoped<UserService, UserService>();
+            services.AddScoped<ClubService, ClubService>();
+            services.AddScoped<ClubMemberService, ClubMemberService>();
             return services;
         }
     }

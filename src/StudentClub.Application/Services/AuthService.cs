@@ -1,9 +1,10 @@
 ﻿using StudentClub.Application.DTOs;
 using StudentClub.Application.Interfaces;
+using StudentClub.Application.IServices;
 
 namespace StudentClub.Application.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
@@ -28,6 +29,11 @@ namespace StudentClub.Application.Services
             bool isValid = _passwordHasher.Verify(request.Password, user.PasswordHash);
             if (!isValid)
                 return null;
+
+            int isActive = await _userRepository.GetIsActiveByEmailAsync(request.Email);
+            if (isActive == 0) return null;
+
+
 
             var token = _tokenGenerator.GenerateToken(user.UserId, user.Email, user.Role);
 

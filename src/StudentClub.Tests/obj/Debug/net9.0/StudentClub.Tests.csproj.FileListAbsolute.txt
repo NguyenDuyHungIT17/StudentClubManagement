@@ -96,3 +96,4 @@ D:\0.StudentClub\src\StudentClub.Tests\obj\Debug\net9.0\refint\StudentClub.Tests
 D:\0.StudentClub\src\StudentClub.Tests\obj\Debug\net9.0\StudentClub.Tests.pdb
 D:\0.StudentClub\src\StudentClub.Tests\obj\Debug\net9.0\StudentClub.Tests.genruntimeconfig.cache
 D:\0.StudentClub\src\StudentClub.Tests\obj\Debug\net9.0\ref\StudentClub.Tests.dll
+D:\0.StudentClub\src\StudentClub.Tests\obj\Debug\net9.0\StudentClub.Tests.sourcelink.json

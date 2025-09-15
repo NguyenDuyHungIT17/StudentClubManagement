@@ -19,7 +19,8 @@ namespace StudentClub.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
-
+            services.AddScoped<IClubRepository, ClubRepository>();
+            services.AddScoped<IClubMemberRepository, CLubMemberRepository>();
 
             return services;
         }
