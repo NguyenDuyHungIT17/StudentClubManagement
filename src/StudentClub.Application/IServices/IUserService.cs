@@ -15,6 +15,7 @@ namespace StudentClub.Application.IServices
         Task UpdateIsActiveUserAsync(int isActive, int userId);
         Task DeleteUserAsync(int requesterId, string requesterRole, int targetUserId);
 
-
+        Task <List<GetAllUsersResponseDto>> GetAllUsersAsync(int id);
+        Task<GetUserResponseDto?> GetUserByIdAsync(int userId, string roleUser, int userIdOnToken);
     }
 }

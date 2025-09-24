@@ -25,5 +25,7 @@ namespace StudentClub.API.Controllers
             var result = await _memberService.CreateClubMemberAsync(createClubMemberRequestDto);
             return Ok(result);
         }
+
+       
     }
 }

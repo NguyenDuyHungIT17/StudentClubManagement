@@ -17,12 +17,25 @@ namespace StudentClub.Application.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IClubMemberRepository _clubMemberRepository;
         private readonly IPasswordHasher _passwordHasher;
 
-        public UserService(IUserRepository userRepository, IPasswordHasher passwordHasher)
+        public UserService(IUserRepository userRepository, IClubMemberRepository clubMemberRepository,  IPasswordHasher passwordHasher)
         {
+            _clubMemberRepository = clubMemberRepository;
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
+        }
+        //map user -> getuserResponseDto
+        private GetUserResponseDto MapToDto(User user)
+        {
+            return new GetUserResponseDto
+            {
+                Email = user.Email,
+                FullName = user.FullName,
+                Role = user.Role,
+                IsActive = user.IsActive
+            };
         }
 
         public async Task<CreateUserResponseDto> CreateUserAsync(CreateUserRequestDto createUserRequset)
@@ -60,11 +73,9 @@ namespace StudentClub.Application.Services
             if (user == null)
                 throw new KeyNotFoundException("User does not exist");
 
-            // Admin và Leader có thể chỉnh tất cả
             if (role == "member" && userIdFromToken != targetUserId)
                 throw new UnauthorizedAccessException("Bạn không có quyền chỉnh sửa user này.");
 
-            // Cập nhật thông tin
             user.FullName = string.IsNullOrWhiteSpace(request.FullName) ? user.FullName : request.FullName;
             user.Email = string.IsNullOrWhiteSpace(request.Email) ? user.Email : request.Email;
             user.UpdatedAt = DateTime.UtcNow;
@@ -117,5 +128,78 @@ namespace StudentClub.Application.Services
 
             await _userRepository.SaveChangeAsynce();
         }
+
+        public async Task<List<GetAllUsersResponseDto>> GetAllUsersAsync(int id)
+        {
+            var user = await _userRepository.GetUserByUserIdAsync(id);
+            var users =  await _userRepository.GetAllUsersAsync();
+            if (users == null) throw new KeyNotFoundException("không có người dùng, hoặc bạn không đủ quyền");
+
+            var userDtos = new List<GetAllUsersResponseDto>();
+            if ( user.Role == "admin")
+            {
+                userDtos = users.Select(u => new GetAllUsersResponseDto
+                {
+                    Email = u.Email,
+                    FullName = u.FullName,
+                    Role = u.Role,
+                    IsActive = u.IsActive,
+                }).ToList();
+            }
+            
+            if (user.Role == "leader")
+            {
+                var clubId = await _clubMemberRepository.GetClubIdByUserId(id);
+                var usersLeader = await _userRepository.GetUserByLeader(clubId);
+                userDtos = usersLeader.Select(u => new GetAllUsersResponseDto
+                {
+                    Email = u.Email,
+                    FullName = u.FullName,
+                    Role = u.Role,
+                    IsActive = u.IsActive,
+                }).ToList();
+            }
+
+            return userDtos; 
+        }
+
+        public async Task<GetUserResponseDto?> GetUserByIdAsync(int userId, string roleUser, int userIdOnToken)
+        {
+            var user = await _userRepository.GetUserByUserIdAsync(userId);
+            if (user == null) return null;
+
+            if (roleUser == "admin")
+            {
+                return MapToDto(user);
+            }
+
+            if (roleUser == "leader")
+            {
+                if (user.Role == "admin") return null;
+
+                if (user.Role == "leader" && userId == userIdOnToken)
+                {
+                    return MapToDto(user);
+                }
+
+                var clubId = await _clubMemberRepository.GetClubIdByUserId(userIdOnToken);
+                var usersInClub = await _userRepository.GetUserByLeader(clubId); 
+
+                if (usersInClub.Any(u => u.UserId == userId))
+                {
+                    return MapToDto(user);
+                }
+
+                return null;
+            }
+
+            if (roleUser == "member")
+            {
+                return userId == userIdOnToken ? MapToDto(user) : null;
+            }
+
+            return null;
+        }
+
     }
 }

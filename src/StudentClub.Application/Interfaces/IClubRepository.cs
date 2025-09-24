@@ -11,6 +11,8 @@ namespace StudentClub.Application.Interfaces
     {
         Task<Club> GetClubByClubNameAsync (string clubName);
         Task<Club> GetClubByClubIdAsync(int id);
+        Task<List<Club>> GetClubsAsync();
+        Task<Club> GetClubAsync(int id);
         Task UpdateLeaderIdAsync(int clubId, int leaderId);
         Task UpdateClubAsync (Club club);
         Task AddClubAsync(Club club);

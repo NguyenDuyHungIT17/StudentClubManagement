@@ -43,7 +43,7 @@ namespace StudentClub.Infrastructure.Repositories
 
         public async Task UpdateUserAsync(User user)
         {
-            _context.Users.Update(user);
+           _context.Users.Update(user);
         }
 
         public async Task DeleteUserAsync(User user)
@@ -51,7 +51,7 @@ namespace StudentClub.Infrastructure.Repositories
             var feedbacks = _context.Feedbacks.Where(f => f.UserId == user.UserId);
             var registration = _context.EventRegistrations.Where(r => r.UserId == user.UserId);
             var clubMembers = _context.ClubMembers.Where(c => c.UserId == user.UserId);
-            var clubsLeader = _context.Clubs.Where( cl => cl.LeaderId == user.UserId);
+            var clubsLeader = _context.Clubs.Where(cl => cl.LeaderId == user.UserId);
 
             _context.Feedbacks.RemoveRange(feedbacks);
             _context.EventRegistrations.RemoveRange(registration);
@@ -61,6 +61,22 @@ namespace StudentClub.Infrastructure.Repositories
 
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
+            //var userId = user.UserId;
+
+            //await _context.Database.ExecuteSqlRawAsync(
+            //    "DELETE FROM Feedbacks WHERE UserId = {0}", userId);
+
+            //await _context.Database.ExecuteSqlRawAsync(
+            //    "DELETE FROM EventRegistrations WHERE UserId = {0}", userId);
+
+            //await _context.Database.ExecuteSqlRawAsync(
+            //    "DELETE FROM ClubMembers WHERE UserId = {0}", userId);
+
+            //await _context.Database.ExecuteSqlRawAsync(
+            //    "UPDATE Clubs SET LeaderId = NULL WHERE LeaderId = {0}", userId);
+
+            //await _context.Database.ExecuteSqlRawAsync(
+            //    "DELETE FROM Users WHERE UserId = {0}", userId);
         }
 
         public async Task<int> GetIsActiveByEmailAsync(string email)
@@ -69,6 +85,21 @@ namespace StudentClub.Infrastructure.Repositories
             if (user == null)
                 return 0;
             return user.IsActive == 1 ? 1 : 0;
+        }
+
+        public async Task<List<User>?> GetAllUsersAsync()
+        {      
+                return await _context.Users.ToListAsync();
+        }
+
+        public async Task<List<User>> GetUserByLeader(int clubId)
+        {
+            var users = await (from cm in _context.ClubMembers
+                               join u in _context.Users on cm.UserId equals u.UserId
+                               where cm.ClubId == clubId && cm.MemberRole == "member"
+                               select u).ToListAsync();
+
+            return users;
         }
     }
 }

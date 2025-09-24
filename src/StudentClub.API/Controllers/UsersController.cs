@@ -27,6 +27,81 @@ namespace StudentClub.API.Controllers
             var result = await _userService.CreateUserAsync(request);
             return Ok(result);
         }
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetUserAsync(int userId)
+        {
+            try
+            {
+                var userIdOnToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var roleUserOnToken = User.FindFirst(ClaimTypes.Role)?.Value;
+                if (string.IsNullOrEmpty(userIdOnToken) || string.IsNullOrEmpty(roleUserOnToken))
+                {
+                    return Unauthorized(new { message = "Token không hợp lệ" });
+                }
+
+                if (!int.TryParse(userIdOnToken, out int userIdFromToken))
+                {
+                    return Unauthorized(new { message = "UserId trong token không hợp lệ" });
+                }
+
+                var user = await _userService.GetUserByIdAsync(userId, roleUserOnToken, userIdFromToken);
+                
+                if (user == null)
+                {
+                    return NotFound("Không tồn tại người dùng, hoặc bản không đủ quyền truy cập");
+                }
+                return Ok(user);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin, leader")]
+        public async Task<IActionResult> GetAllUsersAsync()
+        {
+            try
+            {
+                var userIdOnToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var roleUserOnToken = User.FindFirst(ClaimTypes.Role)?.Value;
+                if (string.IsNullOrEmpty(userIdOnToken) || string.IsNullOrEmpty(roleUserOnToken))
+                {
+                    return Unauthorized(new { message = "Token không hợp lệ" });
+                }
+
+                if (!int.TryParse(userIdOnToken, out int userIdFromToken))
+                {
+                    return Unauthorized(new { message = "UserId trong token không hợp lệ" });
+                }
+
+                var users = await _userService.GetAllUsersAsync(userIdFromToken);
+                return Ok(users);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)   
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         [HttpPut("{id}")]
         [Authorize]
@@ -55,7 +130,7 @@ namespace StudentClub.API.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                return Forbid(ex.Message); // 403
+                return Forbid(ex.Message); 
             }
             catch (KeyNotFoundException ex)
             {
@@ -105,7 +180,6 @@ namespace StudentClub.API.Controllers
 
             try
             {
-                
                 await _userService.DeleteUserAsync(userIdFromToken, role, id);
                 return Ok(new { message = "User đã được xóa thành công" });
             }

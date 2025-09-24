@@ -63,5 +63,7 @@ namespace StudentClub.Application.Services
                 MemberRole = clubMember.MemberRole,
             };
         }
+
+
     }
 }

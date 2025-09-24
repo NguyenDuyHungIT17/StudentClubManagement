@@ -15,12 +15,12 @@ namespace StudentClub.Infrastructure
             services.AddDbContext<StudentClubDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            // đăng ký repository
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<IClubRepository, ClubRepository>();
             services.AddScoped<IClubMemberRepository, CLubMemberRepository>();
+            services.AddScoped<IInterviewRepository, InterviewRepository>();
 
             return services;
         }

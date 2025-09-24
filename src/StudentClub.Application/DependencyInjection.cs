@@ -12,6 +12,7 @@ namespace StudentClub.Application
             services.AddScoped<UserService, UserService>();
             services.AddScoped<ClubService, ClubService>();
             services.AddScoped<ClubMemberService, ClubMemberService>();
+            services.AddScoped<InterviewService, InterviewService>();
             return services;
         }
     }

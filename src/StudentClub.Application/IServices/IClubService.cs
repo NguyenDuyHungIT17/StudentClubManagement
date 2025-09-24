@@ -14,6 +14,9 @@ namespace StudentClub.Application.IServices
         Task<CreateClubResponseDto> CreateClubAsync(CreateClubRequestDto createClubRequestDto);
 
         Task<UpdateClubResponseDto> UpdateClubAsync(UpdateClubRequestDto updateClubRequestDto);
+
+        Task<List<GetAllClubsResponseDto>> GetAllClubAsync();
+        Task<GetClubResponseDto> GetClubAsync(int clubId);
         Task DeleteClubAsync(int clubId);
     }
 }
