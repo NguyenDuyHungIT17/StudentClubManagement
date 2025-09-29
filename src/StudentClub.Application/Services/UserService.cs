@@ -76,10 +76,16 @@ namespace StudentClub.Application.Services
             if (role == "member" && userIdFromToken != targetUserId)
                 throw new UnauthorizedAccessException("Bạn không có quyền chỉnh sửa user này.");
 
+
+            if (request.isActive != 0 && request.isActive != 1)
+                throw new ArgumentException("Giá trị IsActive chỉ có thể là 0 hoặc 1.");
+
             user.FullName = string.IsNullOrWhiteSpace(request.FullName) ? user.FullName : request.FullName;
             user.Email = string.IsNullOrWhiteSpace(request.Email) ? user.Email : request.Email;
             user.UpdatedAt = DateTime.UtcNow;
+            user.IsActive = request.isActive;
 
+            await _userRepository.SaveChangeAsynce();
             await _userRepository.UpdateUserAsync(user);
             await _userRepository.SaveChangeAsynce();
 
@@ -87,7 +93,8 @@ namespace StudentClub.Application.Services
             {
                 FullName = user.FullName,
                 Role = user.Role,
-                Email = user.Email
+                Email = user.Email,
+                IsActive = user.IsActive
             };
         }
 
@@ -140,6 +147,7 @@ namespace StudentClub.Application.Services
             {
                 userDtos = users.Select(u => new GetAllUsersResponseDto
                 {
+                    userId = u.UserId,
                     Email = u.Email,
                     FullName = u.FullName,
                     Role = u.Role,
@@ -153,6 +161,7 @@ namespace StudentClub.Application.Services
                 var usersLeader = await _userRepository.GetUserByLeader(clubId);
                 userDtos = usersLeader.Select(u => new GetAllUsersResponseDto
                 {
+                    userId = u.UserId,
                     Email = u.Email,
                     FullName = u.FullName,
                     Role = u.Role,

@@ -102,5 +102,11 @@ namespace StudentClub.Infrastructure.Repositories
             var club = await _context.Clubs.FirstOrDefaultAsync(x => x.ClubId == id);
             return club;
         }
+
+        public async Task<string?> GetCLubNameByClubIdAsync(int clubId)
+        {
+            var clubName = await _context.Clubs.Where(c => c.ClubId == clubId).Select( c => c.ClubName).FirstOrDefaultAsync();
+            return clubName;
+        }
     }
 }

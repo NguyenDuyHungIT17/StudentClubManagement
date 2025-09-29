@@ -4,6 +4,7 @@ using StudentClub.Application.DTOs;
 using StudentClub.Application.IServices;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using StudentClub.Application.Services;
 
 namespace StudentClub.API.Controllers
 {
@@ -26,6 +27,25 @@ namespace StudentClub.API.Controllers
             {
                 var (userId, role) = GetUserContext();
                 var result = await _service.CreateAsync(request, userId, role);
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("web")]
+        public async Task<IActionResult> CreateWeb([FromBody] CreateInterviewRequestDto request)
+        {
+            try
+            {
+
+                var result = await _service.CreateWebAsync(request);
                 return Ok(result);
             }
             catch (UnauthorizedAccessException ex)
@@ -87,13 +107,20 @@ namespace StudentClub.API.Controllers
         // Hàm lấy userId và role từ JWT
         private (int userId, string role) GetUserContext()
         {
-            var userIdClaim = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-            var roleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+            var userIdOnToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var roleUserOnToken = User.FindFirst(ClaimTypes.Role)?.Value;
 
-            if (string.IsNullOrEmpty(userIdClaim) || string.IsNullOrEmpty(roleClaim))
-                throw new UnauthorizedAccessException("Token không hợp lệ");
+            if (string.IsNullOrEmpty(userIdOnToken) || string.IsNullOrEmpty(roleUserOnToken))
+            {
+                Unauthorized(new { message = "Token không hợp lệ" });
+            }
 
-            return (int.Parse(userIdClaim), roleClaim);
+            if (!int.TryParse(userIdOnToken, out int userIdFromToken))
+            {
+                Unauthorized(new { message = "UserId trong token không hợp lệ" });
+            }
+
+            return (userIdFromToken, roleUserOnToken);
         }
     }
 }

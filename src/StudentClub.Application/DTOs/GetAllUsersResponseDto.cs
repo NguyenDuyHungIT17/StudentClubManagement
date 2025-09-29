@@ -8,6 +8,7 @@ namespace StudentClub.Application.DTOs
 {
     public class GetAllUsersResponseDto
     {
+        public int userId {  get; set; }    
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
 

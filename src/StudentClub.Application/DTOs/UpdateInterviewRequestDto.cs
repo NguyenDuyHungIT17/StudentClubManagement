@@ -9,7 +9,7 @@ namespace StudentClub.Application.DTOs
     public class UpdateInterviewRequestDto
     {
         public string? Evaluation { get; set; }
-        public string Result { get; set; } = "Pending"; // Fail | Pass | Pending
+        public string Result { get; set; } = "Pending"; 
     }
 
 }

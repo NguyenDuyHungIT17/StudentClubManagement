@@ -11,6 +11,6 @@ namespace StudentClub.Application.DTOs
         public int ClubId { get; set; }
         public string ApplicantName { get; set; } = null!;
         public string ApplicantEmail { get; set; } = null!;
+        public string Evaluation { get; set; } 
     }
-
 }

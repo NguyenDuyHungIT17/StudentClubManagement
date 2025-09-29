@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StudentClub.Application.DTOs;
 using StudentClub.Application.DTOs.User;
+using StudentClub.Application.IServices;
 using StudentClub.Application.Services;
 using System;
 using System.Security.Claims;
@@ -13,9 +14,9 @@ namespace StudentClub.API.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public UsersController(UserService userService)
+        public UsersController(IUserService userService)
         {
             _userService = userService;
         }
@@ -27,7 +28,7 @@ namespace StudentClub.API.Controllers
             var result = await _userService.CreateUserAsync(request);
             return Ok(result);
         }
-        [HttpGet("{id}")]
+        [HttpGet("{userId}")]
         [Authorize]
         public async Task<IActionResult> GetUserAsync(int userId)
         {

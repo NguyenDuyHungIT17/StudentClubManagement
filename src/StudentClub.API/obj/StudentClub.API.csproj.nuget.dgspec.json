@@ -179,9 +179,21 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.13.0, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[13.0.0, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[9.0.9, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.13.0, )"
             }
           },
           "imports": [

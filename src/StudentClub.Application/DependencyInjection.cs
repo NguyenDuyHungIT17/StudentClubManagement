@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿
+using Microsoft.Extensions.DependencyInjection;
+
+using StudentClub.Application.IServices;
+
 using StudentClub.Application.Services;
 
 namespace StudentClub.Application
@@ -8,11 +12,13 @@ namespace StudentClub.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
           
-            services.AddScoped<AuthService, AuthService>();
-            services.AddScoped<UserService, UserService>();
-            services.AddScoped<ClubService, ClubService>();
-            services.AddScoped<ClubMemberService, ClubMemberService>();
-            services.AddScoped<InterviewService, InterviewService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IClubService, ClubService>();
+            services.AddScoped<IClubMemberService, ClubMemberService>();
+            services.AddScoped<IInterviewService, InterviewService>();
+            services.AddScoped<IEventService, EventService>();
+
             return services;
         }
     }

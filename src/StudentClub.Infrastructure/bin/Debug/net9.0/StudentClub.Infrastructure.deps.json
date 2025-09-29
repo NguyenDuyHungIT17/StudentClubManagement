@@ -619,6 +619,17 @@
           }
         }
       },
+      "Microsoft.Extensions.Configuration.Binder/9.0.9": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.9"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.Configuration.Binder.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.925.41916"
+          }
+        }
+      },
       "Microsoft.Extensions.DependencyInjection/9.0.9": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.9"
@@ -677,6 +688,21 @@
         },
         "runtime": {
           "lib/net9.0/Microsoft.Extensions.Options.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.925.41916"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options.ConfigurationExtensions/9.0.9": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.9",
+          "Microsoft.Extensions.Configuration.Binder": "9.0.9",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.9",
+          "Microsoft.Extensions.Options": "9.0.9",
+          "Microsoft.Extensions.Primitives": "9.0.9"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {
             "assemblyVersion": "9.0.0.0",
             "fileVersion": "9.0.925.41916"
           }
@@ -1103,7 +1129,10 @@
         "dependencies": {
           "AutoMapper": "15.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "MailKit": "4.13.0",
           "MediatR": "13.0.0",
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "9.0.9",
+          "MimeKit": "4.13.0",
           "StudentClub.Domain": "1.0.0"
         },
         "runtime": {
@@ -1346,6 +1375,13 @@
       "path": "microsoft.extensions.configuration.abstractions/9.0.9",
       "hashPath": "microsoft.extensions.configuration.abstractions.9.0.9.nupkg.sha512"
     },
+    "Microsoft.Extensions.Configuration.Binder/9.0.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6SIp/6Bngk4jm2W36JekZbiIbFPdE/eMUtrJEqIqHGpd1zar3jvgnwxnpWQfzUiGrkyY8q8s6V82zkkEZozghA==",
+      "path": "microsoft.extensions.configuration.binder/9.0.9",
+      "hashPath": "microsoft.extensions.configuration.binder.9.0.9.nupkg.sha512"
+    },
     "Microsoft.Extensions.DependencyInjection/9.0.9": {
       "type": "package",
       "serviceable": true,
@@ -1387,6 +1423,13 @@
       "sha512": "sha512-loxGGHE1FC2AefwPHzrjPq7X92LQm64qnU/whKfo6oWaceewPUVYQJBJs3S3E2qlWwnCpeZ+dGCPTX+5dgVAuQ==",
       "path": "microsoft.extensions.options/9.0.9",
       "hashPath": "microsoft.extensions.options.9.0.9.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options.ConfigurationExtensions/9.0.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-n4DCdnn2qs6V5U06Sx62FySEAZsJiJJgOzrPHDh9hPK7c2W8hEabC76F3Re3tGPjpiKa02RvB6FxZyxo8iICzg==",
+      "path": "microsoft.extensions.options.configurationextensions/9.0.9",
+      "hashPath": "microsoft.extensions.options.configurationextensions.9.0.9.nupkg.sha512"
     },
     "Microsoft.Extensions.Primitives/9.0.9": {
       "type": "package",

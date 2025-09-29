@@ -111,6 +111,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "CreateEvent",
+    "RelativePath": "api/Event",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "StudentClub.Application.DTOs.CreateEventRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "UpdateEvent",
+    "RelativePath": "api/Event/{eventId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "StudentClub.Application.DTOs.UpdateEventRequestDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "StudentClub.API.Controllers.InterviewsController",
     "Method": "Create",
     "RelativePath": "api/Interviews",
@@ -164,6 +201,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "StudentClub.API.Controllers.InterviewsController",
+    "Method": "CreateWeb",
+    "RelativePath": "api/Interviews/web",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "StudentClub.Application.DTOs.CreateInterviewRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "StudentClub.API.Controllers.UsersController",
     "Method": "CreateUser",
     "RelativePath": "api/Users",
@@ -187,27 +240,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "StudentClub.API.Controllers.UsersController",
-    "Method": "GetUserAsync",
-    "RelativePath": "api/Users/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   },
   {
@@ -263,6 +295,22 @@
       {
         "Name": "request",
         "Type": "StudentClub.Application.DTOs.UpdateIsActiveUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.UsersController",
+    "Method": "GetUserAsync",
+    "RelativePath": "api/Users/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

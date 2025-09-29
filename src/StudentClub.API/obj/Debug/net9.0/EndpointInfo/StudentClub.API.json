@@ -191,7 +191,111 @@
         }
       }
     },
+    "/api/Event": {
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEventRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEventRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEventRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Event/{eventId}": {
+      "put": {
+        "tags": [
+          "Event"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Interviews": {
+      "post": {
+        "tags": [
+          "Interviews"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterviewRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterviewRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterviewRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Interviews/web": {
       "post": {
         "tags": [
           "Interviews"
@@ -328,7 +432,7 @@
         }
       }
     },
-    "/api/Users/{id}": {
+    "/api/Users/{userId}": {
       "get": {
         "tags": [
           "Users"
@@ -336,18 +440,11 @@
         "parameters": [
           {
             "name": "userId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -356,7 +453,9 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/api/Users/{id}": {
       "put": {
         "tags": [
           "Users"
@@ -500,6 +599,39 @@
         },
         "additionalProperties": false
       },
+      "CreateEventRequestDto": {
+        "type": "object",
+        "properties": {
+          "clubId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "createAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateInterviewRequestDto": {
         "type": "object",
         "properties": {
@@ -512,6 +644,10 @@
             "nullable": true
           },
           "applicantEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "evaluation": {
             "type": "string",
             "nullable": true
           }
@@ -576,6 +712,35 @@
         },
         "additionalProperties": false
       },
+      "UpdateEventRequestDto": {
+        "type": "object",
+        "properties": {
+          "clubId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "updateAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateInterviewRequestDto": {
         "type": "object",
         "properties": {
@@ -610,6 +775,10 @@
           "fullName": {
             "type": "string",
             "nullable": true
+          },
+          "isActive": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

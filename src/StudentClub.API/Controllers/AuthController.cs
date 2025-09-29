@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentClub.Application.DTOs;
+using StudentClub.Application.IServices;
 using StudentClub.Application.Services;
 
 namespace StudentClub.API.Controllers
@@ -8,9 +9,9 @@ namespace StudentClub.API.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly AuthService _authService;
+        private readonly IAuthService _authService;
 
-        public AuthController(AuthService authService)
+        public AuthController(IAuthService authService)
         {
             _authService = authService;
         }

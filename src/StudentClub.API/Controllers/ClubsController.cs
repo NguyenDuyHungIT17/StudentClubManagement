@@ -21,9 +21,9 @@ namespace StudentClub.API.Controllers
     [Route("api/[controller]")]
     public class ClubsController : Controller
     {
-        private ClubService _clubService;
+        private readonly IClubService _clubService;
 
-        public ClubsController(ClubService clubService)
+        public ClubsController(IClubService clubService)
         {
             _clubService = clubService;
         }

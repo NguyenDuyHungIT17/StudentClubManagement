@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NxxteoylvuQ=",
+  "dgSpecHash": "XSgLXVRgkko=",
   "success": true,
   "projectFilePath": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -35,12 +35,14 @@
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.caching.memory\\9.0.9\\microsoft.extensions.caching.memory.9.0.9.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.9\\microsoft.extensions.configuration.9.0.9.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.9\\microsoft.extensions.configuration.abstractions.9.0.9.nupkg.sha512",
+    "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.configuration.binder\\9.0.9\\microsoft.extensions.configuration.binder.9.0.9.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.9\\microsoft.extensions.dependencyinjection.9.0.9.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.9\\microsoft.extensions.dependencyinjection.abstractions.9.0.9.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.dependencymodel\\9.0.9\\microsoft.extensions.dependencymodel.9.0.9.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.logging\\9.0.9\\microsoft.extensions.logging.9.0.9.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.9\\microsoft.extensions.logging.abstractions.9.0.9.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.options\\9.0.9\\microsoft.extensions.options.9.0.9.nupkg.sha512",
+    "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\9.0.9\\microsoft.extensions.options.configurationextensions.9.0.9.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.9\\microsoft.extensions.primitives.9.0.9.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.identity.client\\4.61.3\\microsoft.identity.client.4.61.3.nupkg.sha512",
     "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\microsoft.identity.client.extensions.msal\\4.61.3\\microsoft.identity.client.extensions.msal.4.61.3.nupkg.sha512",

@@ -8,6 +8,7 @@ namespace StudentClub.Application.Interfaces
     {
         Task<User> GetByEmailAsync(string email);
         Task<int> GetIsActiveByEmailAsync(string email);
+        Task<string?> GetEmailByUserIdAsync(int userId);
         Task<User> GetUserByUserIdAsync(int userId);
         Task<User> GetByFullnameAsync(string username);
         Task<List<User>> GetUserByLeader(int clubId);

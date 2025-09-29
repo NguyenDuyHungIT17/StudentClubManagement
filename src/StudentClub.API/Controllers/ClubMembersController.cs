@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentClub.Application.DTOs;
 using StudentClub.Application.DTOs.Clubs;
+using StudentClub.Application.IServices;
 using StudentClub.Application.Services;
 
 namespace StudentClub.API.Controllers
@@ -11,9 +12,9 @@ namespace StudentClub.API.Controllers
     [ApiController]
     public class ClubMembersController : ControllerBase
     {
-        private readonly ClubMemberService _memberService;
+        private readonly IClubMemberService _memberService;
 
-        public ClubMembersController(ClubMemberService memberService)
+        public ClubMembersController(IClubMemberService memberService)
         {
             _memberService = memberService;
         }

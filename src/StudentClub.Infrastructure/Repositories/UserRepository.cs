@@ -101,5 +101,11 @@ namespace StudentClub.Infrastructure.Repositories
 
             return users;
         }
+
+        public async Task<string?> GetEmailByUserIdAsync(int userId)
+        {
+            var email = await _context.Users.Where(u => u.UserId == userId).Select(u => u.Email).FirstOrDefaultAsync();
+            return email;
+        }
     }
 }
