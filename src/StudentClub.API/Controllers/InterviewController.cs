@@ -13,10 +13,12 @@ namespace StudentClub.API.Controllers
     public class InterviewsController : ControllerBase
     {
         private readonly IInterviewService _service;
+        private readonly IEmailService _emailService;
 
-        public InterviewsController(IInterviewService service)
+        public InterviewsController(IInterviewService service, IEmailService emailService)
         {
             _service = service;
+            _emailService = emailService;
         }
 
         [HttpPost]
@@ -102,9 +104,25 @@ namespace StudentClub.API.Controllers
             }
         }
 
+        //email
+        [HttpPost("club/{clubId}/send-email/{resultType}")]
+        [Authorize(Roles = "admin,leader")]
+        public async Task<IActionResult> SendInterviewResultEmail(int clubId, string resultType)
+        {
+            try
+            {
+                var (userId, role) = GetUserContext();
+                
+                await _emailService.SendInterviewResultEmailAsync(clubId, resultType);
+                return Ok($"Đã gửi email cho các bạn {resultType}.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
 
-        // Hàm lấy userId và role từ JWT
         private (int userId, string role) GetUserContext()
         {
             var userIdOnToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

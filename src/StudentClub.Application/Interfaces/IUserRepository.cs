@@ -18,5 +18,7 @@ namespace StudentClub.Application.Interfaces
         Task SaveChangeAsynce();
         Task UpdateUserAsync(User user);
         Task DeleteUserAsync(User user);
+
+        Task UpdatePasswordAsync(int userId, string newPasswordHash);
     }
 }

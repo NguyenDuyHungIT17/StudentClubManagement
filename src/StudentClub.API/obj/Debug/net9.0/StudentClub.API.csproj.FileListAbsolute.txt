@@ -296,3 +296,7 @@ D:\0.StudentClub\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.RazorAssem
 D:\0.StudentClub\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.RazorAssemblyInfo.cs
 D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Binder.dll
 D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+D:\0.StudentClub\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.MvcApplicationPartsAssemblyInfo.cs
+D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\EmailTemplates\InterviewFail.html
+D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\EmailTemplates\InterviewPass.html
+D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\EmailTemplates\ResetPassword.html

@@ -18,6 +18,7 @@ namespace StudentClub.Application
             services.AddScoped<IClubMemberService, ClubMemberService>();
             services.AddScoped<IInterviewService, InterviewService>();
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             return services;
         }

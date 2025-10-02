@@ -107,5 +107,13 @@ namespace StudentClub.Infrastructure.Repositories
             var email = await _context.Users.Where(u => u.UserId == userId).Select(u => u.Email).FirstOrDefaultAsync();
             return email;
         }
+
+        public async Task UpdatePasswordAsync(int userId, string newPasswordHash)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null) throw new KeyNotFoundException("User not found");
+            user.PasswordHash = newPasswordHash;
+            await _context.SaveChangesAsync();
+        }
     }
 }

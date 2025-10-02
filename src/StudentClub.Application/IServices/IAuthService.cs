@@ -10,5 +10,8 @@ namespace StudentClub.Application.IServices
     public interface IAuthService
     {
         Task<LoginResponseDto?> LoginAsync(LoginRequestDto request);
+        Task<bool> SendPasswordResetCodeAsync(string email);
+        bool VerifyPasswordResetCode(string email, string code);
+        Task<bool> ResetPasswordAsync(string email,string code, string newPassword);
     }
 }

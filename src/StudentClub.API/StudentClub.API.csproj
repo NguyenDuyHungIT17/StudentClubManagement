@@ -27,5 +27,10 @@
     <ProjectReference Include="..\StudentClub.Application\StudentClub.Application.csproj" />
     <ProjectReference Include="..\StudentClub.Infrastructure\StudentClub.Infrastructure.csproj" />
   </ItemGroup>
-
+	<ItemGroup>
+		<None Include="..\StudentClub.Infrastructure\EmailTemplates\**\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Link>EmailTemplates\%(RecursiveDir)%(Filename)%(Extension)</Link>
+		</None>
+	</ItemGroup>
 </Project>
