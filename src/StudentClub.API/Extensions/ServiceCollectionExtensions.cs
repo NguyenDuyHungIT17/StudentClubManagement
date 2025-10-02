@@ -30,13 +30,12 @@ namespace StudentClub.API.Extensions
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
 
-                // 🔹 Thêm event để debug
                 options.Events = new JwtBearerEvents
                 {
                     OnAuthenticationFailed = context =>
                     {
                         Console.WriteLine("JWT Authentication Failed:");
-                        Console.WriteLine(context.Exception); // in ra lỗi chi tiết
+                        Console.WriteLine(context.Exception); 
                         return Task.CompletedTask;
                     },
                     OnTokenValidated = context =>

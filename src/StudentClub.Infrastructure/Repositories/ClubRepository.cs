@@ -90,5 +90,23 @@ namespace StudentClub.Infrastructure.Repositories
             _context.Clubs.Remove(club);
         }
 
+        public async Task<List<Club>> GetClubsAsync()
+        {
+            return await _context.Clubs.ToListAsync();
+        }
+
+       
+
+        public async Task<Club> GetClubAsync(int id)
+        {
+            var club = await _context.Clubs.FirstOrDefaultAsync(x => x.ClubId == id);
+            return club;
+        }
+
+        public async Task<string?> GetCLubNameByClubIdAsync(int clubId)
+        {
+            var clubName = await _context.Clubs.Where(c => c.ClubId == clubId).Select( c => c.ClubName).FirstOrDefaultAsync();
+            return clubName;
+        }
     }
 }

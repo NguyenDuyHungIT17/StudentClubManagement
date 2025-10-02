@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 using StudentClub.Application.DTOs;
 using StudentClub.Application.DTOs.Clubs;
@@ -20,9 +21,9 @@ namespace StudentClub.API.Controllers
     [Route("api/[controller]")]
     public class ClubsController : Controller
     {
-        private ClubService _clubService;
+        private readonly IClubService _clubService;
 
-        public ClubsController(ClubService clubService)
+        public ClubsController(IClubService clubService)
         {
             _clubService = clubService;
         }
@@ -32,6 +33,23 @@ namespace StudentClub.API.Controllers
         public async Task<IActionResult> CreateClub([FromBody] CreateClubRequestDto request)
         { 
             var result = await _clubService.CreateClubAsync(request);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetClubsAsync()
+        {
+            var result = await _clubService.GetAllClubAsync();
+            return Ok(result);
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetClubAsync(int id)
+        {
+            var result = await _clubService.GetClubAsync(id);
+            if (result == null)
+            {
+                return NotFound(new { message = "Không có club nào" });
+            }
             return Ok(result);
         }
 
@@ -54,7 +72,7 @@ namespace StudentClub.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Có lỗi xảy ra: " + ex.Message });
+                return StatusCode(500, new { message = "Có lỗi xảy ra: " + ex.Message }); 
             }
         }
         [HttpDelete("{id}")]

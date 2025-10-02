@@ -2,19 +2,18 @@
 using StudentClub.API.Middleware;
 using StudentClub.Application;
 using StudentClub.Infrastructure;
-using Microsoft.OpenApi.Models; // 👈 thêm namespace này
+using Microsoft.OpenApi.Models; 
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-// 🔑 Swagger + JWT
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentClub API", Version = "v1" });
 
-    // cấu hình cho JWT Authorize
+
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -41,11 +40,9 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// Đăng ký Application & Infrastructure
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-// Đăng ký JWT Auth qua extension
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
 builder.Services.AddCors(options =>
@@ -58,6 +55,7 @@ builder.Services.AddCors(options =>
                   .AllowAnyMethod();
         });
 });
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 

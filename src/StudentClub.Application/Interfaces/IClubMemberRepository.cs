@@ -11,5 +11,7 @@ namespace StudentClub.Application.Interfaces
     {
         Task AddClubMemberAsync(ClubMember clubMember);
         Task SaveChangeAsync();
+
+        Task<int> GetClubIdByUserId(int userId);
     }
 }

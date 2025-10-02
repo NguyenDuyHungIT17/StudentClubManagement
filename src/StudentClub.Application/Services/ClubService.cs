@@ -6,6 +6,7 @@ using StudentClub.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,10 +15,11 @@ namespace StudentClub.Application.Services
     public class ClubService : IClubService
     {
         private readonly IClubRepository _clubRepository;
-
-        public ClubService(IClubRepository clubRepository)
+        private readonly IUserRepository _userRepository;
+        public ClubService(IClubRepository clubRepository, IUserRepository userRepository)
         {
             _clubRepository = clubRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<CreateClubResponseDto> CreateClubAsync(CreateClubRequestDto createClubRequestDto)
@@ -25,7 +27,13 @@ namespace StudentClub.Application.Services
             var existingClub = await _clubRepository.GetClubByClubNameAsync(createClubRequestDto.ClubName);
             if (existingClub != null)
             {
-                throw new Exception("Club already exist");
+                return new CreateClubResponseDto
+                {
+                    ClubName = existingClub.ClubName,
+                    Description = existingClub.Description,
+                    LeaderName = "Đã tồn tại",
+                };
+
             }
 
             var club = new Club
@@ -88,6 +96,51 @@ namespace StudentClub.Application.Services
             await _clubRepository.DeleteClubAsync(club);
 
             await _clubRepository.SaveChangeAsync();
+        }
+
+        public async Task<List<GetAllClubsResponseDto>> GetAllClubAsync()
+        {
+            var clubs = await _clubRepository.GetClubsAsync();
+            var users = await _userRepository.GetAllUsersAsync();
+
+            var clubsDto = clubs.Select(x => new GetAllClubsResponseDto
+            {
+                ClubId = x.ClubId,
+                ClubName = x.ClubName,
+                LeaderName = x.LeaderId == null
+                    ? "Cập nhật sau"
+                    : users.FirstOrDefault(u => u.UserId == x.LeaderId)?.FullName ?? "Cập nhật sau",
+                Description = x.Description,
+                CreatedAt = x.CreatedAt,
+                UpdatedAt = x.UpdatedAt,
+            }).ToList();
+
+            return clubsDto;
+        }
+
+        public async Task<GetClubResponseDto> GetClubAsync(int clubId)
+        {
+            var club = await _clubRepository.GetClubAsync(clubId);
+            var users = await _userRepository.GetAllUsersAsync();
+            if (club == null)
+            {
+                return null;
+            }
+
+            var clubDto = new GetClubResponseDto();
+
+            var description = "chưa mô tả";
+            if (club.Description != null)
+            {
+                description = club.Description;
+            }
+            clubDto.ClubId = clubId;
+            clubDto.ClubName= club.ClubName;
+            clubDto.Description = description;
+            clubDto.CreatedAt = club.CreatedAt;
+            clubDto.LeaderName = club.LeaderId == null ? "Cập nhật sau" : users.FirstOrDefault(u => u.UserId == club.LeaderId)?.FullName ?? "Cập nhật sau";
+
+            return clubDto;
         }
     }
 }

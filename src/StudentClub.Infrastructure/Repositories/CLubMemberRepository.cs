@@ -1,4 +1,5 @@
-﻿using StudentClub.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentClub.Application.Interfaces;
 using StudentClub.Domain.Entities;
 using StudentClub.Infrastructure.Persistence;
 using System;
@@ -20,6 +21,12 @@ namespace StudentClub.Infrastructure.Repositories
         public async Task AddClubMemberAsync(ClubMember clubMember)
         {
             await _context.AddAsync(clubMember);
+        }
+
+        public async Task<int> GetClubIdByUserId(int userId)
+        {
+            var clubMember = await _context.ClubMembers.Where(u => u.UserId == userId).FirstOrDefaultAsync();
+            return clubMember.ClubId;
         }
 
         public async Task SaveChangeAsync()

@@ -174,7 +174,6 @@ D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnal
 D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 D:\0.StudentClub\src\StudentClub.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-D:\0.StudentClub\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.MvcApplicationPartsAssemblyInfo.cs
 D:\0.StudentClub\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.sourcelink.json
 D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\Microsoft.AspNetCore.Razor.Language.dll
 D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\Microsoft.Build.dll
@@ -295,3 +294,9 @@ D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnal
 D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
 D:\0.StudentClub\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.RazorAssemblyInfo.cache
 D:\0.StudentClub\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.RazorAssemblyInfo.cs
+D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Binder.dll
+D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+D:\0.StudentClub\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.MvcApplicationPartsAssemblyInfo.cs
+D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\EmailTemplates\InterviewFail.html
+D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\EmailTemplates\InterviewPass.html
+D:\0.StudentClub\src\StudentClub.API\bin\Debug\net9.0\EmailTemplates\ResetPassword.html

@@ -1,0 +1,99 @@
+﻿using MediatR;
+using StudentClub.Application.DTOs;
+using StudentClub.Application.Interfaces;
+using StudentClub.Application.IServices;
+using StudentClub.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StudentClub.Application.Services
+{
+    public class EventService : IEventService
+    {
+        private readonly IEventRepository _eventRepository;
+        private readonly IClubRepository _clubRepository;
+
+        public EventService(IEventRepository eventRepository, IClubRepository clubRepository)
+        {
+            _eventRepository = eventRepository;
+            _clubRepository = clubRepository;
+        }
+        public async Task<CreateEventResponseDto> CreateEventAsync(CreateEventRequestDto request, int userId, string role)
+        {
+            if (role == "leader")
+            {
+                var club = await _clubRepository.GetClubByClubIdAsync(request.ClubId);
+                if (club == null)
+                    throw new KeyNotFoundException("Câu lạc bộ không tồn tại");
+
+                if (club.LeaderId != userId)
+                    throw new UnauthorizedAccessException("Bạn không có quyền truy cập");
+            }
+
+            var ev = new Event
+            {
+                EventDate = request.EventDate,
+                ClubId = request.ClubId,
+                Description = request.Description,
+                Title = request.Title,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                IsPrivate = request.IsPrivate,
+            };
+
+            await _eventRepository.AddEventAsync(ev);
+            await _eventRepository.SaveChangeAsync();
+
+            var evDto = new CreateEventResponseDto
+            {
+                ClubName = await _clubRepository.GetCLubNameByClubIdAsync(request.ClubId),
+                Description = ev.Description,
+                Title = ev.Title,
+                EventDate = ev.EventDate,
+            };
+
+            return evDto;
+        }
+
+        public async Task<CreateEventResponseDto> UpdateEventAsync(UpdateEventRequestDto requestDto,int eventId, int userId, string role)
+        {
+            if (role == "leader")
+            {
+                var club = await _clubRepository.GetClubByClubIdAsync(requestDto.ClubId);
+                if (club == null)
+                    throw new KeyNotFoundException("Câu lạc bộ không tồn tại");
+
+                if (club.LeaderId != userId)
+                    throw new UnauthorizedAccessException("Bạn không có quyền truy cập");
+            }
+
+            var ev = await _eventRepository.GetByEventIdAsync(eventId);
+            if (ev == null)
+            {
+                throw new KeyNotFoundException("Sự kiện không tồn tại");
+            }
+
+            ev.EventDate = requestDto.EventDate;
+            ev.Title = requestDto.Title;
+            ev.UpdatedAt = DateTime.UtcNow;
+            ev.Description = requestDto.Description;
+            ev.ClubId = requestDto.ClubId;
+            ev.IsPrivate = requestDto.IsPrivate;
+
+            await _eventRepository.SaveChangeAsync();
+
+            var evDto = new CreateEventResponseDto
+            {
+                ClubName = await _clubRepository.GetCLubNameByClubIdAsync(requestDto.ClubId),
+                Description = ev.Description,
+                Title = ev.Title,
+                EventDate = ev.EventDate,
+            };
+
+            return evDto;
+        }
+    }
+}
