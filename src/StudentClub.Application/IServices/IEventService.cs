@@ -11,5 +11,7 @@ namespace StudentClub.Application.IServices
     {
         Task<CreateEventResponseDto> CreateEventAsync(CreateEventRequestDto request, int userId, string role);
         Task<CreateEventResponseDto> UpdateEventAsync(UpdateEventRequestDto requestDto, int eventId, int userId, string role);
+        Task<List<GetAllEventsResponseDto>> GetAllEventsAsync(string role, int userId);
+        Task<List<GetAllEventsResponseDto>> GetEventsByClubIdAsync(int clubId, string role);
     }
 }

@@ -160,6 +160,16 @@
   },
   {
     "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "GetAllEvents",
+    "RelativePath": "api/Event",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
     "Method": "UpdateEvent",
     "RelativePath": "api/Event/{eventId}",
     "HttpMethod": "PUT",
@@ -327,6 +337,27 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.UsersController",
+    "Method": "UpdatePasswordUser",
+    "RelativePath": "api/Users/{id}/change-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "StudentClub.Application.DTOs.UpdatePasswordRequestDto",
         "IsRequired": true
       }
     ],

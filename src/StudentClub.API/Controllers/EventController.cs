@@ -65,6 +65,25 @@ namespace StudentClub.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetAllEvents()
+        {
+            try
+            {
+                var (userId, role) = GetUserContext();
+                var result = await _eventService.GetAllEventsAsync(role, userId);
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
         private (int userId, string role) GetUserContext()
         {
             var userIdOnToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

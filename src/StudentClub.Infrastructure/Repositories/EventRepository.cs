@@ -23,10 +23,25 @@ namespace StudentClub.Infrastructure.Repositories
             await _context.Events.AddAsync(e);
         }
 
+        public async Task<List<Event>> GetAllEventsAsync()
+        {
+            return await _context.Events.ToListAsync();
+        }
+
         public async Task<Event?> GetByEventIdAsync(int eventId)
         {
             var ev = await _context.Events.FirstOrDefaultAsync(e => e.EventId == eventId);
             return ev;
+        }
+
+        public async Task<List<Event>> GetEventsByCLubIdAsync(int clubId)
+        {
+            return await _context.Events.Where(e => e.ClubId == clubId).ToListAsync();
+        }
+
+        public async Task<List<Event>> GetPublicEventsAsync(bool check)
+        {
+            return await _context.Events.Where(e => e.IsPrivate == !check).ToListAsync();
         }
 
         public async Task SaveChangeAsync()

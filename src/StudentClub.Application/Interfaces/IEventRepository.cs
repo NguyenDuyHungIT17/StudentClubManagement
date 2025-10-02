@@ -7,6 +7,9 @@ namespace StudentClub.Application.Interfaces
     {
         Task AddEventAsync(Event e);
         Task SaveChangeAsync();
+        Task <List<Event>> GetAllEventsAsync();
+        Task<List<Event>> GetEventsByCLubIdAsync(int clubId);
+        Task<List<Event>> GetPublicEventsAsync(bool check);
         Task<Event?> GetByEventIdAsync(int eventId);
     }
 }

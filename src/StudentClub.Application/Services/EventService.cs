@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentClub.Application.Mapper;
 
 namespace StudentClub.Application.Services
 {
@@ -15,11 +16,17 @@ namespace StudentClub.Application.Services
     {
         private readonly IEventRepository _eventRepository;
         private readonly IClubRepository _clubRepository;
+        private readonly IClubMemberRepository _clubmemberRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly EventMapping _eventMapper;
 
-        public EventService(IEventRepository eventRepository, IClubRepository clubRepository)
+        public EventService(IEventRepository eventRepository, IClubRepository clubRepository, IClubMemberRepository clubMemberRepository, EventMapping eventMapper, IUserRepository userRepository)
         {
             _eventRepository = eventRepository;
             _clubRepository = clubRepository;
+            _eventMapper = eventMapper;
+            _userRepository = userRepository;
+            _clubmemberRepository = clubMemberRepository;
         }
         public async Task<CreateEventResponseDto> CreateEventAsync(CreateEventRequestDto request, int userId, string role)
         {
@@ -54,6 +61,39 @@ namespace StudentClub.Application.Services
                 Title = ev.Title,
                 EventDate = ev.EventDate,
             };
+
+            return evDto;
+        }
+
+        public async Task<List<GetAllEventsResponseDto>> GetAllEventsAsync(string role, int userId)
+        {
+            var evDto = new List<GetAllEventsResponseDto>();
+            if (role == "admin")
+            {
+               var ev = await _eventRepository.GetAllEventsAsync();
+               evDto = await _eventMapper.ToDtoList(ev);
+            }else if (role == "leader" || role == "member")
+            {
+                var clubId = await _clubmemberRepository.GetClubIdByUserId(userId);
+                var ev = await _eventRepository.GetEventsByCLubIdAsync(clubId);
+                return await _eventMapper.ToDtoList(ev);
+            }
+            return evDto;
+        }
+
+        public async Task<List<GetAllEventsResponseDto>> GetEventsByClubIdAsync(int clubId, string role)
+        {
+            var evDto = new List<GetAllEventsResponseDto>();
+            if (role == "admin")
+            {
+                var ev = await  _eventRepository.GetEventsByCLubIdAsync(clubId);
+                evDto = await _eventMapper.ToDtoList(ev);
+            }
+            else if (role == "leader" || role == "member")
+            {
+                var ev = await _eventRepository.GetEventsByCLubIdAsync(clubId);
+                evDto = await _eventMapper.ToDtoList(ev);
+            }
 
             return evDto;
         }

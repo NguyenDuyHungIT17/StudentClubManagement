@@ -142,6 +142,47 @@ namespace StudentClub.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [HttpPut("{id}/change-password")]
+        [Authorize]
+        public async Task<IActionResult> UpdatePasswordUser(int id, [FromBody] UpdatePasswordRequestDto request)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var roleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(userIdClaim) || string.IsNullOrEmpty(roleClaim))
+            {
+                return Unauthorized(new { message = "Token không hợp lệ" });
+            }
+
+            if (!int.TryParse(userIdClaim, out int userIdFromToken))
+            {
+                return Unauthorized(new { message = "UserId trong token không hợp lệ" });
+            }
+
+            try
+            {
+                await _userService.UpdatePasswordUserAsync(id, userIdFromToken, request.OldPassword, request.NewPassword);
+                return Ok(new { message = "Cập nhật mật khẩu thành công" });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message); 
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message }); 
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message }); 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Có lỗi xảy ra: " + ex.Message }); 
+            }
+        }
+
         [HttpPut("{id}/is-active")]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateIsActiveUser(int id, [FromBody] UpdateIsActiveUserDto request)

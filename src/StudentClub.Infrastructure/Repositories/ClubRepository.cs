@@ -55,7 +55,7 @@ namespace StudentClub.Infrastructure.Repositories
 
         public async Task DeleteEventRegistrationsByClubIdAsync(int clubId)
         {
-            var registrations = _context.EventRegistrations
+            var registrations =  _context.EventRegistrations
                 .Where(r => r.Event.ClubId == clubId);
             _context.EventRegistrations.RemoveRange(registrations);
         }

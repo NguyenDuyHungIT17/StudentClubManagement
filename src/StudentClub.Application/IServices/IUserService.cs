@@ -13,8 +13,8 @@ namespace StudentClub.Application.IServices
         Task<CreateUserResponseDto> CreateUserAsync(CreateUserRequestDto createUserRequset);
         Task<UpdateUserResponseDto> UpdateUserAsync(int userIdFromToken, string role, int targetUserId, UpdateUserRequestDto request);
         Task UpdateIsActiveUserAsync(int isActive, int userId);
+        Task UpdatePasswordUserAsync(int userId, int userIdOnToken, string oldPassword, string newPassword);
         Task DeleteUserAsync(int requesterId, string requesterRole, int targetUserId);
-
         Task <List<GetAllUsersResponseDto>> GetAllUsersAsync(int id);
         Task<GetUserResponseDto?> GetUserByIdAsync(int userId, string roleUser, int userIdOnToken);
     }
