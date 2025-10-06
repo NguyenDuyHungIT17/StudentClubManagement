@@ -190,6 +190,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "GetEventById",
+    "RelativePath": "api/Event/{eventId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "StudentClub.API.Controllers.InterviewsController",
     "Method": "Create",
     "RelativePath": "api/Interviews",
@@ -396,6 +412,32 @@
         "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "GetPublicEvents",
+    "RelativePath": "publicEvents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "GetEventsByClubId",
+    "RelativePath": "publicEvents/club",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clubId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

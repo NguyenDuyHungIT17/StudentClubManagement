@@ -23,9 +23,8 @@ namespace StudentClub.Infrastructure
             services.AddScoped<IClubMemberRepository, CLubMemberRepository>();
             services.AddScoped<IInterviewRepository, InterviewRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
-            //services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
-            //services.AddSingleton<ITemplateRenderer, TemplateRenderer>();
-            //services.AddTransient<IMailService, MailService>();
+            services.AddScoped<IEventRegistrationRepository, EventRegistrationRepository>();
+;
             return services;
         }
     }

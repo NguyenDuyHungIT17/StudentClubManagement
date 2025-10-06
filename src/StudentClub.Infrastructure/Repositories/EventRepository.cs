@@ -34,6 +34,11 @@ namespace StudentClub.Infrastructure.Repositories
             return ev;
         }
 
+        public async Task<Event?> GetEventByIdAsync(int eventId)
+        {
+           return await _context.Events.FirstOrDefaultAsync(e => e.EventId == eventId);
+        }
+
         public async Task<List<Event>> GetEventsByCLubIdAsync(int clubId)
         {
             return await _context.Events.Where(e => e.ClubId == clubId).ToListAsync();
@@ -42,6 +47,11 @@ namespace StudentClub.Infrastructure.Repositories
         public async Task<List<Event>> GetPublicEventsAsync(bool check)
         {
             return await _context.Events.Where(e => e.IsPrivate == !check).ToListAsync();
+        }
+
+        public Task<List<Event>> GetPublicEventsByCLubIdAsync(int clubId, bool check)
+        {
+            return _context.Events.Where(e => e.ClubId == clubId && e.IsPrivate == !check).ToListAsync();
         }
 
         public async Task SaveChangeAsync()

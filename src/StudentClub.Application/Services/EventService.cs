@@ -81,6 +81,17 @@ namespace StudentClub.Application.Services
             return evDto;
         }
 
+        public async Task<GetAllEventsResponseDto> GetEventByIdAsync(int eventId)
+        {
+            var ev = await _eventRepository.GetByEventIdAsync(eventId);
+            if (ev == null)
+                throw new KeyNotFoundException("Sự kiện không tồn tại");
+
+            var evDto = await _eventMapper.ToDto(ev);
+
+            return evDto;
+        }
+
         public async Task<List<GetAllEventsResponseDto>> GetEventsByClubIdAsync(int clubId, string role)
         {
             var evDto = new List<GetAllEventsResponseDto>();
@@ -94,6 +105,27 @@ namespace StudentClub.Application.Services
                 var ev = await _eventRepository.GetEventsByCLubIdAsync(clubId);
                 evDto = await _eventMapper.ToDtoList(ev);
             }
+
+            return evDto;
+        }
+
+        public async Task<List<GetAllEventsResponseDto>> GetPublicEventsAsync()
+        {
+            var ev = await  _eventRepository.GetPublicEventsAsync(false);
+            var evDto = new List<GetAllEventsResponseDto>();
+                evDto = await  _eventMapper.ToDtoList(ev);
+            if (evDto.Count == 0)
+                throw new KeyNotFoundException("Không có sự kiện công khai nào");
+            return evDto;
+        }
+
+        public async Task<List<GetAllEventsResponseDto>> GetPublicEventsByClubIdAsync(int clubId)
+        {
+            var ev = await _eventRepository.GetPublicEventsByCLubIdAsync(clubId, false);
+            var evDto = new List<GetAllEventsResponseDto>();
+            evDto = await _eventMapper.ToDtoList(ev);
+            if (evDto.Count == 0)
+                throw new KeyNotFoundException("Không có sự kiện công khai nào");
 
             return evDto;
         }
