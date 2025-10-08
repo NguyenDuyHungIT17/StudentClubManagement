@@ -39,8 +39,6 @@ namespace StudentClub.Application.Services
             int isActive = await _userRepository.GetIsActiveByEmailAsync(request.Email);
             if (isActive == 0) return null;
 
-
-
             var token = _tokenGenerator.GenerateToken(user.UserId, user.Email, user.Role);
 
             return new LoginResponseDto
@@ -89,5 +87,7 @@ namespace StudentClub.Application.Services
 
             return true;
         }
+
+
     }
 }

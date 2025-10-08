@@ -115,5 +115,15 @@ namespace StudentClub.Infrastructure.Repositories
             user.PasswordHash = newPasswordHash;
             await _context.SaveChangesAsync();
         }
+
+        public async Task<string> GetUserNameByIdAsync(int userId)
+        {
+            var user = await  _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+            return user.FullName;
+        }
     }
 }

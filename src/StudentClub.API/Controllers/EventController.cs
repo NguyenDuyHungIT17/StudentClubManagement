@@ -65,6 +65,78 @@ namespace StudentClub.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        [HttpGet("/publicEvents")]
+        public async Task<IActionResult> GetPublicEvents()
+        {
+            try
+            {
+                var result = await _eventService.GetPublicEventsAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("/publicEvents/club")]
+        public async Task<IActionResult> GetEventsByClubId([FromQuery] int clubId)
+        {
+            try
+            {
+                var result = await _eventService.GetPublicEventsByClubIdAsync(clubId);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+        [HttpGet("{eventId}")]
+        public async Task<IActionResult> GetEventById(int eventId)
+        {
+            try
+            {
+                var result = await _eventService.GetEventByIdAsync(eventId);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetAllEvents()
+        {
+            try
+            {
+                var (userId, role) = GetUserContext();
+                var result = await _eventService.GetAllEventsAsync(role, userId);
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
         private (int userId, string role) GetUserContext()
         {
             var userIdOnToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

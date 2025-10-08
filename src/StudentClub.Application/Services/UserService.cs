@@ -210,5 +210,19 @@ namespace StudentClub.Application.Services
             return null;
         }
 
+        public async Task UpdatePasswordUserAsync(int userIdOnToken, int userId, string oldPassword, string newPassword)
+        {
+            if (userIdOnToken != userId)
+                throw new UnauthorizedAccessException("Bạn không có quyền thay đổi mật khẩu của người dùng khác.");
+
+            if (string.IsNullOrWhiteSpace(oldPassword) || string.IsNullOrWhiteSpace(newPassword))
+                throw new ArgumentException("Mật khẩu cũ và mật khẩu mới không được để trống.");
+            
+            if (oldPassword == _passwordHasher.Hash(newPassword))
+                throw new ArgumentException("Mật khẩu mới phải khác mật khẩu cũ.");
+
+            await _userRepository.UpdatePasswordAsync(userId, _passwordHasher.Hash(newPassword));
+
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StudentClub.Application.Mapper;
 
 namespace StudentClub.Application.Services
 {
@@ -15,11 +16,17 @@ namespace StudentClub.Application.Services
     {
         private readonly IEventRepository _eventRepository;
         private readonly IClubRepository _clubRepository;
+        private readonly IClubMemberRepository _clubmemberRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly EventMapping _eventMapper;
 
-        public EventService(IEventRepository eventRepository, IClubRepository clubRepository)
+        public EventService(IEventRepository eventRepository, IClubRepository clubRepository, IClubMemberRepository clubMemberRepository, EventMapping eventMapper, IUserRepository userRepository)
         {
             _eventRepository = eventRepository;
             _clubRepository = clubRepository;
+            _eventMapper = eventMapper;
+            _userRepository = userRepository;
+            _clubmemberRepository = clubMemberRepository;
         }
         public async Task<CreateEventResponseDto> CreateEventAsync(CreateEventRequestDto request, int userId, string role)
         {
@@ -54,6 +61,71 @@ namespace StudentClub.Application.Services
                 Title = ev.Title,
                 EventDate = ev.EventDate,
             };
+
+            return evDto;
+        }
+
+        public async Task<List<GetAllEventsResponseDto>> GetAllEventsAsync(string role, int userId)
+        {
+            var evDto = new List<GetAllEventsResponseDto>();
+            if (role == "admin")
+            {
+               var ev = await _eventRepository.GetAllEventsAsync();
+               evDto = await _eventMapper.ToDtoList(ev);
+            }else if (role == "leader" || role == "member")
+            {
+                var clubId = await _clubmemberRepository.GetClubIdByUserId(userId);
+                var ev = await _eventRepository.GetEventsByCLubIdAsync(clubId);
+                return await _eventMapper.ToDtoList(ev);
+            }
+            return evDto;
+        }
+
+        public async Task<GetAllEventsResponseDto> GetEventByIdAsync(int eventId)
+        {
+            var ev = await _eventRepository.GetByEventIdAsync(eventId);
+            if (ev == null)
+                throw new KeyNotFoundException("Sự kiện không tồn tại");
+
+            var evDto = await _eventMapper.ToDto(ev);
+
+            return evDto;
+        }
+
+        public async Task<List<GetAllEventsResponseDto>> GetEventsByClubIdAsync(int clubId, string role)
+        {
+            var evDto = new List<GetAllEventsResponseDto>();
+            if (role == "admin")
+            {
+                var ev = await  _eventRepository.GetEventsByCLubIdAsync(clubId);
+                evDto = await _eventMapper.ToDtoList(ev);
+            }
+            else if (role == "leader" || role == "member")
+            {
+                var ev = await _eventRepository.GetEventsByCLubIdAsync(clubId);
+                evDto = await _eventMapper.ToDtoList(ev);
+            }
+
+            return evDto;
+        }
+
+        public async Task<List<GetAllEventsResponseDto>> GetPublicEventsAsync()
+        {
+            var ev = await  _eventRepository.GetPublicEventsAsync(false);
+            var evDto = new List<GetAllEventsResponseDto>();
+                evDto = await  _eventMapper.ToDtoList(ev);
+            if (evDto.Count == 0)
+                throw new KeyNotFoundException("Không có sự kiện công khai nào");
+            return evDto;
+        }
+
+        public async Task<List<GetAllEventsResponseDto>> GetPublicEventsByClubIdAsync(int clubId)
+        {
+            var ev = await _eventRepository.GetPublicEventsByCLubIdAsync(clubId, false);
+            var evDto = new List<GetAllEventsResponseDto>();
+            evDto = await _eventMapper.ToDtoList(ev);
+            if (evDto.Count == 0)
+                throw new KeyNotFoundException("Không có sự kiện công khai nào");
 
             return evDto;
         }

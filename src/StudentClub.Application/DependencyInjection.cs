@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 using StudentClub.Application.IServices;
-
+using StudentClub.Application.Mapper;
 using StudentClub.Application.Services;
 
 namespace StudentClub.Application
@@ -19,7 +19,10 @@ namespace StudentClub.Application
             services.AddScoped<IInterviewService, InterviewService>();
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IEventRegistrationService, EventRegistrationService>();
 
+            services.AddScoped<EventMapping>();
+            services.AddScoped<EventRegistrationMapping>();
             return services;
         }
     }

@@ -160,6 +160,16 @@
   },
   {
     "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "GetAllEvents",
+    "RelativePath": "api/Event",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
     "Method": "UpdateEvent",
     "RelativePath": "api/Event/{eventId}",
     "HttpMethod": "PUT",
@@ -171,6 +181,70 @@
         "Type": "StudentClub.Application.DTOs.UpdateEventRequestDto",
         "IsRequired": true
       },
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "GetEventById",
+    "RelativePath": "api/Event/{eventId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventRegistrationsController",
+    "Method": "CreateEventRegistration",
+    "RelativePath": "api/EventRegistrations",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "StudentClub.Application.DTOs.CreateEventRegistrationRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventRegistrationsController",
+    "Method": "DeleteEventRegistration",
+    "RelativePath": "api/EventRegistrations/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventRegistrationsController",
+    "Method": "GetAllEventRegistrationsByEventId",
+    "RelativePath": "api/EventRegistrations/event/{eventId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
         "Name": "eventId",
         "Type": "System.Int32",
@@ -334,6 +408,27 @@
   },
   {
     "ContainingType": "StudentClub.API.Controllers.UsersController",
+    "Method": "UpdatePasswordUser",
+    "RelativePath": "api/Users/{id}/change-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "StudentClub.Application.DTOs.UpdatePasswordRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.UsersController",
     "Method": "UpdateIsActiveUser",
     "RelativePath": "api/Users/{id}/is-active",
     "HttpMethod": "PUT",
@@ -365,6 +460,32 @@
         "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "GetPublicEvents",
+    "RelativePath": "publicEvents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "GetEventsByClubId",
+    "RelativePath": "publicEvents/club",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clubId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
