@@ -206,6 +206,54 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "StudentClub.API.Controllers.EventRegistrationsController",
+    "Method": "CreateEventRegistration",
+    "RelativePath": "api/EventRegistrations",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "StudentClub.Application.DTOs.CreateEventRegistrationRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventRegistrationsController",
+    "Method": "DeleteEventRegistration",
+    "RelativePath": "api/EventRegistrations/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventRegistrationsController",
+    "Method": "GetAllEventRegistrationsByEventId",
+    "RelativePath": "api/EventRegistrations/event/{eventId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "StudentClub.API.Controllers.InterviewsController",
     "Method": "Create",
     "RelativePath": "api/Interviews",

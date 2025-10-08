@@ -25,7 +25,7 @@ namespace StudentClub.Infrastructure.Repositories
 
         public async Task DeleteEventRegistrationAsync(int eventRegistritonId)
         {
-            var eventRegistration = _context.EventRegistrations.Where(e => e.RegistrationId == eventRegistritonId);
+            var eventRegistration =  _context.EventRegistrations.Where(e => e.RegistrationId == eventRegistritonId);
             _context.EventRegistrations.RemoveRange(eventRegistration);
         }
 
@@ -39,6 +39,17 @@ namespace StudentClub.Infrastructure.Repositories
         {
             _context.EventRegistrations.Update(eventRegistration);
             return Task.CompletedTask;
+        }
+
+        public async Task SaveChangeAsynce()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<EventRegistration?>> GetEventRegistrationByEventIdAsync(int eventId)
+        {
+            var eventRegistration = await _context.EventRegistrations.Where(e => e.EventId == eventId).ToListAsync();
+            return eventRegistration;
         }
     }
 }

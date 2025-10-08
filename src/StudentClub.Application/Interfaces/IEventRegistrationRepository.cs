@@ -13,5 +13,7 @@ namespace StudentClub.Application.Interfaces
         Task UpdateEventRegistrationAsync(EventRegistration eventRegistration);
         Task DeleteEventRegistrationAsync(int eventRegistritonId);
         Task<EventRegistration?> GetEventRegistrationByIdAsync(int eventRegistrationId);
+        Task<List<EventRegistration?>> GetEventRegistrationByEventIdAsync(int eventId);
+        Task SaveChangeAsynce();
     }
 }

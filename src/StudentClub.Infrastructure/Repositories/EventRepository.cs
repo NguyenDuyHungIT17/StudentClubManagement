@@ -39,6 +39,16 @@ namespace StudentClub.Infrastructure.Repositories
            return await _context.Events.FirstOrDefaultAsync(e => e.EventId == eventId);
         }
 
+        public async Task<string> GetEventNameByIdAsync(int eventId)
+        {
+            var ev = await _context.Events.FirstOrDefaultAsync(e => e.EventId == eventId);
+            if (ev == null)
+            {
+                throw new Exception("Event not found");
+            }
+            return ev.Title;
+        }
+
         public async Task<List<Event>> GetEventsByCLubIdAsync(int clubId)
         {
             return await _context.Events.Where(e => e.ClubId == clubId).ToListAsync();

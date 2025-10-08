@@ -13,6 +13,7 @@ namespace StudentClub.Application.Interfaces
         Task<User> GetByFullnameAsync(string username);
         Task<List<User>> GetUserByLeader(int clubId);
         Task<List<User>?> GetAllUsersAsync();
+        Task<string> GetUserNameByIdAsync(int userId);
         Task AddAsync(User user);
 
         Task SaveChangeAsynce();
