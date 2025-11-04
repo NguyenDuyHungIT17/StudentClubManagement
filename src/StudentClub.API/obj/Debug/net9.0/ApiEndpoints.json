@@ -25,7 +25,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.LoginRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.LoginRequestDto",
         "IsRequired": true
       }
     ],
@@ -41,7 +41,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.ResetPasswordRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.ResetPasswordRequestDto",
         "IsRequired": true
       }
     ],
@@ -57,7 +57,7 @@
     "Parameters": [
       {
         "Name": "createClubMemberRequestDto",
-        "Type": "StudentClub.Application.DTOs.CreateClubMemberRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.CreateClubMemberRequestDto",
         "IsRequired": true
       }
     ],
@@ -73,7 +73,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.Clubs.CreateClubRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.CreateClubRequestDto",
         "IsRequired": true
       }
     ],
@@ -115,7 +115,7 @@
     "Parameters": [
       {
         "Name": "update",
-        "Type": "StudentClub.Application.DTOs.UpdateClubRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.UpdateClubRequestDto",
         "IsRequired": true
       },
       {
@@ -152,7 +152,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.CreateEventRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.CreateEventRequestDto",
         "IsRequired": true
       }
     ],
@@ -178,7 +178,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.UpdateEventRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.UpdateEventRequestDto",
         "IsRequired": true
       },
       {
@@ -206,6 +206,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "DeleteAsync",
+    "RelativePath": "api/Event/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.EventController",
+    "Method": "GetEventsByClubIdAsync",
+    "RelativePath": "api/Event/event/{clubId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clubId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "StudentClub.API.Controllers.EventRegistrationsController",
     "Method": "CreateEventRegistration",
     "RelativePath": "api/EventRegistrations",
@@ -215,7 +247,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.CreateEventRegistrationRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.CreateEventRegistrationRequestDto",
         "IsRequired": true
       }
     ],
@@ -254,6 +286,85 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "StudentClub.API.Controllers.FeedbackController",
+    "Method": "CreateFeedback",
+    "RelativePath": "api/Feedback",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "StudentClub.Application.DTOs.request.CreateFeedbackRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.FeedbackController",
+    "Method": "GetAllFeedbacks",
+    "RelativePath": "api/Feedback",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.FeedbackController",
+    "Method": "GetFeedbacksByEventId",
+    "RelativePath": "api/Feedback/{eventId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "eventId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.FeedbackController",
+    "Method": "GetFeedbackById",
+    "RelativePath": "api/Feedback/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.FeedbackController",
+    "Method": "UpdateFeedback",
+    "RelativePath": "api/Feedback/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "StudentClub.Application.DTOs.request.CreateFeedbackRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "StudentClub.API.Controllers.InterviewsController",
     "Method": "Create",
     "RelativePath": "api/Interviews",
@@ -263,7 +374,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.CreateInterviewRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.CreateInterviewRequestDto",
         "IsRequired": true
       }
     ],
@@ -284,7 +395,7 @@
       },
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.UpdateInterviewRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.UpdateInterviewRequestDto",
         "IsRequired": true
       }
     ],
@@ -337,7 +448,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.CreateInterviewRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.CreateInterviewRequestDto",
         "IsRequired": true
       }
     ],
@@ -353,7 +464,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.User.CreateUserRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.CreateUserRequestDto",
         "IsRequired": true
       }
     ],
@@ -384,7 +495,7 @@
       },
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.UpdateUserRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.UpdateUserRequestDto",
         "IsRequired": true
       }
     ],
@@ -421,7 +532,7 @@
       },
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.UpdatePasswordRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.UpdatePasswordRequestDto",
         "IsRequired": true
       }
     ],
@@ -442,7 +553,7 @@
       },
       {
         "Name": "request",
-        "Type": "StudentClub.Application.DTOs.UpdateIsActiveUserDto",
+        "Type": "StudentClub.Application.DTOs.response.UpdateIsActiveUserDto",
         "IsRequired": true
       }
     ],

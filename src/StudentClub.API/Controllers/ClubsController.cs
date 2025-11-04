@@ -1,19 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
-using Microsoft.EntityFrameworkCore;
-using StudentClub.Application.DTOs;
-using StudentClub.Application.DTOs.Clubs;
-using StudentClub.Application.DTOs.User;
+using StudentClub.Application.DTOs.request;
 using StudentClub.Application.IServices;
-using StudentClub.Application.Services;
-using StudentClub.Domain.Entities;
-using StudentClub.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentClub.API.Controllers
 {

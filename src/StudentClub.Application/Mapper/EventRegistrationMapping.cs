@@ -1,5 +1,5 @@
 ﻿using Org.BouncyCastle.Crypto.Fpe;
-using StudentClub.Application.DTOs;
+using StudentClub.Application.DTOs.response;
 using StudentClub.Application.Interfaces;
 using StudentClub.Domain.Entities;
 using System;

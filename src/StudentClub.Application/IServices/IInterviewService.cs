@@ -1,4 +1,5 @@
-﻿using StudentClub.Application.DTOs;
+﻿using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.response;
 
 namespace StudentClub.Application.IServices
 {

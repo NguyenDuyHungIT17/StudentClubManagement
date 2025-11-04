@@ -2,11 +2,6 @@
 using StudentClub.Application.Interfaces;
 using StudentClub.Domain.Entities;
 using StudentClub.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentClub.Infrastructure.Repositories
 {
@@ -21,6 +16,20 @@ namespace StudentClub.Infrastructure.Repositories
         public async Task AddEventAsync(Event e)
         {
             await _context.Events.AddAsync(e);
+        }
+
+        public async Task DeleteEvent(int id)
+        {
+            var feedbacks = _context.Feedbacks
+                .Where(f => f.Event.EventId == id);
+            _context.Feedbacks.RemoveRange(feedbacks);
+
+            var regisrtation = _context.EventRegistrations
+                    .Where(f => f.Event.EventId == id);
+            _context.EventRegistrations.RemoveRange(regisrtation);
+
+            var ev = _context.Events.Where(e => e.EventId == id);
+            _context.Events.RemoveRange(ev);
         }
 
         public async Task<List<Event>> GetAllEventsAsync()
@@ -56,12 +65,12 @@ namespace StudentClub.Infrastructure.Repositories
 
         public async Task<List<Event>> GetPublicEventsAsync(bool check)
         {
-            return await _context.Events.Where(e => e.IsPrivate == !check).ToListAsync();
+            return await _context.Events.Where(e => e.IsPrivate == check).ToListAsync();
         }
 
         public Task<List<Event>> GetPublicEventsByCLubIdAsync(int clubId, bool check)
         {
-            return _context.Events.Where(e => e.ClubId == clubId && e.IsPrivate == !check).ToListAsync();
+            return _context.Events.Where(e => e.ClubId == clubId && e.IsPrivate == check).ToListAsync();
         }
 
         public async Task SaveChangeAsync()

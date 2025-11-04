@@ -20,9 +20,11 @@ namespace StudentClub.Application
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IEventRegistrationService, EventRegistrationService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
 
             services.AddScoped<EventMapping>();
             services.AddScoped<EventRegistrationMapping>();
+            services.AddScoped<FeedbackMapping>();
             return services;
         }
     }

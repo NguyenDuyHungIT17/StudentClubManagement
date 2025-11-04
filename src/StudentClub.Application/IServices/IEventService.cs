@@ -1,9 +1,5 @@
-﻿using StudentClub.Application.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.response;
 
 namespace StudentClub.Application.IServices
 {
@@ -15,6 +11,8 @@ namespace StudentClub.Application.IServices
         Task<GetAllEventsResponseDto> GetEventByIdAsync(int eventId);
         Task<List<GetAllEventsResponseDto>> GetPublicEventsAsync();
         Task<List<GetAllEventsResponseDto>> GetPublicEventsByClubIdAsync(int clubId);
+        Task<List<GetAllEventsResponseDto>> GetEventsByClubIdAsync(int userId);
+        Task DeleteEvent(int id);
         Task<List<GetAllEventsResponseDto>> GetEventsByClubIdAsync(int clubId, string role);
     }
 }

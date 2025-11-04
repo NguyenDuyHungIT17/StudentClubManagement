@@ -1,5 +1,5 @@
-﻿using StudentClub.Application.DTOs;
-using StudentClub.Application.DTOs.Clubs;
+﻿using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.response;
 using StudentClub.Application.Interfaces;
 using System;
 using System.Collections.Generic;

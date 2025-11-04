@@ -1,4 +1,5 @@
-﻿using StudentClub.Application.DTOs;
+﻿using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.response;
 using System;
 using System.Collections.Generic;
 using System.Linq;

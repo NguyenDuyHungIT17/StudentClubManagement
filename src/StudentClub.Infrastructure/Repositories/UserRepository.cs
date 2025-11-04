@@ -2,7 +2,6 @@
 using StudentClub.Application.Interfaces;
 using StudentClub.Domain.Entities;
 using StudentClub.Infrastructure.Persistence;
-using System.Threading.Tasks;
 
 namespace StudentClub.Infrastructure.Repositories
 {

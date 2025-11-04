@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StudentClub.Application.DTOs;
-using StudentClub.Application.DTOs.User;
+using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.response;
 using StudentClub.Application.IServices;
-using StudentClub.Application.Services;
-using System;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace StudentClub.API.Controllers
 {

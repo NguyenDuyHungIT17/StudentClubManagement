@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StudentClub.Application.DTOs;
+using StudentClub.Application.DTOs.request;
 using StudentClub.Application.IServices;
-using System.Net.WebSockets;
 using System.Security.Claims;
 
 namespace StudentClub.API.Controllers
@@ -126,6 +125,34 @@ namespace StudentClub.API.Controllers
             {
                 var (userId, role) = GetUserContext();
                 var result = await _eventService.GetAllEventsAsync(role, userId);
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "admin, leader")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            await _eventService.DeleteEvent(id);
+            return Ok(new { message = "Xóa thành công" });
+        }
+
+        [HttpGet("event/{clubId}")]
+        [Authorize]
+        public async Task<IActionResult> GetEventsByClubIdAsync(int clubId)
+        {
+            try
+            {
+                var (userId, role) = GetUserContext();
+                var result = await _eventService.GetEventsByClubIdAsync(userId);
                 return Ok(result);
             }
             catch (UnauthorizedAccessException ex)

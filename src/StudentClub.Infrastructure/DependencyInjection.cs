@@ -1,5 +1,4 @@
-﻿using MailKit;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StudentClub.Application.Interfaces;
@@ -24,7 +23,8 @@ namespace StudentClub.Infrastructure
             services.AddScoped<IInterviewRepository, InterviewRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IEventRegistrationRepository, EventRegistrationRepository>();
-;
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+
             return services;
         }
     }

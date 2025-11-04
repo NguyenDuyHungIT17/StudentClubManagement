@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace StudentClub.Application.Services
 {
@@ -14,6 +15,7 @@ namespace StudentClub.Application.Services
     {
         private readonly IClubRepository _clubRepository;
         private readonly IInterviewRepository _interviewRepository;
+        private readonly ILogger<EmailService> _logger;
 
         private readonly IConfiguration _config;
         private readonly string _templatePath;
@@ -23,7 +25,7 @@ namespace StudentClub.Application.Services
         private readonly string _user;
         private readonly string _pass;
 
-        public EmailService(IConfiguration config, IClubRepository clubRepository, IInterviewRepository interviewRepository)
+        public EmailService(IConfiguration config, IClubRepository clubRepository, IInterviewRepository interviewRepository, ILogger<EmailService> logger)
         {
             _config = config;
             _templatePath = Path.Combine(AppContext.BaseDirectory, "EmailTemplates");
@@ -35,56 +37,83 @@ namespace StudentClub.Application.Services
 
             _clubRepository = clubRepository;
             _interviewRepository = interviewRepository;
+            _logger = logger;
         }
 
         public async Task SendEmailAsync(string to, string subject, string htmlBody)
         {
-            using var client = new SmtpClient(_host, _port)
+            try
             {
-                Credentials = new NetworkCredential(_user, _pass),
-                EnableSsl = true
-            };
-            var mail = new MailMessage(_from, to, subject, htmlBody)
+                using var client = new SmtpClient(_host, _port)
+                {
+                    Credentials = new NetworkCredential(_user, _pass),
+                    EnableSsl = true
+                };
+                var mail = new MailMessage(_from, to, subject, htmlBody)
+                {
+                    IsBodyHtml = true
+                };
+                await client.SendMailAsync(mail);
+            }
+            catch (Exception ex)
             {
-                IsBodyHtml = true
-            };
-            await client.SendMailAsync(mail);
+                _logger.LogError("Có lỗi khi gửi email ");
+                throw;
+            }
+           
         }
 
         public async Task<string> RenderTemplateAsync(string templateName, Dictionary<string, string> values)
         {
-            var filePath = Path.Combine(_templatePath, templateName);
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException($"Không tìm thấy template: {filePath}");
-
-            var template = await File.ReadAllTextAsync(filePath);
-            foreach (var pair in values)
+            try
             {
-                template = template.Replace("{{" + pair.Key + "}}", pair.Value);
+                var filePath = Path.Combine(_templatePath, templateName);
+                if (!File.Exists(filePath))
+                    throw new FileNotFoundException($"Không tìm thấy template: {filePath}");
+
+                var template = await File.ReadAllTextAsync(filePath);
+                foreach (var pair in values)
+                {
+                    template = template.Replace("{{" + pair.Key + "}}", pair.Value);
+                }
+                return template;
             }
-            return template;
+            catch (Exception ex)
+            {
+                _logger.LogError("Có lỗi khi render template email");
+                throw;
+            }
+            
         }
 
         public async Task SendInterviewResultEmailAsync(int clubId, string resultType)
         {
-            var club = await _clubRepository.GetClubByClubIdAsync(clubId);
-            var interviews = await _interviewRepository.GetByClubIdAsync(clubId);
-
-            string templateName = resultType == "Pass" ? "InterviewPass.html" : "InterviewFail.html";
-            string subject = "Kết quả phỏng vấn CLB";
-
-            foreach (var interview in interviews)
+            try
             {
-                if (interview.Result == resultType)
+                var club = await _clubRepository.GetClubByClubIdAsync(clubId);
+                var interviews = await _interviewRepository.GetByClubIdAsync(clubId);
+
+                string templateName = resultType == "Pass" ? "InterviewPass.html" : "InterviewFail.html";
+                string subject = "Kết quả phỏng vấn CLB";
+
+                foreach (var interview in interviews)
                 {
-                    var html = await RenderTemplateAsync(templateName, new Dictionary<string, string>
+                    if (interview.Result == resultType)
+                    {
+                        var html = await RenderTemplateAsync(templateName, new Dictionary<string, string>
                     {
                         { "ApplicantName", interview.ApplicantName },
                         { "ClubName", club.ClubName }
                     });
-                    await SendEmailAsync(interview.ApplicantEmail, subject, html);
+                        await SendEmailAsync(interview.ApplicantEmail, subject, html);
+                    }
                 }
+            }catch(Exception ex)
+            {
+                _logger.LogError("Có lỗi khi gửi email thông báo");
+                throw;
             }
+            
         }
     }
 }

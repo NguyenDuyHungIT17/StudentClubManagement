@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using StudentClub.Application.DTOs;
+using StudentClub.Application.DTOs.request;
 using StudentClub.Application.IServices;
-using StudentClub.Application.Services;
 
 namespace StudentClub.API.Controllers
 {
@@ -16,7 +15,12 @@ namespace StudentClub.API.Controllers
         {
             _authService = authService;
         }
-
+        /// <summary>
+        /// Đăng nhập
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
