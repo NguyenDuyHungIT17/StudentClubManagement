@@ -10,7 +10,7 @@ namespace StudentClub.Application.IServices
 {
     public interface IEventRegistrationService
     {
-        Task<CreateEventRegistrationResponseDto> CreateEventRegistrationAsync(CreateEventRegistrationRequestDto request);
+        Task<CreateEventRegistrationResponseDto> CreateEventRegistrationAsync(CreateEventRegistrationRequestDto request, int userId);
         Task DeleteEventRegistration(int eventRegistrationId, string role, int userId);
         Task<List<CreateEventRegistrationResponseDto>> GetAllEventRegistrationsByEventId(int eventId);
     }

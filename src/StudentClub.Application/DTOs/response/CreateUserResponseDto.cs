@@ -9,6 +9,7 @@ namespace StudentClub.Application.DTOs.response
     public class CreateUserResponseDto
     {
         public string Email { get; set; } = string.Empty;
+        public string ClubName { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
     }
 }

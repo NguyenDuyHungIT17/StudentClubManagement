@@ -13,6 +13,8 @@ public partial class EventRegistration
 
     public bool? CheckedIn { get; set; }
 
+    public string? CheckName { get; set; }
+
     public DateTime? RegisteredAt { get; set; }
 
     public DateTime? CreatedAt { get; set; }

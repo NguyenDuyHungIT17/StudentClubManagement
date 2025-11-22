@@ -18,15 +18,41 @@ namespace StudentClub.Infrastructure.Repositories
             await _context.AddAsync(clubMember);
         }
 
+        public async Task<List<ClubMember>> GetAllClubMemberAsync()
+        {
+            var clubMembers = await _context.ClubMembers
+                .Include(x => x.Club)
+                .Include(x => x.User).ToListAsync();
+            return clubMembers;
+        }
+
         public async Task<int> GetClubIdByUserId(int userId)
         {
-            var clubMember = await _context.ClubMembers.Where(u => u.UserId == userId).FirstOrDefaultAsync();
+            var clubMember = await _context.ClubMembers.
+                Include(x => x.Club)
+                .Include(x => x.User)
+                .Where(u => u.UserId == userId).FirstOrDefaultAsync();
             return clubMember.ClubId;
+        }
+
+        public async Task<ClubMember> GetClubMemberByIdAsync(int id)
+        {
+            var clubMember = await _context.ClubMembers
+                .Include(x => x.Club)
+                .Include(x => x.User)
+                .Where(u => u.ClubMemberId == id).FirstOrDefaultAsync();
+            return clubMember;
         }
 
         public async Task SaveChangeAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<ClubMember> UpdateClubMemberAsync(ClubMember clubMember)
+        {
+            _context.ClubMembers.Update(clubMember);
+            return clubMember;
         }
     }
 }

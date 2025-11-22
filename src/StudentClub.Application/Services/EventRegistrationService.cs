@@ -4,7 +4,6 @@ using StudentClub.Application.DTOs.response;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Application.Mapper;
-using StudentClub.Domain.Entities;
 
 namespace StudentClub.Application.Services
 {
@@ -13,40 +12,52 @@ namespace StudentClub.Application.Services
         private readonly IEventRegistrationRepository _eventRegistrationRepository;
         private readonly IClubRepository _clubRepository;
         private readonly IEventRepository _eventRepository;   
+        private readonly IUserRepository _userRepository;
         private readonly EventRegistrationMapping _eventMapping;
         private readonly ILogger<EventRegistrationService> _logger;
 
-        public EventRegistrationService(IEventRegistrationRepository eventRegistrationRepository, EventRegistrationMapping eventMapping, IClubRepository clubRepository, IEventRepository eventRepository, ILogger<EventRegistrationService> logger)
+        public EventRegistrationService(IEventRegistrationRepository eventRegistrationRepository, EventRegistrationMapping eventMapping, IClubRepository clubRepository, IEventRepository eventRepository, ILogger<EventRegistrationService> logger, IUserRepository userRepository)
         {
             _eventRegistrationRepository = eventRegistrationRepository;
             _eventMapping = eventMapping;
             _clubRepository = clubRepository;
             _eventRepository = eventRepository;
+            _userRepository = userRepository;
             _logger = logger;
         }
-        public async Task<CreateEventRegistrationResponseDto> CreateEventRegistrationAsync(CreateEventRegistrationRequestDto request)
+        public async Task<CreateEventRegistrationResponseDto> CreateEventRegistrationAsync(CreateEventRegistrationRequestDto request, int userId)
         {
             try
             {
-                var response = new EventRegistration();
-                if (request == null)
+                if (userId != 0)
                 {
-                    throw new KeyNotFoundException("yêu cầu không thỏa mãn");
+                    var user = await _userRepository.GetUserByUserIdAsync(userId);
+                    if (user == null)
+                    {
+                        throw new KeyNotFoundException("Người dùng không tồn tại");
+                    }
+
+                    var entity = await _eventMapping.MapToEntity(request);
+                    await _eventRegistrationRepository.AddEventRegistrationAsync(entity);
+                    await _eventRegistrationRepository.SaveChangeAsynce();
+                    
+                    var responseDto = await _eventMapping.MapToCreateEventRegistrationResponseDto(entity);
+
+                    return responseDto;
                 }
+                else
+                {
+                    request.UserId = 22;
 
-                response.EventId = request.EventId;
-                response.UserId = request.UserId;
-                response.CheckedIn = request.CheckedIn;
-                response.RegisteredAt = DateTime.Now;
-                response.CreatedAt = DateTime.Now;
-                response.UpdatedAt = DateTime.Now;
+                    var entity = await _eventMapping.MapToEntity(request);
+                    await _eventRegistrationRepository.AddEventRegistrationAsync(entity);
+                    await _eventRegistrationRepository.SaveChangeAsynce();
 
-                await _eventRegistrationRepository.AddEventRegistrationAsync(response);
-                await _eventRegistrationRepository.SaveChangeAsynce();
+                    var responseDto = await _eventMapping.MapToCreateEventRegistrationResponseDto(entity);
 
-                var responseDto = await _eventMapping.MapToCreateEventRegistrationResponseDto(response);
-
-                return responseDto;
+                    return responseDto;
+                }
+               
             }
             catch (Exception ex) 
             {

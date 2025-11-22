@@ -1,12 +1,6 @@
-﻿using Org.BouncyCastle.Asn1.Ocsp;
-using StudentClub.Application.DTOs.response;
+﻿using StudentClub.Application.DTOs.response;
 using StudentClub.Application.Interfaces;
 using StudentClub.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentClub.Application.Mapper
 {

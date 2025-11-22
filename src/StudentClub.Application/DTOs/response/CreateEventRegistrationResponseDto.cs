@@ -8,6 +8,7 @@ namespace StudentClub.Application.DTOs.response
 {
     public class CreateEventRegistrationResponseDto 
     {
+        public int Id { get; set; }
         public string EventName { get; set; } = string.Empty;   
         public string UserName { get; set; } = string.Empty;
         public bool? CheckedIn { get; set; }

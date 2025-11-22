@@ -64,6 +64,69 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "StudentClub.API.Controllers.ClubMembersController",
+    "Method": "GetAllClubMembers",
+    "RelativePath": "api/ClubMembers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.ClubMembersController",
+    "Method": "GetClubMemberById",
+    "RelativePath": "api/ClubMembers/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.ClubMembersController",
+    "Method": "UpdateClubMember",
+    "RelativePath": "api/ClubMembers/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateClubMemberRequestDto",
+        "Type": "StudentClub.Application.DTOs.request.CreateClubMemberRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.ClubMembersController",
+    "Method": "GetClubMembersByClubId",
+    "RelativePath": "api/ClubMembers/club/{clubId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clubId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "StudentClub.API.Controllers.ClubsController",
     "Method": "CreateClub",
     "RelativePath": "api/Clubs",
@@ -396,6 +459,22 @@
       {
         "Name": "request",
         "Type": "StudentClub.Application.DTOs.request.UpdateInterviewRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "StudentClub.API.Controllers.InterviewsController",
+    "Method": "GetById",
+    "RelativePath": "api/Interviews/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

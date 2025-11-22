@@ -120,6 +120,23 @@ namespace StudentClub.API.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var result = await _service.GetByIdAsync(id);
+                if (result == null)
+                {
+                    return NotFound(new { message = "Không tìm thấy phỏng vấn" });
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
         private (int userId, string role) GetUserContext()
         {

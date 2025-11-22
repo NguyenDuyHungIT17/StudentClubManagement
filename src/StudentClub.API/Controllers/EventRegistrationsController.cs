@@ -34,12 +34,12 @@ namespace StudentClub.API.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> CreateEventRegistration([FromBody] CreateEventRegistrationRequestDto request)
         {
             try
             {
-                var result = await _eventRegistrationService.CreateEventRegistrationAsync(request);
+                var (userId, _) = GetUserContext();
+                var result = await _eventRegistrationService.CreateEventRegistrationAsync(request, userId);
                 return Ok(result);
             }
             catch (Exception ex)

@@ -239,5 +239,32 @@ namespace StudentClub.Application.Services
                 throw;
             }
         }
+
+        public async Task<GetInterviewResponseDto?> GetByIdAsync(int id)
+        {
+            try
+            {
+                var interview = await _repo.GetByIdAsync(id);
+                if (interview == null) return null;
+
+                var response = new GetInterviewResponseDto
+                {
+                    InterviewId = interview.InterviewId,
+                    ClubId = interview.ClubId,
+                    ApplicantName = interview.ApplicantName,
+                    ApplicantEmail = interview.ApplicantEmail,
+                    Evaluation = interview.Evaluation,
+                    Result = interview.Result,
+                    CreatedAt = interview.CreatedAt,
+                };
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi lấy phỏng vấn");
+                throw;
+            }
+        }
     }
 }

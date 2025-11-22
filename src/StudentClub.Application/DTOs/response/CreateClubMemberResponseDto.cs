@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentClub.Application.DTOs.response
+﻿namespace StudentClub.Application.DTOs.response
 {
     public class CreateClubMemberResponseDto
     {
-        public string clubName { get; set; }
+        public int ClubMemberId { get; set; }
+        public string ClubName { get; set; }
 
-        public string userName { get; set; }
+        public string UserName { get; set; }
 
         public string MemberRole { get; set; }
+
+        public DateTime? JoinAt { get; set; }
     }
 }

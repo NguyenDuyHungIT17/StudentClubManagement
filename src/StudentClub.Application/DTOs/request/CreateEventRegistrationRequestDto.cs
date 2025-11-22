@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentClub.Application.DTOs.request
+﻿namespace StudentClub.Application.DTOs.request
 {
     public class CreateEventRegistrationRequestDto
     {
@@ -13,6 +7,8 @@ namespace StudentClub.Application.DTOs.request
         public int UserId { get; set; }
 
         public bool? CheckedIn { get; set; }
+
+        public string? CheckName { get; set; }
 
     }
 }

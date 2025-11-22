@@ -19,14 +19,16 @@ namespace StudentClub.Application.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IClubMemberRepository _clubMemberRepository;
+        private readonly IClubRepository _clubRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly ILogger<UserService> _logger;
 
-        public UserService(IUserRepository userRepository, IClubMemberRepository clubMemberRepository,  IPasswordHasher passwordHasher, ILogger<UserService> logger)
+        public UserService(IClubRepository clubRepository, IUserRepository userRepository, IClubMemberRepository clubMemberRepository,  IPasswordHasher passwordHasher, ILogger<UserService> logger)
         {
             _clubMemberRepository = clubMemberRepository;
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
+            _clubRepository = clubRepository;
             _logger = logger;
         }
 
@@ -53,7 +55,7 @@ namespace StudentClub.Application.Services
 
                 var user = new User
                 {
-                    FullName = createUserRequset.Email,
+                    FullName = createUserRequset.FullName,
                     Email = createUserRequset.Email,
                     PasswordHash = _passwordHasher.Hash(createUserRequset.Password),
                     Role = createUserRequset.Role,
@@ -65,11 +67,22 @@ namespace StudentClub.Application.Services
                 await _userRepository.AddAsync(user);
                 await _userRepository.SaveChangeAsynce();
 
+                var newclubMember = new ClubMember
+                {
+                    ClubId = createUserRequset.ClubId,
+                    UserId = user.UserId,
+                    JoinedAt = DateTime.UtcNow,
+                };
+                await _clubMemberRepository.AddClubMemberAsync(newclubMember);
+                await _clubMemberRepository.SaveChangeAsync();
+
                 return new CreateUserResponseDto
                 {
                     Email = user.Email,
                     Role = user.Role,
+                    ClubName = await _clubRepository.GetCLubNameByClubIdAsync(createUserRequset.ClubId)
                 };
+
             }
             catch (Exception ex)
             {
@@ -94,6 +107,7 @@ namespace StudentClub.Application.Services
 
                 user.FullName = string.IsNullOrWhiteSpace(request.FullName) ? user.FullName : request.FullName;
                 user.Email = string.IsNullOrWhiteSpace(request.Email) ? user.Email : request.Email;
+                user.Role = string.IsNullOrWhiteSpace(request.Role) ? user.Role : request.Role;
                 user.UpdatedAt = DateTime.UtcNow;
                 user.IsActive = request.isActive;
 

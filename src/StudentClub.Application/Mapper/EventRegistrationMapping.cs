@@ -1,12 +1,7 @@
-﻿using Org.BouncyCastle.Crypto.Fpe;
+﻿using StudentClub.Application.DTOs.request;
 using StudentClub.Application.DTOs.response;
 using StudentClub.Application.Interfaces;
 using StudentClub.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentClub.Application.Mapper
 {
@@ -24,8 +19,9 @@ namespace StudentClub.Application.Mapper
         {
             return new CreateEventRegistrationResponseDto
             {
+                Id = eventRegistration.RegistrationId,
                 EventName = await _eventRepository.GetEventNameByIdAsync(eventRegistration.EventId),
-                UserName = await _userRepository.GetUserNameByIdAsync(eventRegistration.UserId),
+                UserName = eventRegistration.CheckName,
                 CheckedIn = eventRegistration.CheckedIn,
                 RegisteredAt = eventRegistration.RegisteredAt,
                 EventDate = eventRegistration.Event.EventDate
@@ -41,6 +37,19 @@ namespace StudentClub.Application.Mapper
                 result.Add(dto);
             }
             return result;
+        }
+
+        public async virtual Task<EventRegistration> MapToEntity(CreateEventRegistrationRequestDto ev)
+        {
+            return new EventRegistration
+            {
+                EventId = ev.EventId,
+                UserId = ev.UserId,
+                CheckedIn = ev.CheckedIn,
+                CheckName = ev.CheckName,
+                RegisteredAt = DateTime.UtcNow,
+                CreatedAt = DateTime.UtcNow,
+            };
         }
     }
 }

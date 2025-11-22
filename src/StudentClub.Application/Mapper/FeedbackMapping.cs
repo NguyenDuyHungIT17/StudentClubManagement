@@ -38,7 +38,7 @@ namespace StudentClub.Application.Mapper
 
         public async virtual Task<Feedback> ToEntity(CreateFeedbackRequestDto request, int userIdOnToken)
         {
-            var userId = 17;
+            var userId = 22;
             if (userIdOnToken != 0)
             {
                 userId = (int)userIdOnToken;

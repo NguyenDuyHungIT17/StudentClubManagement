@@ -9,6 +9,7 @@ namespace StudentClub.Application.IServices
 
         Task<GetInterviewResponseDto> CreateWebAsync(CreateInterviewRequestDto request);
         Task<GetInterviewResponseDto?> UpdateAsync(int id, UpdateInterviewRequestDto request, int userId, string role);
+        Task<GetInterviewResponseDto?> GetByIdAsync(int id);
         Task DeleteAsync(int id, int userId, string role);
         Task<List<GetInterviewResponseDto>> GetByClubIdAsync(int clubId, int userId, string role);
         Task<List<GetInterviewResponseDto>> GetAllAsync(); 

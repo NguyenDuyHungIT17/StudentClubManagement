@@ -25,6 +25,7 @@ namespace StudentClub.Application
             services.AddScoped<EventMapping>();
             services.AddScoped<EventRegistrationMapping>();
             services.AddScoped<FeedbackMapping>();
+            services.AddScoped<ClubMemberMapping>();
             return services;
         }
     }
