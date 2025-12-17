@@ -7,56 +7,164 @@
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\clubmemberservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\mapper\\clubmembermapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\mapper\\clubmembermapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\interviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\interviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\repositories\\clubmemberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\repositories\\clubmemberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\mapper\\eventregistrationmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\mapper\\eventregistrationmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\clubservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\clubservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\mapper\\eventmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\mapper\\eventmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\clubmemberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\clubmemberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\request\\createclubmemberrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\request\\createclubmemberrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\iservices\\iclubmemberservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\iservices\\iclubmemberservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\interfaces\\iclubmemberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\interfaces\\iclubmemberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\mapper\\clubmembermapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\mapper\\clubmembermapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\clubscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\clubscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\request\\updateclubrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\request\\updateclubrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\interviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\interviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\utils\\tokengenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\utils\\tokengenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\middleware\\requestloggingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\middleware\\requestloggingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\repositories\\clubmemberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\repositories\\clubmemberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\views\\clubs\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\views\\clubs\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\repositories\\clubrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\repositories\\clubrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\repositories\\eventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\repositories\\eventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\utils\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\utils\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46F1791E-A102-45A7-9C92-002E33763F96}|src\\StudentClub.Domain\\StudentClub.Domain.csproj|d:\\0.studentclub\\src\\studentclub.domain\\entities\\eventregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46F1791E-A102-45A7-9C92-002E33763F96}|src\\StudentClub.Domain\\StudentClub.Domain.csproj|solutionrelative:src\\studentclub.domain\\entities\\eventregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46F1791E-A102-45A7-9C92-002E33763F96}|src\\StudentClub.Domain\\StudentClub.Domain.csproj|d:\\0.studentclub\\src\\studentclub.domain\\entities\\clubmember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46F1791E-A102-45A7-9C92-002E33763F96}|src\\StudentClub.Domain\\StudentClub.Domain.csproj|solutionrelative:src\\studentclub.domain\\entities\\clubmember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\response\\getallclubsresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\response\\getallclubsresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\clubmemberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\clubmemberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\mapper\\feedbackmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\mapper\\feedbackmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\request\\createuserrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\request\\createuserrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\request\\createclubmemberrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\request\\createclubmemberrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\iservices\\iclubmemberservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\iservices\\iclubmemberservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\request\\createfeedbackrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\request\\createfeedbackrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\eventregistrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\eventregistrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\iservices\\ifeedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\iservices\\ifeedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\mapper\\eventregistrationmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\mapper\\eventregistrationmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\interfaces\\iclubmemberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\interfaces\\iclubmemberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\eventregistrationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -67,60 +175,20 @@
       "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\feedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\interviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\interviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\interviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\interviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\iservices\\iinterviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\iservices\\iinterviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\mapper\\feedbackmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\mapper\\feedbackmapping.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\response\\createclubmemberresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\response\\createclubmemberresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\repositories\\clubrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\repositories\\clubrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\eventregistrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\eventregistrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\request\\updateuserrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\request\\updateuserrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\request\\createuserrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\request\\createuserrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\response\\createuserresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\response\\createuserresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{46F1791E-A102-45A7-9C92-002E33763F96}|src\\StudentClub.Domain\\StudentClub.Domain.csproj|d:\\0.studentclub\\src\\studentclub.domain\\entities\\eventregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{46F1791E-A102-45A7-9C92-002E33763F96}|src\\StudentClub.Domain\\StudentClub.Domain.csproj|solutionrelative:src\\studentclub.domain\\entities\\eventregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\response\\createeventregistrationresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -129,14 +197,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\iservices\\ieventregistrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\iservices\\ieventregistrationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\eventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\request\\createeventregistrationrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -167,20 +227,12 @@
       "RelativeMoniker": "D:0:0:{46F1791E-A102-45A7-9C92-002E33763F96}|src\\StudentClub.Domain\\StudentClub.Domain.csproj|solutionrelative:src\\studentclub.domain\\entities\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\repositories\\eventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\repositories\\eventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\interfaces\\ieventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\interfaces\\ieventrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\iservices\\ieventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\iservices\\ieventservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\services\\clubservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\services\\clubservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|d:\\0.studentclub\\src\\studentclub.infrastructure\\repositories\\eventregistrationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -191,20 +243,8 @@
       "RelativeMoniker": "D:0:0:{B40743DC-057B-4EC7-B509-6A456BCD7A69}|src\\StudentClub.Infrastructure\\StudentClub.Infrastructure.csproj|solutionrelative:src\\studentclub.infrastructure\\repositories\\feedbackrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\iservices\\ifeedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\iservices\\ifeedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\request\\createfeedbackrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\request\\createfeedbackrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\interfaces\\ifeedbackrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\interfaces\\ifeedbackrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|d:\\0.studentclub\\src\\studentclub.application\\dtos\\response\\updatefeedbackdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -243,10 +283,6 @@
       "RelativeMoniker": "D:0:0:{1E939C3A-C047-4E55-94BC-734A99D0578C}|src\\StudentClub.Application\\StudentClub.Application.csproj|solutionrelative:src\\studentclub.application\\dtos\\request\\createclubrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|d:\\0.studentclub\\src\\studentclub.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{98D4600C-175E-4933-9ECB-AE57140477E3}|src\\StudentClub.API\\StudentClub.API.csproj|solutionrelative:src\\studentclub.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{46F1791E-A102-45A7-9C92-002E33763F96}|src\\StudentClub.Domain\\StudentClub.Domain.csproj|d:\\0.studentclub\\src\\studentclub.domain\\entities\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{46F1791E-A102-45A7-9C92-002E33763F96}|src\\StudentClub.Domain\\StudentClub.Domain.csproj|solutionrelative:src\\studentclub.domain\\entities\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -258,37 +294,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 257,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "FeedbackService.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\FeedbackService.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\FeedbackService.cs",
               "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\FeedbackService.cs",
               "RelativeToolTip": "src\\StudentClub.Application\\Services\\FeedbackService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwB0AAABhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-13T09:56:41.392Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 37,
               "Title": "IFeedbackService.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\IServices\\IFeedbackService.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\IServices\\IFeedbackService.cs",
               "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\IServices\\IFeedbackService.cs",
               "RelativeToolTip": "src\\StudentClub.Application\\IServices\\IFeedbackService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAABlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-13T09:56:12.838Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 59,
               "Title": "FeedbackRepository.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\FeedbackRepository.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Repositories\\FeedbackRepository.cs",
@@ -301,20 +337,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 35,
               "Title": "CreateFeedbackRequestDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateFeedbackRequestDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\CreateFeedbackRequestDto.cs",
               "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateFeedbackRequestDto.cs",
               "RelativeToolTip": "src\\StudentClub.Application\\DTOs\\request\\CreateFeedbackRequestDto.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwA0AAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-13T09:32:50.407Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 61,
               "Title": "UpdateFeedbackDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\response\\UpdateFeedbackDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\response\\UpdateFeedbackDto.cs",
@@ -327,7 +363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 62,
               "Title": "CreateFeedbackResponseDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\response\\CreateFeedbackResponseDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\response\\CreateFeedbackResponseDto.cs",
@@ -340,13 +376,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 29,
               "Title": "FeedbackMapping.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\FeedbackMapping.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\Mapper\\FeedbackMapping.cs",
               "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\FeedbackMapping.cs",
               "RelativeToolTip": "src\\StudentClub.Application\\Mapper\\FeedbackMapping.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwBkAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-13T10:27:40.006Z",
               "IsPinned": true
@@ -373,52 +409,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ClubMemberMapping.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\ClubMemberMapping.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Mapper\\ClubMemberMapping.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\ClubMemberMapping.cs",
-              "RelativeToolTip": "src\\StudentClub.Application\\Mapper\\ClubMemberMapping.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-13T07:38:52.134Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ClubMemberService.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\ClubMemberService.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\ClubMemberService.cs",
               "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\ClubMemberService.cs",
               "RelativeToolTip": "src\\StudentClub.Application\\Services\\ClubMemberService.cs",
-              "ViewState": "AgIAAJIAAAAAAAAAAAAiwJwAAABPAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwBsAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-15T06:06:32.037Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CLubMemberRepository.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\CLubMemberRepository.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Repositories\\CLubMemberRepository.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\CLubMemberRepository.cs",
-              "RelativeToolTip": "src\\StudentClub.Infrastructure\\Repositories\\CLubMemberRepository.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACYAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "ClubMemberMapping.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\ClubMemberMapping.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Mapper\\ClubMemberMapping.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\ClubMemberMapping.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\Mapper\\ClubMemberMapping.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T06:45:49.969Z"
+              "WhenOpened": "2025-11-13T07:38:52.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClubsController.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\ClubsController.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\ClubsController.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\ClubsController.cs",
+              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\ClubsController.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAiwCsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T16:16:32.714Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "EventRegistrationMapping.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\EventRegistrationMapping.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Mapper\\EventRegistrationMapping.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\EventRegistrationMapping.cs",
-              "RelativeToolTip": "src\\StudentClub.Application\\Mapper\\EventRegistrationMapping.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAiwBAAAAAAAAAAAAAAAA==",
+              "Title": "ClubService.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\ClubService.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\ClubService.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\ClubService.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\Services\\ClubService.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwFEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T07:12:29.997Z"
+              "WhenOpened": "2025-10-13T10:14:59.976Z"
             },
             {
               "$type": "Document",
@@ -428,61 +464,133 @@
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\Mapper\\EventMapping.cs",
               "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\EventMapping.cs",
               "RelativeToolTip": "src\\StudentClub.Application\\Mapper\\EventMapping.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-13T10:28:59.136Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ClubMembersController.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\ClubMembersController.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\ClubMembersController.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\ClubMembersController.cs",
-              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\ClubMembersController.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAswDEAAABDAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "EventService.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\EventService.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\EventService.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\EventService.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\Services\\EventService.cs",
+              "ViewState": "AgIAALkAAAAAAAAAAADwvxMAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T07:17:03.181Z"
+              "WhenOpened": "2025-10-31T07:31:07.765Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
+              "Title": "InterviewService.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\InterviewService.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\InterviewService.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\InterviewService.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\Services\\InterviewService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPIAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T07:03:26.443Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CLubMemberRepository.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\CLubMemberRepository.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Repositories\\CLubMemberRepository.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\CLubMemberRepository.cs",
+              "RelativeToolTip": "src\\StudentClub.Infrastructure\\Repositories\\CLubMemberRepository.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAwwBgAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T06:45:49.969Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TokenGenerator.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Utils\\TokenGenerator.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Utils\\TokenGenerator.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Utils\\TokenGenerator.cs",
+              "RelativeToolTip": "src\\StudentClub.Infrastructure\\Utils\\TokenGenerator.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwBwAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T04:28:10.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "InterviewController.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\InterviewController.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\InterviewController.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\InterviewController.cs",
+              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\InterviewController.cs",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAAAGkAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T16:16:55.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UpdateClubRequestDto.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\UpdateClubRequestDto.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\UpdateClubRequestDto.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\UpdateClubRequestDto.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\DTOs\\request\\UpdateClubRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T03:46:07.272Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Program.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.API\\Program.cs",
               "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Program.cs",
               "RelativeToolTip": "src\\StudentClub.API\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-14T08:40:40.614Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "CreateClubMemberRequestDto.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateClubMemberRequestDto.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\CreateClubMemberRequestDto.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateClubMemberRequestDto.cs",
-              "RelativeToolTip": "src\\StudentClub.Application\\DTOs\\request\\CreateClubMemberRequestDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T02:30:09.684Z"
+              "DocumentIndex": 17,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Views\\Clubs\\Create.cshtml",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\Views\\Clubs\\Create.cshtml",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Views\\Clubs\\Create.cshtml",
+              "RelativeToolTip": "src\\StudentClub.API\\Views\\Clubs\\Create.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T10:24:20.876Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\DependencyInjection.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\DependencyInjection.cs",
-              "RelativeToolTip": "src\\StudentClub.Infrastructure\\DependencyInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "EventController.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\EventController.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\EventController.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\EventController.cs",
+              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\EventController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwAQAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T17:24:51.656Z"
+              "WhenOpened": "2025-10-24T16:16:44.453Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
+              "Title": "ServiceCollectionExtensions.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\Extensions\\ServiceCollectionExtensions.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeToolTip": "src\\StudentClub.API\\Extensions\\ServiceCollectionExtensions.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T09:46:18.439Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "DependencyInjection.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DependencyInjection.cs",
@@ -494,19 +602,247 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
+              "Title": "RequestLoggingMiddleware.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Middleware\\RequestLoggingMiddleware.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\Middleware\\RequestLoggingMiddleware.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Middleware\\RequestLoggingMiddleware.cs",
+              "RelativeToolTip": "src\\StudentClub.API\\Middleware\\RequestLoggingMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T09:49:29.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\appsettings.Development.json",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\appsettings.Development.json",
+              "RelativeToolTip": "src\\StudentClub.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-14T07:43:01.266Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "src\\StudentClub.API\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T10:24:45.036Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "EventRepository.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\EventRepository.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Repositories\\EventRepository.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\EventRepository.cs",
+              "RelativeToolTip": "src\\StudentClub.Infrastructure\\Repositories\\EventRepository.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAwwDwAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T07:13:07.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ClubRepository.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\ClubRepository.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Repositories\\ClubRepository.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\ClubRepository.cs",
+              "RelativeToolTip": "src\\StudentClub.Infrastructure\\Repositories\\ClubRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T09:30:12.277Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\AuthService.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\AuthService.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\Services\\AuthService.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwDEAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T16:17:45.827Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "GetAllClubsResponseDto.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\response\\GetAllClubsResponseDto.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\response\\GetAllClubsResponseDto.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\response\\GetAllClubsResponseDto.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\DTOs\\response\\GetAllClubsResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T02:09:48.889Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "PasswordHasher.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Utils\\PasswordHasher.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Utils\\PasswordHasher.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Utils\\PasswordHasher.cs",
+              "RelativeToolTip": "src\\StudentClub.Infrastructure\\Utils\\PasswordHasher.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAIwAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T04:27:29.986Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ClubMember.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Domain\\Entities\\ClubMember.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Domain\\Entities\\ClubMember.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Domain\\Entities\\ClubMember.cs",
+              "RelativeToolTip": "src\\StudentClub.Domain\\Entities\\ClubMember.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T04:26:47.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAO8AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T03:58:50.999Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "EventRegistration.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Domain\\Entities\\EventRegistration.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Domain\\Entities\\EventRegistration.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Domain\\Entities\\EventRegistration.cs",
+              "RelativeToolTip": "src\\StudentClub.Domain\\Entities\\EventRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T07:47:36.324Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\UserService.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\UserService.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\Services\\UserService.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAlwE8AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T03:47:56.011Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ClubMembersController.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\ClubMembersController.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\ClubMembersController.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\ClubMembersController.cs",
+              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\ClubMembersController.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAQwCIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T07:17:03.181Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CreateClubMemberRequestDto.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateClubMemberRequestDto.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\CreateClubMemberRequestDto.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateClubMemberRequestDto.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\DTOs\\request\\CreateClubMemberRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T02:30:09.684Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwAgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T16:16:31.298Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
               "Title": "IClubMemberService.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\IServices\\IClubMemberService.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\IServices\\IClubMemberService.cs",
               "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\IServices\\IClubMemberService.cs",
               "RelativeToolTip": "src\\StudentClub.Application\\IServices\\IClubMemberService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-13T07:26:34.233Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 31,
+              "Title": "CreateUserRequestDto.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateUserRequestDto.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\CreateUserRequestDto.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateUserRequestDto.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\DTOs\\request\\CreateUserRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T07:20:04.147Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "EventRegistrationService.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\EventRegistrationService.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\EventRegistrationService.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\EventRegistrationService.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\Services\\EventRegistrationService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAawCwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T09:00:09.569Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "EventRegistrationMapping.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\EventRegistrationMapping.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Mapper\\EventRegistrationMapping.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Mapper\\EventRegistrationMapping.cs",
+              "RelativeToolTip": "src\\StudentClub.Application\\Mapper\\EventRegistrationMapping.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAiwBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T07:12:29.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\DependencyInjection.cs",
+              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\StudentClub.Infrastructure\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T17:24:51.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
               "Title": "IClubMemberRepository.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Interfaces\\IClubMemberRepository.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\Interfaces\\IClubMemberRepository.cs",
@@ -518,31 +854,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ClubsController.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\ClubsController.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\ClubsController.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\ClubsController.cs",
-              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\ClubsController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAIwEgAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T16:16:32.714Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "EventController.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\EventController.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\EventController.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\EventController.cs",
-              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\EventController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKwAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T16:16:44.453Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 41,
               "Title": "EventRegistrationsController.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\EventRegistrationsController.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\EventRegistrationsController.cs",
@@ -554,7 +866,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 42,
               "Title": "FeedbackController.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\FeedbackController.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\FeedbackController.cs",
@@ -566,31 +878,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "InterviewController.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\InterviewController.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\InterviewController.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\InterviewController.cs",
-              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\InterviewController.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAmwGkAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T16:16:55.73Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\UsersController.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAADwv1UAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T03:58:50.999Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 43,
               "Title": "IInterviewService.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\IServices\\IInterviewService.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\IServices\\IInterviewService.cs",
@@ -602,19 +890,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "InterviewService.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\InterviewService.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\InterviewService.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\InterviewService.cs",
-              "RelativeToolTip": "src\\StudentClub.Application\\Services\\InterviewService.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAPIAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T07:03:26.443Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 44,
               "Title": "CreateClubMemberResponseDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\response\\CreateClubMemberResponseDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\response\\CreateClubMemberResponseDto.cs",
@@ -626,55 +902,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "ClubRepository.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\ClubRepository.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Repositories\\ClubRepository.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\ClubRepository.cs",
-              "RelativeToolTip": "src\\StudentClub.Infrastructure\\Repositories\\ClubRepository.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAgwDoAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T09:30:12.277Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\UserService.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\UserService.cs",
-              "RelativeToolTip": "src\\StudentClub.Application\\Services\\UserService.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAwwHcAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T03:47:56.011Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\AuthService.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\AuthService.cs",
-              "RelativeToolTip": "src\\StudentClub.Application\\Services\\AuthService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T16:17:45.827Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "EventRegistrationService.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\EventRegistrationService.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\EventRegistrationService.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\EventRegistrationService.cs",
-              "RelativeToolTip": "src\\StudentClub.Application\\Services\\EventRegistrationService.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAD4vywAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T09:00:09.569Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 45,
               "Title": "UpdateUserRequestDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\UpdateUserRequestDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\UpdateUserRequestDto.cs",
@@ -686,19 +914,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "CreateUserRequestDto.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateUserRequestDto.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\CreateUserRequestDto.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateUserRequestDto.cs",
-              "RelativeToolTip": "src\\StudentClub.Application\\DTOs\\request\\CreateUserRequestDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-12T07:20:04.147Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 46,
               "Title": "CreateUserResponseDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\response\\CreateUserResponseDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\response\\CreateUserResponseDto.cs",
@@ -710,7 +926,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 47,
               "Title": "CreateEventRegistrationResponseDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\response\\CreateEventRegistrationResponseDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\response\\CreateEventRegistrationResponseDto.cs",
@@ -722,19 +938,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "EventRegistration.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Domain\\Entities\\EventRegistration.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Domain\\Entities\\EventRegistration.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Domain\\Entities\\EventRegistration.cs",
-              "RelativeToolTip": "src\\StudentClub.Domain\\Entities\\EventRegistration.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwAUAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T07:47:36.324Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 48,
               "Title": "IEventRegistrationService.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\IServices\\IEventRegistrationService.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\IServices\\IEventRegistrationService.cs",
@@ -746,7 +950,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 49,
               "Title": "CreateEventRegistrationRequestDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateEventRegistrationRequestDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\CreateEventRegistrationRequestDto.cs",
@@ -758,7 +962,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 50,
               "Title": "20251104082636_AddCheckNameToEventRegistration.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Migrations\\20251104082636_AddCheckNameToEventRegistration.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Migrations\\20251104082636_AddCheckNameToEventRegistration.cs",
@@ -770,19 +974,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "EventService.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\EventService.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\EventService.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\EventService.cs",
-              "RelativeToolTip": "src\\StudentClub.Application\\Services\\EventService.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAYwLEAAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T07:31:07.765Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 51,
               "Title": "StudentClubDbContextModelSnapshot.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Migrations\\StudentClubDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Migrations\\StudentClubDbContextModelSnapshot.cs",
@@ -794,7 +986,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 52,
               "Title": "StudentClubDbContext.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Persistence\\StudentClubDbContext.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Persistence\\StudentClubDbContext.cs",
@@ -806,7 +998,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 53,
               "Title": "20251104081025_eventRegistration.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Migrations\\20251104081025_eventRegistration.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Migrations\\20251104081025_eventRegistration.cs",
@@ -818,7 +1010,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 54,
               "Title": "20251104080233_Initial.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Migrations\\20251104080233_Initial.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Migrations\\20251104080233_Initial.cs",
@@ -830,7 +1022,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 55,
               "Title": "Event.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Domain\\Entities\\Event.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Domain\\Entities\\Event.cs",
@@ -842,7 +1034,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 56,
               "Title": "IEventRepository.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Interfaces\\IEventRepository.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\Interfaces\\IEventRepository.cs",
@@ -854,19 +1046,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
-              "Title": "EventRepository.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\EventRepository.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Repositories\\EventRepository.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\EventRepository.cs",
-              "RelativeToolTip": "src\\StudentClub.Infrastructure\\Repositories\\EventRepository.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAswDwAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T07:13:07.696Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 57,
               "Title": "IEventService.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\IServices\\IEventService.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\IServices\\IEventService.cs",
@@ -878,19 +1058,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
-              "Title": "ClubService.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\ClubService.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.Application\\Services\\ClubService.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.Application\\Services\\ClubService.cs",
-              "RelativeToolTip": "src\\StudentClub.Application\\Services\\ClubService.cs",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAcwHMAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T10:14:59.976Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 58,
               "Title": "EventRegistrationRepository.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\EventRegistrationRepository.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Repositories\\EventRegistrationRepository.cs",
@@ -902,7 +1070,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 60,
               "Title": "IFeedbackRepository.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Interfaces\\IFeedbackRepository.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\Interfaces\\IFeedbackRepository.cs",
@@ -914,19 +1082,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "src\\StudentClub.API\\Controllers\\AuthController.cs",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "src\\StudentClub.API\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T16:16:31.298Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 63,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Repositories\\UserRepository.cs",
@@ -938,7 +1094,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 64,
               "Title": "InterviewRepository.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Infrastructure\\Repositories\\InterviewRepository.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Infrastructure\\Repositories\\InterviewRepository.cs",
@@ -950,7 +1106,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 65,
               "Title": "UpdateUserResponseDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\response\\UpdateUserResponseDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\response\\UpdateUserResponseDto.cs",
@@ -962,7 +1118,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 66,
               "Title": "LoginRequestDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\LoginRequestDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\LoginRequestDto.cs",
@@ -974,7 +1130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 67,
               "Title": "IClubRepository.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\Interfaces\\IClubRepository.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\Interfaces\\IClubRepository.cs",
@@ -986,7 +1142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 68,
               "Title": "CreateEventRequestDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateEventRequestDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\CreateEventRequestDto.cs",
@@ -998,7 +1154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 69,
               "Title": "CreateClubRequestDto.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Application\\DTOs\\request\\CreateClubRequestDto.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Application\\DTOs\\request\\CreateClubRequestDto.cs",
@@ -1010,19 +1166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.API\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "src\\StudentClub.API\\appsettings.Development.json",
-              "ToolTip": "D:\\0.StudentClub\\src\\StudentClub.API\\appsettings.Development.json",
-              "RelativeToolTip": "src\\StudentClub.API\\appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-14T07:43:01.266Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 70,
               "Title": "Feedback.cs",
               "DocumentMoniker": "D:\\0.StudentClub\\src\\StudentClub.Domain\\Entities\\Feedback.cs",
               "RelativeDocumentMoniker": "src\\StudentClub.Domain\\Entities\\Feedback.cs",

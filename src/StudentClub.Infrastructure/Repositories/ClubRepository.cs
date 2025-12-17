@@ -90,8 +90,6 @@ namespace StudentClub.Infrastructure.Repositories
             return await _context.Clubs.ToListAsync();
         }
 
-       
-
         public async Task<Club> GetClubAsync(int id)
         {
             var club = await _context.Clubs.FirstOrDefaultAsync(x => x.ClubId == id);

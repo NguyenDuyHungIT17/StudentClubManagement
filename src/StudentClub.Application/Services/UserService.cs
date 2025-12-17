@@ -71,6 +71,7 @@ namespace StudentClub.Application.Services
                 {
                     ClubId = createUserRequset.ClubId,
                     UserId = user.UserId,
+                    MemberRole = createUserRequset.Role,
                     JoinedAt = DateTime.UtcNow,
                 };
                 await _clubMemberRepository.AddClubMemberAsync(newclubMember);

@@ -1,8 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-
-namespace StudentClub.API.Middleware
+﻿namespace StudentClub.API.Middleware
 {
     public class RequestLoggingMiddleware
     {

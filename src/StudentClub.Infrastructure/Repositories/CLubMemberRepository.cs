@@ -15,7 +15,7 @@ namespace StudentClub.Infrastructure.Repositories
 
         public async Task AddClubMemberAsync(ClubMember clubMember)
         {
-            await _context.AddAsync(clubMember);
+            await _context.ClubMembers.AddAsync(clubMember);
         }
 
         public async Task<List<ClubMember>> GetAllClubMemberAsync()
