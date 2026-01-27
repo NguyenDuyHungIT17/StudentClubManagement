@@ -2,8 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 
 using StudentClub.Application.IServices;
+using StudentClub.Application.IServices.IRealtimeService;
 using StudentClub.Application.Mapper;
 using StudentClub.Application.Services;
+using StudentClub.Application.Services.RealtimeServices;
 
 namespace StudentClub.Application
 {
@@ -21,6 +23,7 @@ namespace StudentClub.Application
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IEventRegistrationService, EventRegistrationService>();
             services.AddScoped<IFeedbackService, FeedbackService>();
+            services.AddSingleton<IRealtimeService, ChatService>();
 
             services.AddScoped<EventMapping>();
             services.AddScoped<EventRegistrationMapping>();

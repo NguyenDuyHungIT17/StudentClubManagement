@@ -18,3 +18,23 @@ D:\0.StudentClub\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Inf
 D:\0.StudentClub\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.genruntimeconfig.cache
 D:\0.StudentClub\src\StudentClub.Infrastructure\obj\Debug\net9.0\ref\StudentClub.Infrastructure.dll
 D:\0.StudentClub\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.sourcelink.json
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\bin\Debug\net9.0\StudentClub.Infrastructure.deps.json
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\bin\Debug\net9.0\StudentClub.Infrastructure.runtimeconfig.json
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\bin\Debug\net9.0\StudentClub.Infrastructure.dll
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\bin\Debug\net9.0\StudentClub.Infrastructure.pdb
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\bin\Debug\net9.0\StudentClub.Application.dll
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\bin\Debug\net9.0\StudentClub.Domain.dll
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\bin\Debug\net9.0\StudentClub.Application.pdb
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\bin\Debug\net9.0\StudentClub.Domain.pdb
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.csproj.AssemblyReference.cache
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.AssemblyInfoInputs.cache
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.AssemblyInfo.cs
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.csproj.CoreCompileInputs.cache
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.sourcelink.json
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentC.9C420EAB.Up2Date
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.dll
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\refint\StudentClub.Infrastructure.dll
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.pdb
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\StudentClub.Infrastructure.genruntimeconfig.cache
+D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.Infrastructure\obj\Debug\net9.0\ref\StudentClub.Infrastructure.dll

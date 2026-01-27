@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\0.StudentClub\\src\\StudentClub.Tests\\StudentClub.Tests.csproj": {}
+    "D:\\hung_test_project\\29_Hưng Nguyễn Duy_2022605277\\StudentClubManagement\\src\\StudentClub.Tests\\StudentClub.Tests.csproj": {}
   },
   "projects": {
-    "D:\\0.StudentClub\\src\\StudentClub.Tests\\StudentClub.Tests.csproj": {
+    "D:\\hung_test_project\\29_Hưng Nguyễn Duy_2022605277\\StudentClubManagement\\src\\StudentClub.Tests\\StudentClub.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\0.StudentClub\\src\\StudentClub.Tests\\StudentClub.Tests.csproj",
+        "projectUniqueName": "D:\\hung_test_project\\29_Hưng Nguyễn Duy_2022605277\\StudentClubManagement\\src\\StudentClub.Tests\\StudentClub.Tests.csproj",
         "projectName": "StudentClub.Tests",
-        "projectPath": "D:\\0.StudentClub\\src\\StudentClub.Tests\\StudentClub.Tests.csproj",
-        "packagesPath": "C:\\Users\\HUNG NGUYEN\\.nuget\\packages\\",
-        "outputPath": "D:\\0.StudentClub\\src\\StudentClub.Tests\\obj\\",
+        "projectPath": "D:\\hung_test_project\\29_Hưng Nguyễn Duy_2022605277\\StudentClubManagement\\src\\StudentClub.Tests\\StudentClub.Tests.csproj",
+        "packagesPath": "C:\\Users\\hungnd\\.nuget\\packages\\",
+        "outputPath": "D:\\hung_test_project\\29_Hưng Nguyễn Duy_2022605277\\StudentClubManagement\\src\\StudentClub.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HUNG NGUYEN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hungnd\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,7 +27,6 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "D:\\cac_mon_hoc\\ki_xuan_3\\asp.net": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -46,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -80,12 +79,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.11, 9.0.11]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.11, 9.0.11]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.11, 9.0.11]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

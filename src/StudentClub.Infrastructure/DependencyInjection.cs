@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StudentClub.Application.Interfaces;
 using StudentClub.Infrastructure.Persistence;
+using StudentClub.Infrastructure.Realtime;
 using StudentClub.Infrastructure.Repositories;
 using StudentClub.Infrastructure.Utils;
 
@@ -24,7 +25,7 @@ namespace StudentClub.Infrastructure
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IEventRegistrationRepository, EventRegistrationRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
-
+            services.AddSingleton<IRealtimeConnectionManager ,WebSocketConnectionManager>();
             return services;
         }
     }

@@ -1,8 +1,8 @@
-﻿using StudentClub.API.Extensions;
-using StudentClub.API.Middleware;
+﻿using Microsoft.OpenApi.Models;
+using StudentClub.API.Extensions;
+using StudentClub.API.WebSockets;
 using StudentClub.Application;
 using StudentClub.Infrastructure;
-using Microsoft.OpenApi.Models; 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +61,9 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseWebSockets();
+ChatWebSocketEndpoint.MapChat(app);
 
 app.UseCors("AllowFrontend");
 

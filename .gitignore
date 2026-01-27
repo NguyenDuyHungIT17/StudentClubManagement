@@ -1,0 +1,36 @@
+## ===== .NET =====
+bin/
+obj/
+out/
+
+## ===== Visual Studio =====
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## ===== Rider / VSCode =====
+.idea/
+.vscode/
+
+## ===== OS =====
+.DS_Store
+Thumbs.db
+
+## ===== Logs =====
+*.log
+
+## ===== Secrets =====
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+## ===== EF Core =====
+Migrations/
+
+## ===== Test results =====
+TestResults/
+
+## ===== Docker =====
+**/docker-data/
