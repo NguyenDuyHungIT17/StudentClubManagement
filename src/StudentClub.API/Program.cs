@@ -1,12 +1,21 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.OpenApi.Models;
 using StudentClub.API.Extensions;
+using StudentClub.API.Validators.Club;
 using StudentClub.API.WebSockets;
 using StudentClub.Application;
 using StudentClub.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddFluentValidation(fv =>
+    {
+        fv.RegisterValidatorsFromAssemblyContaining<CreateClubRequest>();
+    });
+
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>

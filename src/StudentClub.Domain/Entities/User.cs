@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentClub.Domain.Entities;
 
+[Table("Users")]
 public partial class User
 {
     public int UserId { get; set; }

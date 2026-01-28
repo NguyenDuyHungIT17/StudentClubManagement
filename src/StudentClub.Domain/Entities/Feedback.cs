@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentClub.Domain.Entities;
 
+[Table("Feedbacks")]
 public partial class Feedback
 {
     public int FeedbackId { get; set; }

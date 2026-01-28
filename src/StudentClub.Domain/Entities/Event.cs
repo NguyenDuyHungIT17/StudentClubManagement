@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace StudentClub.Domain.Entities;
 
+[Table("Events")]
 public partial class Event
 {
     public int EventId { get; set; }

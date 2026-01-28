@@ -177,13 +177,13 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "update",
-        "Type": "StudentClub.Application.DTOs.request.UpdateClubRequestDto",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       },
       {
-        "Name": "id",
-        "Type": "",
+        "Name": "update",
+        "Type": "StudentClub.Application.DTOs.request.UpdateClubRequestDto",
         "IsRequired": true
       }
     ],

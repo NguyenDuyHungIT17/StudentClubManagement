@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EeNHpwbamSs=",
+  "dgSpecHash": "SDBxisS9H+0=",
   "success": true,
   "projectFilePath": "D:\\hung_test_project\\29_Hưng Nguyễn Duy_2022605277\\StudentClubManagement\\src\\StudentClub.API\\StudentClub.API.csproj",
   "expectedPackageFiles": [
@@ -9,9 +9,9 @@
     "C:\\Users\\hungnd\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\hungnd\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\hungnd\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
-    "C:\\Users\\hungnd\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
-    "C:\\Users\\hungnd\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.1\\fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
-    "C:\\Users\\hungnd\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
+    "C:\\Users\\hungnd\\.nuget\\packages\\fluentvalidation\\9.5.4\\fluentvalidation.9.5.4.nupkg.sha512",
+    "C:\\Users\\hungnd\\.nuget\\packages\\fluentvalidation.aspnetcore\\9.5.4\\fluentvalidation.aspnetcore.9.5.4.nupkg.sha512",
+    "C:\\Users\\hungnd\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\9.5.4\\fluentvalidation.dependencyinjectionextensions.9.5.4.nupkg.sha512",
     "C:\\Users\\hungnd\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\hungnd\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\hungnd\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",

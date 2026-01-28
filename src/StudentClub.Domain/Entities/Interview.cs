@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentClub.Domain.Entities;
 
+[Table("Interviews")]
 public partial class Interview
 {
     public int InterviewId { get; set; }

@@ -298,7 +298,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -1159,8 +1160,17 @@
             "type": "string",
             "nullable": true
           },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
           "description": {
             "type": "string",
+            "nullable": true
+          },
+          "leaderId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -1352,10 +1362,6 @@
       "UpdateClubRequestDto": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
           "clubName": {
             "type": "string",
             "nullable": true
@@ -1367,6 +1373,10 @@
           "leaderId": {
             "type": "integer",
             "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

@@ -43,11 +43,11 @@ namespace StudentClub.API.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin, leader")]
-        public async Task<IActionResult> UpdateClub([FromBody] UpdateClubRequestDto update)
+        public async Task<IActionResult> UpdateClub(int id, [FromBody] UpdateClubRequestDto update)
         {
             try
             {
-                await _clubService.UpdateClubAsync(update);
+                await _clubService.UpdateClubAsync(id, update);
                 return Ok(new { message = "Cập nhật trạng thái thành công" });
             }
             catch (ArgumentException ex)

@@ -8,8 +8,13 @@ namespace StudentClub.Application.DTOs.request
 {
     public class CreateClubRequestDto
     {
-        public string ClubName {  get; set; }
-        public string Description { get; set; }
+        public string ClubName { get; set; } = null!;
+
+        public string? Title { get; set; }
+
+        public string? Description { get; set; }
+
+        public int? LeaderId { get; set; }
 
     }
 }

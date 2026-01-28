@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentClub.Domain.Entities;
 
+[Table("Clubs")]
 public partial class Club
 {
     public int ClubId { get; set; }
 
     public string ClubName { get; set; } = null!;
+
+    public string? Title { get; set; }
 
     public string? Description { get; set; }
 

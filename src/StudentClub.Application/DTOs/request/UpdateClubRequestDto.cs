@@ -8,9 +8,9 @@ namespace StudentClub.Application.DTOs.request
 {
     public class UpdateClubRequestDto
     {
-        public int Id { get; set; }
         public string ClubName { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public int LeaderId { get; set; }
+        public string? Title { get; set; }
     }
 }

@@ -11,5 +11,6 @@ namespace StudentClub.Application.DTOs.response
         public string ClubName { get; set; }
         public string Description { get; set; }
         public string LeaderName { get; set; }
+        public string? Title { get; set; }
     }
 }

@@ -45,6 +45,7 @@ namespace StudentClub.Application.Services
                     ClubName = createClubRequestDto.ClubName,
                     Description = createClubRequestDto.Description,
                     LeaderId = null,
+                    Title = createClubRequestDto.Title,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
                 };
@@ -56,7 +57,8 @@ namespace StudentClub.Application.Services
                 {
                     ClubName = club.ClubName,
                     Description = club.Description,
-                    LeaderName = "Cập nhật sau"
+                    LeaderName = "Cập nhật sau",
+                    Title = club.Title,
                 };
             }
             catch (Exception ex)
@@ -66,11 +68,11 @@ namespace StudentClub.Application.Services
             }
         }
 
-        public async Task<UpdateClubResponseDto> UpdateClubAsync(UpdateClubRequestDto updateClubRequestDto)
+        public async Task<UpdateClubResponseDto> UpdateClubAsync(int id, UpdateClubRequestDto updateClubRequestDto)
         {
             try
             {
-                var club = await _clubRepository.GetClubByClubIdAsync(updateClubRequestDto.Id);
+                var club = await _clubRepository.GetClubByClubIdAsync(id);
                 if (club == null)
                 {
                     throw new Exception("Câu lạc bộ không được tìm thấy");
@@ -92,7 +94,7 @@ namespace StudentClub.Application.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi cập nhật câu lạc bộ. ClubId: {ClubId}, Thời gian: {Time}", updateClubRequestDto.Id, DateTime.UtcNow);
+                _logger.LogError(ex, "Lỗi khi cập nhật câu lạc bộ. ClubId: {ClubId}, Thời gian: {Time}", id, DateTime.UtcNow);
                 throw;
             }
         }
