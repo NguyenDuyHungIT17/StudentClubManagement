@@ -32,7 +32,7 @@ namespace StudentClub.API.Validators.User
             // Role
             RuleFor(x => x.Role)
                 .NotEmpty().WithMessage("Role không được để trống")
-                .Must(role => role == "Admin" || role == "Leader" || role == "Member")
+                .Must(role => role == "admin" || role == "leader" || role == "member")
                 .WithMessage("Role không hợp lệ");
 
             // IsActive

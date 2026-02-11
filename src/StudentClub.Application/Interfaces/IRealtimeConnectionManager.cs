@@ -10,9 +10,9 @@ namespace StudentClub.Application.Interfaces
 {
     public interface IRealtimeConnectionManager
     {
-        IEnumerable<RealtimeConnection> GetByClub(Guid clubId);
-        RealtimeConnection? GetByUser(Guid userId);
-        IEnumerable<RealtimeConnection> GetLeaders(Guid clubId);
+        IEnumerable<RealtimeConnection> GetByClub(int clubId);
+        RealtimeConnection? GetByUser(int userId);
+        IEnumerable<RealtimeConnection> GetLeaders(int clubId);
         Task SendAsync(RealtimeConnection connection, object payload);
         void Add(WebSocketConnection conn);
         void Remove(Guid id);

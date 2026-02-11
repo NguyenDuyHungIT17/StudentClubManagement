@@ -308,8 +308,6 @@ D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\
 D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.csproj.CoreCompileInputs.cache
 D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.MvcApplicationPartsAssemblyInfo.cs
 D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.MvcApplicationPartsAssemblyInfo.cache
-D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.RazorAssemblyInfo.cache
-D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.RazorAssemblyInfo.cs
 D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.sourcelink.json
 D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.API\obj\Debug\net9.0\StudentClub.API.dll
 D:\hung_test_project\29_Hưng Nguyễn Duy_2022605277\StudentClubManagement\src\StudentClub.API\obj\Debug\net9.0\refint\StudentClub.API.dll

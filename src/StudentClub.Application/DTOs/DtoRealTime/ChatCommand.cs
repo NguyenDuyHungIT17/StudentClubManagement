@@ -9,8 +9,8 @@ namespace StudentClub.Application.DTOs.DtoRealTime
     public class ChatCommand
     {
         public string Type { get; set; } = default!;
-        public Guid ClubId { get; set; }
-        public Guid? ToUserId { get; set; }
+        public int ClubId { get; set; }
+        public int? ToUserId { get; set; }
         public string Content { get; set; } = default!;
     }
 }

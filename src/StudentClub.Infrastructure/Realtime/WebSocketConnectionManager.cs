@@ -18,13 +18,13 @@ namespace StudentClub.Infrastructure.Realtime
         public void Remove(Guid id)
             => _connections.TryRemove(id, out _);
 
-        public IEnumerable<RealtimeConnection> GetByClub(Guid clubId)
+        public IEnumerable<RealtimeConnection> GetByClub(int clubId)
             => _connections.Values.Where(c => c.ClubId == clubId);
 
-        public RealtimeConnection? GetByUser(Guid userId)
+        public RealtimeConnection? GetByUser(int userId)
             => _connections.Values.FirstOrDefault(c => c.UserId == userId);
 
-        public IEnumerable<RealtimeConnection> GetLeaders(Guid clubId)
+        public IEnumerable<RealtimeConnection> GetLeaders(int clubId)
             => _connections.Values.Where(c => c.ClubId == clubId && c.Role == "Leader");
 
         public async Task SendAsync(RealtimeConnection conn, object payload)
@@ -43,6 +43,7 @@ namespace StudentClub.Infrastructure.Realtime
                 true,
                 CancellationToken.None);
         }
+
     }
 }
 
