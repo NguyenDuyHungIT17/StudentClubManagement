@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ryKqPcfImGo=",
+  "dgSpecHash": "4ohg3K6yHYE=",
   "success": true,
   "projectFilePath": "D:\\hung_test_project\\29_Hưng Nguyễn Duy_2022605277\\StudentClubManagement\\src\\StudentClub.Domain\\StudentClub.Domain.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\hungnd\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.11\\microsoft.windowsdesktop.app.ref.9.0.11.nupkg.sha512",
-    "C:\\Users\\hungnd\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.11\\microsoft.netcore.app.ref.9.0.11.nupkg.sha512",
-    "C:\\Users\\hungnd\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.11\\microsoft.aspnetcore.app.ref.9.0.11.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
