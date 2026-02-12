@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StudentClub.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a5f325c9c556b1fda4f9b38d7b12551a5502103a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd4bd63df5cd89a51a0dc9f4081806afef6637f6")]
 [assembly: System.Reflection.AssemblyProductAttribute("StudentClub.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StudentClub.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
