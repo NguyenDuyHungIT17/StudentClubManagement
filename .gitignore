@@ -1,0 +1,53 @@
+# Build
+bin/
+obj/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Test
+TestResults/
+
+# ASP.NET
+wwwroot/lib/
+
+# Publish
+publish/
+
+# Cache
+*.cache
+*.db
+*.opendb
+*.shm
+*.wal
+
+# Entity Framework
+Migrations/*Designer.cs
+
+# Generated files
+*.generated.cs
+
+# Local config
+appsettings.Development.json
+appsettings.Local.json
