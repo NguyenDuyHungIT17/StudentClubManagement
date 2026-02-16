@@ -1,36 +1,53 @@
-## ===== .NET =====
+# Build
 bin/
 obj/
 out/
 
-## ===== Visual Studio =====
+# Visual Studio
 .vs/
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
 
-## ===== Rider / VSCode =====
+# Rider / VS Code
 .idea/
 .vscode/
 
-## ===== OS =====
+# Logs
+*.log
+
+# OS
 .DS_Store
 Thumbs.db
 
-## ===== Logs =====
-*.log
+# NuGet
+*.nupkg
+packages/
+.nuget/
 
-## ===== Secrets =====
-appsettings.Development.json
-appsettings.Local.json
-secrets.json
-
-## ===== EF Core =====
-Migrations/
-
-## ===== Test results =====
+# Test
 TestResults/
 
-## ===== Docker =====
-**/docker-data/
+# ASP.NET
+wwwroot/lib/
+
+# Publish
+publish/
+
+# Cache
+*.cache
+*.db
+*.opendb
+*.shm
+*.wal
+
+# Entity Framework
+Migrations/*Designer.cs
+
+# Generated files
+*.generated.cs
+
+# Local config
+appsettings.Development.json
+appsettings.Local.json
