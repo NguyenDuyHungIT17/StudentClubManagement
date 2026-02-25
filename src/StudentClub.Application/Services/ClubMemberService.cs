@@ -5,6 +5,7 @@ using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Application.Mapper;
 using StudentClub.Domain.Entities;
+using StudentClub.Shared.ApiResponse; 
 
 namespace StudentClub.Application.Services
 {
@@ -25,20 +26,20 @@ namespace StudentClub.Application.Services
             _logger = logger;
         }
 
-        public async Task<CreateClubMemberResponseDto> CreateClubMemberAsync(CreateClubMemberRequestDto createClubMemberRequestDto)
+        public async Task<ApiResponse<CreateClubMemberResponseDto>> CreateClubMemberAsync(CreateClubMemberRequestDto createClubMemberRequestDto)
         {
             try
             {
                 var existingClub = await _clubRepository.GetClubByClubIdAsync(createClubMemberRequestDto.ClubId);
                 if (existingClub == null)
                 {
-                    throw new Exception("Club is not exist");
+                    return ApiResponse<CreateClubMemberResponseDto>.Failure(404, "Club is not exist");
                 }
 
                 var existingUser = await _userRepository.GetUserByUserIdAsync(createClubMemberRequestDto.UserId);
                 if (existingUser == null)
                 {
-                    throw new Exception("User is not exist");
+                    return ApiResponse<CreateClubMemberResponseDto>.Failure(404, "User is not exist");
                 }
 
                 var clubMember = new ClubMember
@@ -59,93 +60,94 @@ namespace StudentClub.Application.Services
                     await _clubRepository.UpdateLeaderIdAsync(createClubMemberRequestDto.ClubId, createClubMemberRequestDto.UserId);
                     await _clubmemberRepository.SaveChangeAsync();
                 }
-                return new CreateClubMemberResponseDto
+
+                var result = new CreateClubMemberResponseDto
                 {
                     ClubMemberId = clubMember.ClubMemberId,
                     ClubName = existingClub.ClubName,
                     UserName = existingUser.FullName,
                     MemberRole = clubMember.MemberRole,
                 };
+
+                return ApiResponse<CreateClubMemberResponseDto>.Success(result, "Thêm thành viên thành công");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi thêm thành viên vào câu lạc bộ. UserId: {UserId}, ClubId: {ClubId}, Thời gian: {Time}", createClubMemberRequestDto.UserId, createClubMemberRequestDto.ClubId, DateTime.UtcNow);
-                throw;
-
+                return ApiResponse<CreateClubMemberResponseDto>.Failure(500, ex.Message);
             }
         }
 
-        public async Task<List<CreateClubMemberResponseDto>> GetAllClubMemberAsync()
+        public async Task<ApiResponse<List<CreateClubMemberResponseDto>>> GetAllClubMemberAsync()
         {
             try
             {
                 var clubMembers = await _clubmemberRepository.GetAllClubMemberAsync();
-                if(clubMembers == null || !clubMembers.Any())
+                if (clubMembers == null || !clubMembers.Any())
                 {
-                    throw new Exception("Không có thành viên câu lạc bộ nào.");
+                    return ApiResponse<List<CreateClubMemberResponseDto>>.Failure(404, "Không có thành viên câu lạc bộ nào.");
                 }
 
                 var clubMemberDtos = await _clubMemberMapping.ToDtoList(clubMembers);
-
-                return clubMemberDtos;
+                return ApiResponse<List<CreateClubMemberResponseDto>>.Success(clubMemberDtos);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi lấy danh sách thành viên câu lạc bộ. Thời gian: {Time}", DateTime.UtcNow);
-                throw;
+                return ApiResponse<List<CreateClubMemberResponseDto>>.Failure(500, ex.Message);
             }
         }
 
-        public async Task<CreateClubMemberResponseDto> GetClubMemberByIdAsync(int id)
+        public async Task<ApiResponse<CreateClubMemberResponseDto>> GetClubMemberByIdAsync(int id)
         {
             try
             {
-                var clubMembers = await _clubmemberRepository.GetClubMemberByIdAsync(id);
-                if (clubMembers == null)
+                var clubMember = await _clubmemberRepository.GetClubMemberByIdAsync(id);
+                if (clubMember == null)
                 {
-                    throw new Exception("Không có thành viên câu lạc bộ này.");
+                    return ApiResponse<CreateClubMemberResponseDto>.Failure(404, "Không có thành viên câu lạc bộ này.");
                 }
 
-                var clubMemberDtos = await _clubMemberMapping.ToResponse(clubMembers);
-
-                return clubMemberDtos;
+                var clubMemberDto = await _clubMemberMapping.ToResponse(clubMember);
+                return ApiResponse<CreateClubMemberResponseDto>.Success(clubMemberDto);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi lấy danh sách thành viên câu lạc bộ. Thời gian: {Time}", DateTime.UtcNow);
-                throw;
+                _logger.LogError(ex, "Lỗi khi lấy thành viên câu lạc bộ. Thời gian: {Time}", DateTime.UtcNow);
+                return ApiResponse<CreateClubMemberResponseDto>.Failure(500, ex.Message);
             }
         }
 
-        public async Task<CreateClubMemberResponseDto> UpdateClubMemberAsync(int id, CreateClubMemberRequestDto updateClubMemberRequestDto)
+        public async Task<ApiResponse<CreateClubMemberResponseDto>> UpdateClubMemberAsync(int id, CreateClubMemberRequestDto updateClubMemberRequestDto)
         {
             try
             {
-                var clubMemberTask = await _clubmemberRepository.GetClubMemberByIdAsync(id);
-                if (clubMemberTask == null)
+                var clubMember = await _clubmemberRepository.GetClubMemberByIdAsync(id);
+                if (clubMember == null)
                 {
-                    throw new Exception("Không có thành viên câu lạc bộ này.");
+                    return ApiResponse<CreateClubMemberResponseDto>.Failure(404, "Không có thành viên câu lạc bộ này.");
                 }
 
-                clubMemberTask.ClubId = updateClubMemberRequestDto.ClubId;
-                clubMemberTask.UserId = updateClubMemberRequestDto.UserId;
-                clubMemberTask.JoinedAt = updateClubMemberRequestDto.JoinAt;
-                clubMemberTask.MemberRole = updateClubMemberRequestDto.MemberRole;
+                clubMember.ClubId = updateClubMemberRequestDto.ClubId;
+                clubMember.UserId = updateClubMemberRequestDto.UserId;
+                clubMember.JoinedAt = updateClubMemberRequestDto.JoinAt;
+                clubMember.MemberRole = updateClubMemberRequestDto.MemberRole;
+                clubMember.UpdatedAt = DateTime.Now;
 
-                await _clubmemberRepository.UpdateClubMemberAsync(clubMemberTask);
+                await _clubmemberRepository.UpdateClubMemberAsync(clubMember);
                 await _clubmemberRepository.SaveChangeAsync();
 
-                var clubMemberDtos = await _clubMemberMapping.ToResponse(clubMemberTask);
-                return clubMemberDtos;
+                var clubMemberDto = await _clubMemberMapping.ToResponse(clubMember);
+                return ApiResponse<CreateClubMemberResponseDto>.Success(clubMemberDto, "Cập nhật thành công");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi cập nhật thành viên câu lạc bộ. ClubMemberId: {ClubMemberId}, Thời gian: {Time}", id, DateTime.UtcNow);
-                throw;
+                return ApiResponse<CreateClubMemberResponseDto>.Failure(500, ex.Message);
             }
         }
 
-        public async Task<List<CreateClubMemberResponseDto>> GetAllClubMemberByClubIdAsync(int clubId)
+        public async Task<ApiResponse<List<CreateClubMemberResponseDto>>> GetAllClubMemberByClubIdAsync(int clubId)
         {
             try
             {
@@ -154,17 +156,16 @@ namespace StudentClub.Application.Services
 
                 if (clubMembers == null || !clubMembers.Any())
                 {
-                    throw new Exception("Không có thành viên câu lạc bộ nào.");
+                    return ApiResponse<List<CreateClubMemberResponseDto>>.Failure(404, "Không có thành viên câu lạc bộ nào.");
                 }
 
                 var clubMemberDtos = await _clubMemberMapping.ToDtoList(clubMembers);
-
-                return clubMemberDtos;
+                return ApiResponse<List<CreateClubMemberResponseDto>>.Success(clubMemberDtos);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi lấy danh sách thành viên câu lạc bộ theo ClubId. ClubId: {ClubId}, Thời gian: {Time}", clubId, DateTime.UtcNow);
-                throw;
+                return ApiResponse<List<CreateClubMemberResponseDto>>.Failure(500, ex.Message);
             }
         }
     }

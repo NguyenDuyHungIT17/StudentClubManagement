@@ -4,6 +4,7 @@ using StudentClub.Application.DTOs.response;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Application.Mapper;
+using StudentClub.Shared.ApiResponse; // Thêm namespace này
 
 namespace StudentClub.Application.Services
 {
@@ -11,7 +12,7 @@ namespace StudentClub.Application.Services
     {
         private readonly IEventRegistrationRepository _eventRegistrationRepository;
         private readonly IClubRepository _clubRepository;
-        private readonly IEventRepository _eventRepository;   
+        private readonly IEventRepository _eventRepository;
         private readonly IUserRepository _userRepository;
         private readonly EventRegistrationMapping _eventMapping;
         private readonly ILogger<EventRegistrationService> _logger;
@@ -25,7 +26,8 @@ namespace StudentClub.Application.Services
             _userRepository = userRepository;
             _logger = logger;
         }
-        public async Task<CreateEventRegistrationResponseDto> CreateEventRegistrationAsync(CreateEventRegistrationRequestDto request, int userId)
+
+        public async Task<ApiResponse<CreateEventRegistrationResponseDto>> CreateEventRegistrationAsync(CreateEventRegistrationRequestDto request, int userId)
         {
             try
             {
@@ -34,16 +36,15 @@ namespace StudentClub.Application.Services
                     var user = await _userRepository.GetUserByUserIdAsync(userId);
                     if (user == null)
                     {
-                        throw new KeyNotFoundException("Người dùng không tồn tại");
+                        return ApiResponse<CreateEventRegistrationResponseDto>.Failure(404, "Người dùng không tồn tại");
                     }
 
                     var entity = await _eventMapping.MapToEntity(request);
                     await _eventRegistrationRepository.AddEventRegistrationAsync(entity);
                     await _eventRegistrationRepository.SaveChangeAsynce();
-                    
-                    var responseDto = await _eventMapping.MapToCreateEventRegistrationResponseDto(entity);
 
-                    return responseDto;
+                    var responseDto = await _eventMapping.MapToCreateEventRegistrationResponseDto(entity);
+                    return ApiResponse<CreateEventRegistrationResponseDto>.Success(responseDto, "Đăng ký sự kiện thành công");
                 }
                 else
                 {
@@ -54,19 +55,17 @@ namespace StudentClub.Application.Services
                     await _eventRegistrationRepository.SaveChangeAsynce();
 
                     var responseDto = await _eventMapping.MapToCreateEventRegistrationResponseDto(entity);
-
-                    return responseDto;
+                    return ApiResponse<CreateEventRegistrationResponseDto>.Success(responseDto, "Đăng ký sự kiện thành công (Mặc định)");
                 }
-               
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi thêm người tham gia sự kiện Thời gian: {Time}",  DateTime.UtcNow);
-                throw;
+                _logger.LogError(ex, "Lỗi khi thêm người tham gia sự kiện Thời gian: {Time}", DateTime.UtcNow);
+                return ApiResponse<CreateEventRegistrationResponseDto>.Failure(500, ex.Message);
             }
         }
 
-        public async Task DeleteEventRegistration(int eventRegistrationId, string role, int userId)
+        public async Task<ApiResponse> DeleteEventRegistration(int eventRegistrationId, string role, int userId)
         {
             try
             {
@@ -74,56 +73,63 @@ namespace StudentClub.Application.Services
 
                 if (er == null)
                 {
-                    throw new KeyNotFoundException("Không tìm thấy thông tin");
+                    return ApiResponse.Failure(404, "Không tìm thấy thông tin đăng ký");
                 }
 
                 var ev = await _eventRepository.GetEventByIdAsync(er.EventId);
 
                 if (ev == null)
                 {
-                    throw new KeyNotFoundException("Sự kiện không tồn tại");
+                    return ApiResponse.Failure(404, "Sự kiện không tồn tại");
                 }
 
                 if (role == "leader")
                 {
                     var club = await _clubRepository.GetClubByClubIdAsync(ev.ClubId);
                     if (club == null)
-                        throw new KeyNotFoundException("Câu lạc bộ không tồn tại");
+                        return ApiResponse.Failure(404, "Câu lạc bộ không tồn tại");
 
                     if (club.LeaderId != userId)
-                        throw new UnauthorizedAccessException("Bạn không có quyền xóa sự kiện này");
+                        return ApiResponse.Failure(403, "Bạn không có quyền xóa sự kiện này");
 
                     await _eventRegistrationRepository.DeleteEventRegistrationAsync(eventRegistrationId);
                 }
-
-                if (role == "admin")
+                else if (role == "admin")
                 {
                     await _eventRegistrationRepository.DeleteEventRegistrationAsync(eventRegistrationId);
                 }
-            }catch (Exception ex)
+                else
+                {
+                    return ApiResponse.Failure(403, "Vai trò của bạn không được phép thực hiện hành động này");
+                }
+
+                await _eventRegistrationRepository.SaveChangeAsynce(); // Đảm bảo có lưu thay đổi nếu repository chưa lưu
+                return ApiResponse.Success("Xóa đăng ký sự kiện thành công");
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi xóa thành viên - sự kiện, Thời gian: {Time}", DateTime.UtcNow);
-                throw;
+                return ApiResponse.Failure(500, ex.Message);
             }
-          
         }
 
-        public async Task<List<CreateEventRegistrationResponseDto>> GetAllEventRegistrationsByEventId(int eventId)
+        public async Task<ApiResponse<List<CreateEventRegistrationResponseDto>>> GetAllEventRegistrationsByEventId(int eventId)
         {
             try
             {
                 var ers = await _eventRegistrationRepository.GetEventRegistrationByEventIdAsync(eventId);
-                if (ers == null)
+                if (ers == null || !ers.Any())
                 {
-                    throw new KeyNotFoundException("Không tìm thấy thông tin");
+                    return ApiResponse<List<CreateEventRegistrationResponseDto>>.Failure(404, "Không tìm thấy thông tin");
                 }
-                var ersDto = new List<CreateEventRegistrationResponseDto>();
-                ersDto = await _eventMapping.MapToDtoList(ers);
-                return ersDto;
-            }catch (Exception ex)
+
+                var ersDto = await _eventMapping.MapToDtoList(ers);
+                return ApiResponse<List<CreateEventRegistrationResponseDto>>.Success(ersDto);
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi lấy thành viên - sự kiện, Thời gian: {Time}", DateTime.UtcNow);
-                throw;
+                return ApiResponse<List<CreateEventRegistrationResponseDto>>.Failure(500, ex.Message);
             }
         }
     }

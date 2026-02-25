@@ -1,17 +1,13 @@
 ﻿using StudentClub.Application.DTOs.request;
 using StudentClub.Application.DTOs.response;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StudentClub.Shared.ApiResponse;
 
 namespace StudentClub.Application.IServices
 {
     public interface IEventRegistrationService
     {
-        Task<CreateEventRegistrationResponseDto> CreateEventRegistrationAsync(CreateEventRegistrationRequestDto request, int userId);
-        Task DeleteEventRegistration(int eventRegistrationId, string role, int userId);
-        Task<List<CreateEventRegistrationResponseDto>> GetAllEventRegistrationsByEventId(int eventId);
+        Task<ApiResponse<CreateEventRegistrationResponseDto>> CreateEventRegistrationAsync(CreateEventRegistrationRequestDto request, int userId);
+        Task<ApiResponse> DeleteEventRegistration(int eventRegistrationId, string role, int userId);
+        Task<ApiResponse<List<CreateEventRegistrationResponseDto>>> GetAllEventRegistrationsByEventId(int eventId);
     }
 }

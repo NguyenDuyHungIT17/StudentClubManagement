@@ -1,20 +1,16 @@
 ﻿using StudentClub.Application.DTOs.request;
 using StudentClub.Application.DTOs.response;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StudentClub.Shared.ApiResponse;
 
 namespace StudentClub.Application.IServices
 {
     public interface IClubMemberService
     {
-        Task<CreateClubMemberResponseDto> CreateClubMemberAsync(CreateClubMemberRequestDto createClubMemberRequestDto);
-        Task<List<CreateClubMemberResponseDto>> GetAllClubMemberAsync();
-        Task<List<CreateClubMemberResponseDto>> GetAllClubMemberByClubIdAsync(int clubId);
-        Task<CreateClubMemberResponseDto> GetClubMemberByIdAsync(int id);
-        Task<CreateClubMemberResponseDto> UpdateClubMemberAsync(int id, CreateClubMemberRequestDto updateClubMemberRequestDto);
+        Task<ApiResponse<CreateClubMemberResponseDto>> CreateClubMemberAsync(CreateClubMemberRequestDto createClubMemberRequestDto);
+        Task<ApiResponse<List<CreateClubMemberResponseDto>>> GetAllClubMemberAsync();
+        Task<ApiResponse<List<CreateClubMemberResponseDto>>> GetAllClubMemberByClubIdAsync(int clubId);
+        Task<ApiResponse<CreateClubMemberResponseDto>> GetClubMemberByIdAsync(int id);
+        Task<ApiResponse<CreateClubMemberResponseDto>> UpdateClubMemberAsync(int id, CreateClubMemberRequestDto updateClubMemberRequestDto);
 
     }
 }

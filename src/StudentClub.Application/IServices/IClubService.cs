@@ -1,22 +1,19 @@
 ﻿using StudentClub.Application.DTOs.request;
 using StudentClub.Application.DTOs.response;
-using StudentClub.Application.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StudentClub.Shared.ApiResponse; 
 
 namespace StudentClub.Application.IServices
 {
     public interface IClubService
     {
-        Task<CreateClubResponseDto> CreateClubAsync(CreateClubRequestDto createClubRequestDto);
+        Task<ApiResponse<CreateClubResponseDto>> CreateClubAsync(CreateClubRequestDto createClubRequestDto);
 
-        Task<UpdateClubResponseDto> UpdateClubAsync(int id, UpdateClubRequestDto updateClubRequestDto);
+        Task<ApiResponse<UpdateClubResponseDto>> UpdateClubAsync(int id, UpdateClubRequestDto updateClubRequestDto);
 
-        Task<List<GetAllClubsResponseDto>> GetAllClubAsync();
-        Task<GetClubResponseDto> GetClubAsync(int clubId);
-        Task DeleteClubAsync(int clubId);
+        Task<ApiResponse<List<GetAllClubsResponseDto>>> GetAllClubAsync();
+
+        Task<ApiResponse<GetClubResponseDto>> GetClubAsync(int clubId);
+
+        Task<ApiResponse> DeleteClubAsync(int clubId); // Trả về ApiResponse (không có T) cho hàm void/delete
     }
 }

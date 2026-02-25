@@ -1,18 +1,19 @@
 ﻿using StudentClub.Application.DTOs.request;
 using StudentClub.Application.DTOs.response;
+using StudentClub.Shared.ApiResponse;
 
 namespace StudentClub.Application.IServices
 {
     public interface IEventService
     {
-        Task<CreateEventResponseDto> CreateEventAsync(CreateEventRequestDto request, int userId, string role);
-        Task<CreateEventResponseDto> UpdateEventAsync(UpdateEventRequestDto requestDto, int eventId, int userId, string role);
-        Task<List<GetAllEventsResponseDto>> GetAllEventsAsync(string role, int userId);
-        Task<GetAllEventsResponseDto> GetEventByIdAsync(int eventId);
-        Task<List<GetAllEventsResponseDto>> GetPublicEventsAsync();
-        Task<List<GetAllEventsResponseDto>> GetPublicEventsByClubIdAsync(int clubId);
-        Task<List<GetAllEventsResponseDto>> GetEventsByClubIdAsync(int userId);
-        Task DeleteEvent(int id);
-        Task<List<GetAllEventsResponseDto>> GetEventsByClubIdAsync(int clubId, string role);
+        Task<ApiResponse<CreateEventResponseDto>> CreateEventAsync(CreateEventRequestDto request, int userId, string role);
+        Task<ApiResponse<CreateEventResponseDto>> UpdateEventAsync(UpdateEventRequestDto requestDto, int eventId, int userId, string role);
+        Task<ApiResponse<List<GetAllEventsResponseDto>>> GetAllEventsAsync(string role, int userId);
+        Task<ApiResponse<GetAllEventsResponseDto>> GetEventByIdAsync(int eventId);
+        Task<ApiResponse<List<GetAllEventsResponseDto>>> GetPublicEventsAsync();
+        Task<ApiResponse<List<GetAllEventsResponseDto>>> GetPublicEventsByClubIdAsync(int clubId);
+        Task<ApiResponse<List<GetAllEventsResponseDto>>> GetEventsByClubIdAsync(int userId);
+        Task<ApiResponse> DeleteEvent(int id);
+        Task<ApiResponse<List<GetAllEventsResponseDto>>> GetEventsByClubIdAsync(int clubId, string role);
     }
 }
