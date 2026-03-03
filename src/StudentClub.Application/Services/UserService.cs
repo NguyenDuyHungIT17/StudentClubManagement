@@ -50,6 +50,12 @@ namespace StudentClub.Application.Services
                     return ApiResponse<CreateUserResponseDto>.Failure(400, "Account already exist");
                 }
 
+                var clubExisting = await _clubRepository.GetClubByClubIdAsync(createUserRequset.ClubId);
+                    
+                if (clubExisting == null)
+                {
+                    return ApiResponse<CreateUserResponseDto>.Failure(400, "Câu lạc bộ không tồn tại");
+                }
                 var user = new User
                 {
                     FullName = createUserRequset.FullName,
