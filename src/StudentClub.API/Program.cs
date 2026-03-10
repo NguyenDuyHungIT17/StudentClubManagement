@@ -88,7 +88,8 @@ builder.Services.AddCors(options =>
             policy.WithOrigins("http://localhost:5173")
                   .AllowAnyHeader()
                   .AllowAnyMethod()
-                  .AllowCredentials(); // WebSocket thường cần cái này nếu có cookie, nhưng token query string thì ko bắt buộc
+                  .AllowCredentials() // WebSocket thường cần cái này nếu có cookie, nhưng token query string thì ko bắt buộc
+                    .WithExposedHeaders("x-pagination");
         });
 });
 builder.Services.AddMemoryCache();

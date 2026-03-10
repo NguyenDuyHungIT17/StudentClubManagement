@@ -1,4 +1,5 @@
-﻿using StudentClub.Application.DTOs.request;
+﻿using StudentClub.Application.DTOs.Filter;
+using StudentClub.Application.DTOs.request;
 using StudentClub.Application.DTOs.response;
 using StudentClub.Shared.ApiResponse; 
 
@@ -10,7 +11,7 @@ namespace StudentClub.Application.IServices
 
         Task<ApiResponse<UpdateClubResponseDto>> UpdateClubAsync(int id, UpdateClubRequestDto updateClubRequestDto);
 
-        Task<ApiResponse<List<GetAllClubsResponseDto>>> GetAllClubAsync();
+        Task<PagedResponse<GetAllClubsResponseDto>> GetAllClubAsync(ClubFilterRequest filter);
 
         Task<ApiResponse<GetClubResponseDto>> GetClubAsync(int clubId);
 

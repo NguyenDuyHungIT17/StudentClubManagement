@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using StudentClub.Application.DTOs.Filter;
 using StudentClub.Application.DTOs.request;
 using StudentClub.Application.DTOs.response;
 using StudentClub.Application.Interfaces;
@@ -37,6 +38,32 @@ namespace StudentClub.Application.Services
                     return ApiResponse<CreateClubResponseDto>.Success(existDto, "Câu lạc bộ đã tồn tại");
                 }
 
+                var leader = await _userRepository.GetUserByUserIdAsync(createClubRequestDto.LeaderId.Value);
+                if (leader != null)
+                {
+                    var clubs = new Club
+                    {
+                        ClubName = createClubRequestDto.ClubName,
+                        Description = createClubRequestDto.Description,
+                        LeaderId = leader.UserId,
+                        Title = createClubRequestDto.Title,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                    };
+
+                    await _clubRepository.AddClubAsync(clubs);
+                    await _clubRepository.SaveChangeAsync();
+
+                    var result1 = new CreateClubResponseDto
+                    {
+                        ClubName = clubs.ClubName,
+                        Description = clubs.Description,
+                        LeaderName = leader.FullName,
+                        Title = clubs.Title,
+                    };
+
+                    return ApiResponse<CreateClubResponseDto>.Success(result1, "Tạo câu lạc bộ thành công");
+                }
                 var club = new Club
                 {
                     ClubName = createClubRequestDto.ClubName,
@@ -79,7 +106,7 @@ namespace StudentClub.Application.Services
 
                 club.ClubName = updateClubRequestDto.ClubName;
                 club.Description = updateClubRequestDto.Description;
-                club.LeaderId = updateClubRequestDto.LeaderId;
+                 club.LeaderId = updateClubRequestDto.LeaderId;
                 club.UpdatedAt = DateTime.Now;
 
                 await _clubRepository.UpdateClubAsync(club);
@@ -129,7 +156,7 @@ namespace StudentClub.Application.Services
             }
         }
 
-        public async Task<ApiResponse<List<GetAllClubsResponseDto>>> GetAllClubAsync()
+        public async Task<PagedResponse<GetAllClubsResponseDto>> GetAllClubAsync(ClubFilterRequest filter)
         {
             try
             {
@@ -140,6 +167,7 @@ namespace StudentClub.Application.Services
                 {
                     ClubId = x.ClubId,
                     ClubName = x.ClubName,
+                    Title = x.Title,
                     LeaderName = x.LeaderId == null
                         ? "Cập nhật sau"
                         : users.FirstOrDefault(u => u.UserId == x.LeaderId)?.FullName ?? "Cập nhật sau",
@@ -148,12 +176,43 @@ namespace StudentClub.Application.Services
                     UpdatedAt = x.UpdatedAt,
                 }).ToList();
 
-                return ApiResponse<List<GetAllClubsResponseDto>>.Success(clubsDto);
+                // FILTER
+                if (!string.IsNullOrWhiteSpace(filter.KeyWord))
+                {
+                    var keyword = filter.KeyWord.Trim().ToLower();
+
+                    clubsDto = clubsDto
+                        .Where(x =>
+                            x.ClubName.ToLower().Contains(keyword) ||
+                            (x.Description != null && x.Description.ToLower().Contains(keyword)))
+                        .ToList();
+                }
+
+                var totalCount = clubsDto.Count;
+
+                var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
+                var pageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;
+
+                var items = clubsDto
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+                return new PagedResponse<GetAllClubsResponseDto>
+                {
+                    Items = items,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalPages = totalPages,
+                    TotalCount = totalCount
+                };
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi lấy danh sách câu lạc bộ. Thời gian: {Time}", DateTime.UtcNow);
-                return ApiResponse<List<GetAllClubsResponseDto>>.Failure(500, ex.Message);
+                throw;
             }
         }
 

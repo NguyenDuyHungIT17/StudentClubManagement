@@ -29,14 +29,33 @@
             new() { Status = status ?? 500, IsSuccess = false, Message = message, Errors = errors ?? new() };
     }
 
-    public record PagedResponse<T>
+    public class PagedResponse<T>
     {
-        public List<T> Items { get; init; } = new();
-        public int PageNumber { get; init; }
-        public int PageSize { get; init; }
-        public int TotalPages { get; init; }
-        public long TotalCount { get; init; }
+        public List<T> Items { get; set; } = new();
+
+        public int PageNumber { get; set; }
+
+        public int PageSize { get; set; }
+
+        public int TotalPages { get; set; }
+
+        public long TotalCount { get; set; }
+
         public bool HasPreviousPage => PageNumber > 1;
+
         public bool HasNextPage => PageNumber < TotalPages;
+
+        public object GetMetadata()
+        {
+            return new
+            {
+                PageNumber,
+                PageSize,
+                TotalPages,
+                TotalCount,
+                HasPreviousPage,
+                HasNextPage
+            };
+        }
     }
 }

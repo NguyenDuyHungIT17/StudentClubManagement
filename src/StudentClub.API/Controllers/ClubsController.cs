@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StudentClub.API.Extensions;
+using StudentClub.Application.DTOs.Filter;
 using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.response;
 using StudentClub.Application.IServices;
+using StudentClub.Shared.ApiResponse;
+using System.Text.Json;
 
 namespace StudentClub.API.Controllers
 {
@@ -25,10 +30,21 @@ namespace StudentClub.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetClubsAsync()
+        public async Task<IActionResult> GetAllClubs([FromQuery] ClubFilterRequest filter)
         {
-            var result = await _clubService.GetAllClubAsync();
-            return Ok(result);
+                var result = await _clubService.GetAllClubAsync(filter);
+
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(new
+                {
+                    result.PageNumber,
+                    result.PageSize,
+                    result.TotalPages,
+                    result.TotalCount,
+                    result.HasPreviousPage,
+                    result.HasNextPage
+                }));
+
+                return Ok(ApiResponse<List<GetAllClubsResponseDto>>.Success(result.Items));
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetClubAsync(int id)
