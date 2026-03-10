@@ -1,5 +1,5 @@
-﻿using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
+﻿using StudentClub.Application.DTOs.request.Event;
+using StudentClub.Application.DTOs.response.Event;
 using StudentClub.Shared.ApiResponse;
 
 namespace StudentClub.Application.IServices

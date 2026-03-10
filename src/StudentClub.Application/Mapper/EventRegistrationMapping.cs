@@ -1,5 +1,5 @@
-﻿using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
+﻿using StudentClub.Application.DTOs.request.EventRegistration;
+using StudentClub.Application.DTOs.response.EventRegistration;
 using StudentClub.Application.Interfaces;
 using StudentClub.Domain.Entities;
 

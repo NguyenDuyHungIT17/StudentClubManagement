@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using StudentClub.API.Extensions;
 using StudentClub.Application.DTOs.Filter;
-using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
+using StudentClub.Application.DTOs.request.Club;
+using StudentClub.Application.DTOs.response.Club;
 using StudentClub.Application.IServices;
 using StudentClub.Shared.ApiResponse;
 using System.Text.Json;
@@ -85,8 +85,8 @@ namespace StudentClub.API.Controllers
         {
             try
             {
-                await _clubService.DeleteClubAsync(id);
-                return Ok(new { message = "Xóa thành công" });
+                var result = await _clubService.DeleteClubAsync(id);
+                return Ok(result);
             }
             catch (KeyNotFoundException ex)
             {

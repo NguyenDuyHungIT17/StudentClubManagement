@@ -1,4 +1,4 @@
-﻿using StudentClub.Application.DTOs.response;
+﻿using StudentClub.Application.DTOs.response.Event;
 using StudentClub.Application.Interfaces;
 using StudentClub.Domain.Entities;
 

@@ -1,7 +1,7 @@
 ﻿using StudentClub.Application.DTOs.Filter;
-using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
-using StudentClub.Shared.ApiResponse; 
+using StudentClub.Application.DTOs.request.Club;
+using StudentClub.Application.DTOs.response.Club;
+using StudentClub.Shared.ApiResponse;
 
 namespace StudentClub.Application.IServices
 {

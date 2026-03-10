@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.request.User;
 
 namespace StudentClub.API.Validators.User
 {

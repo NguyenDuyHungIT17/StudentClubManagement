@@ -1,5 +1,5 @@
-﻿using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
+﻿using StudentClub.Application.DTOs.request.ClubMember;
+using StudentClub.Application.DTOs.response.ClubMember;
 using StudentClub.Domain.Entities;
 
 namespace StudentClub.Application.Mapper

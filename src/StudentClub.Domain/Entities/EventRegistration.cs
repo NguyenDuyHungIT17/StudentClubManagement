@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentClub.Domain.Entities;
 
@@ -11,7 +9,7 @@ public partial class EventRegistration
 
     public int EventId { get; set; }
 
-    public int UserId { get; set; }
+    public int? UserId { get; set; }
 
     public bool? CheckedIn { get; set; }
 
@@ -22,6 +20,10 @@ public partial class EventRegistration
     public DateTime? CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
+
+    public string? GuestEmail { get; set; }
+
+    public string? GuestName { get; set; }
 
     public virtual Event Event { get; set; } = null!;
 

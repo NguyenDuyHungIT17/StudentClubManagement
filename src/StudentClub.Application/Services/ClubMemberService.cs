@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
+using StudentClub.Application.DTOs.request.ClubMember;
+using StudentClub.Application.DTOs.response.ClubMember;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Application.Mapper;
 using StudentClub.Domain.Entities;
-using StudentClub.Shared.ApiResponse; 
+using StudentClub.Shared.ApiResponse;
 
 namespace StudentClub.Application.Services
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.request.Auth;
 using StudentClub.Application.IServices;
 
 namespace StudentClub.API.Controllers

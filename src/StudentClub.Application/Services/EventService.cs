@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
+using StudentClub.Application.DTOs.request.Event;
+using StudentClub.Application.DTOs.response.Event;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Application.Mapper;

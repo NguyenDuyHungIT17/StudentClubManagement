@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using StudentClub.Application.DTOs.Filter;
-using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
+using StudentClub.Application.DTOs.request.Club;
+using StudentClub.Application.DTOs.response.Club;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Domain.Entities;

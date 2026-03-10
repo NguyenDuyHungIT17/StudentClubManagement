@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.request.Auth;
 using StudentClub.Application.DTOs.response;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;

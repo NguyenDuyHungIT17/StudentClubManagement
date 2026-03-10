@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.request.ClubMember;
 using StudentClub.Application.IServices;
 
 namespace StudentClub.API.Controllers
@@ -36,10 +36,6 @@ namespace StudentClub.API.Controllers
         public async Task<IActionResult> GetClubMemberById(int id)
         {
             var result = await _memberService.GetClubMemberByIdAsync(id);
-            if (result == null)
-            {
-                return NotFound(new { message = "Không có thành viên nào" });
-            }
             return Ok(result);
         }
 
@@ -57,8 +53,8 @@ namespace StudentClub.API.Controllers
         {
             try
             {
-                await _memberService.UpdateClubMemberAsync(id, updateClubMemberRequestDto);
-                return Ok(new { message = "Cập nhật thành viên câu lạc bộ thành công" });
+                var result = await _memberService.UpdateClubMemberAsync(id, updateClubMemberRequestDto);
+                return Ok(result);
             }
             catch (ArgumentException ex)
             {

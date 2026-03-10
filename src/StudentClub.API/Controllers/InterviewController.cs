@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.request.Interview;
 using StudentClub.Application.IServices;
 using System.Security.Claims;
 

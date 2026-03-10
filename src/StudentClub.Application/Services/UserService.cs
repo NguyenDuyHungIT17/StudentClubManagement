@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
+using StudentClub.Application.DTOs.Filter;
+using StudentClub.Application.DTOs.request.User;
+using StudentClub.Application.DTOs.response.User;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Domain.Entities;
@@ -192,12 +193,11 @@ namespace StudentClub.Application.Services
             }
         }
 
-        public async Task<ApiResponse<List<GetAllUsersResponseDto>>> GetAllUsersAsync(int id)
+        public async Task<PagedResponse<GetAllUsersResponseDto>> GetAllUsersAsync(int id, UserFilterRequest filter)
         {
             try
             {
                 var user = await _userRepository.GetUserByUserIdAsync(id);
-                if (user == null) return ApiResponse<List<GetAllUsersResponseDto>>.Failure(404, "Người yêu cầu không tồn tại");
 
                 var users = await _userRepository.GetAllUsersAsync();
                 var userDtos = new List<GetAllUsersResponseDto>();
@@ -227,12 +227,50 @@ namespace StudentClub.Application.Services
                     }).ToList();
                 }
 
-                return ApiResponse<List<GetAllUsersResponseDto>>.Success(userDtos);
+                if (!string.IsNullOrWhiteSpace(filter.KeyWord))
+                {
+                    var keyword = filter.KeyWord.Trim().ToLower();
+
+                    userDtos = userDtos
+                        .Where(x =>
+                            x.Email.ToLower().Contains(keyword) ||
+                            (x.FullName != null && x.FullName.ToLower().Contains(keyword)))
+                        .ToList();
+                }
+
+                if (!string.IsNullOrWhiteSpace(filter.Role))
+                {
+                    var role = filter.Role.Trim().ToLower();
+
+                    userDtos = userDtos
+                        .Where(x => x.Role == role)
+                        .ToList();
+                }
+
+                var total = userDtos.Count;
+                var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
+                var pageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;
+
+                var items = userDtos
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                var totalPages = (int)Math.Ceiling(total / (double)pageSize);
+
+                return new PagedResponse<GetAllUsersResponseDto>
+                {
+                    Items = items,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalPages = totalPages,
+                    TotalCount = total
+                };
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi lấy tất cả user.");
-                return ApiResponse<List<GetAllUsersResponseDto>>.Failure(500, ex.Message);
+                throw;
             }
         }
 

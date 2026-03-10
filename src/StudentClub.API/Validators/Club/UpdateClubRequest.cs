@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.request.Club;
 
 namespace StudentClub.API.Validators.Club
 {

@@ -1,5 +1,5 @@
-﻿using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
+﻿using StudentClub.Application.DTOs.request.Interview;
+using StudentClub.Application.DTOs.response.Interview;
 using StudentClub.Shared.ApiResponse; // Thêm namespace này
 
 namespace StudentClub.Application.IServices

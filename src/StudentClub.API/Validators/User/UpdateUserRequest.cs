@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using StudentClub.Application.DTOs.request;
+using StudentClub.Application.DTOs.request.User;
 
 namespace StudentClub.API.Validators.User
 {
@@ -23,9 +23,9 @@ namespace StudentClub.API.Validators.User
             // Role (optional)
             RuleFor(x => x.Role)
                 .Must(role =>
-                    role == "Admin" ||
-                    role == "Leader" ||
-                    role == "Member"
+                    role == "admin" ||
+                    role == "leader" ||
+                    role == "member"
                 )
                 .WithMessage("Role không hợp lệ")
                 .When(x => !string.IsNullOrWhiteSpace(x.Role));

@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StudentClub.Application.DTOs.request;
-using StudentClub.Application.DTOs.response;
+using StudentClub.Application.DTOs.Filter;
+using StudentClub.Application.DTOs.request.Auth;
+using StudentClub.Application.DTOs.request.User;
+using StudentClub.Application.DTOs.response.User;
 using StudentClub.Application.IServices;
+using StudentClub.Shared.ApiResponse;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace StudentClub.API.Controllers
 {
@@ -67,7 +71,7 @@ namespace StudentClub.API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "admin, leader")]
-        public async Task<IActionResult> GetAllUsersAsync()
+        public async Task<IActionResult> GetAllUsersAsync([FromQuery] UserFilterRequest filter)
         {
             try
             {
@@ -83,8 +87,18 @@ namespace StudentClub.API.Controllers
                     return Unauthorized(new { message = "UserId trong token không hợp lệ" });
                 }
 
-                var users = await _userService.GetAllUsersAsync(userIdFromToken);
-                return Ok(users);
+                var result = await _userService.GetAllUsersAsync(userIdFromToken, filter);
+
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(new
+                {
+                    result.PageNumber,
+                    result.PageSize,
+                    result.TotalPages,
+                    result.TotalCount,
+                    result.HasPreviousPage,
+                    result.HasNextPage
+                }));
+                return Ok(ApiResponse<List<GetAllUsersResponseDto>>.Success(result.Items));
             }
             catch (UnauthorizedAccessException ex)
             {
