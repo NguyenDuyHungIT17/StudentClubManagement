@@ -11,8 +11,8 @@ namespace StudentClub.Application.Mapper
             return new CreateClubMemberResponseDto
             {
                 ClubMemberId = clubMember.ClubMemberId,
-                ClubName = clubMember.Club.ClubName,
-                UserName = clubMember.User.FullName,
+                ClubId = clubMember.Club.ClubId,
+                UserId = clubMember.User.UserId,
                 MemberRole = clubMember.MemberRole,
                 JoinAt = clubMember.JoinedAt,
             };

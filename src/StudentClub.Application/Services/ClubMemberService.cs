@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using StudentClub.Application.DTOs.Filter;
 using StudentClub.Application.DTOs.request.ClubMember;
 using StudentClub.Application.DTOs.response.ClubMember;
 using StudentClub.Application.Interfaces;
@@ -64,8 +65,8 @@ namespace StudentClub.Application.Services
                 var result = new CreateClubMemberResponseDto
                 {
                     ClubMemberId = clubMember.ClubMemberId,
-                    ClubName = existingClub.ClubName,
-                    UserName = existingUser.FullName,
+                    ClubId = existingClub.ClubId,
+                    UserId = existingUser.UserId,
                     MemberRole = clubMember.MemberRole,
                 };
 
@@ -78,23 +79,75 @@ namespace StudentClub.Application.Services
             }
         }
 
-        public async Task<ApiResponse<List<CreateClubMemberResponseDto>>> GetAllClubMemberAsync()
+        public async Task<PagedResponse<CreateClubMemberResponseDto>> GetAllClubMemberAsync(ClubMemberFilter filter)
         {
             try
             {
                 var clubMembers = await _clubmemberRepository.GetAllClubMemberAsync();
+
                 if (clubMembers == null || !clubMembers.Any())
                 {
-                    return ApiResponse<List<CreateClubMemberResponseDto>>.Failure(404, "Không có thành viên câu lạc bộ nào.");
+                    return new PagedResponse<CreateClubMemberResponseDto>
+                    {
+                        Items = new List<CreateClubMemberResponseDto>(),
+                        PageNumber = 1,
+                        PageSize = 10,
+                        TotalPages = 0,
+                        TotalCount = 0
+                    };
                 }
 
-                var clubMemberDtos = await _clubMemberMapping.ToDtoList(clubMembers);
-                return ApiResponse<List<CreateClubMemberResponseDto>>.Success(clubMemberDtos);
+                var clubMemberDtos = clubMembers.Select(x => new CreateClubMemberResponseDto
+                {
+                    ClubMemberId = x.ClubMemberId,
+                    ClubId = x.ClubId,
+                    UserId = x.UserId,
+                    MemberRole = x.MemberRole,
+                    JoinAt = x.JoinedAt
+                }).ToList();
+
+                if (filter.ClubId.HasValue)
+                {
+                    clubMemberDtos = clubMemberDtos
+                        .Where(x => x.ClubId == filter.ClubId.Value)
+                        .ToList();
+                }
+
+                if (!string.IsNullOrWhiteSpace(filter.MemberRole))
+                {
+                    var role = filter.MemberRole.Trim().ToLower();
+
+                    clubMemberDtos = clubMemberDtos
+                        .Where(x => x.MemberRole.ToLower() == role)
+                        .ToList();
+                }
+
+
+                var totalCount = clubMemberDtos.Count;
+
+                var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
+                var pageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;
+
+                var items = clubMemberDtos
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+                return new PagedResponse<CreateClubMemberResponseDto>
+                {
+                    Items = items,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalPages = totalPages,
+                    TotalCount = totalCount
+                };
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi lấy danh sách thành viên câu lạc bộ. Thời gian: {Time}", DateTime.UtcNow);
-                return ApiResponse<List<CreateClubMemberResponseDto>>.Failure(500, ex.Message);
+                throw;
             }
         }
 
@@ -166,6 +219,27 @@ namespace StudentClub.Application.Services
             {
                 _logger.LogError(ex, "Lỗi khi lấy danh sách thành viên câu lạc bộ theo ClubId. ClubId: {ClubId}, Thời gian: {Time}", clubId, DateTime.UtcNow);
                 return ApiResponse<List<CreateClubMemberResponseDto>>.Failure(500, ex.Message);
+            }
+        }
+
+        public async Task<ApiResponse> DeleteAsync(int id)
+        {
+            try
+            {
+                var exist = await _clubmemberRepository.GetClubMemberByIdAsync(id);
+                if (exist == null)
+                {
+                    return ApiResponse.Failure(400, "không tồn tại thành viên");
+                }
+
+                await _clubmemberRepository.Delete(id);
+                await _clubmemberRepository.SaveChangeAsync();
+                return ApiResponse.Success("Xóa thành công");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "xóa thất bại");
+                return ApiResponse.Failure(500, ex.Message);
             }
         }
     }

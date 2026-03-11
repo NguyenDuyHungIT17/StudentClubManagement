@@ -22,6 +22,8 @@ public partial class Event
 
     public DateTime? UpdatedAt { get; set; }
 
+    public int? Priority { get; set; }
+
     public virtual Club Club { get; set; } = null!;
 
     public virtual ICollection<EventRegistration> EventRegistrations { get; set; } = new List<EventRegistration>();

@@ -48,6 +48,7 @@ namespace StudentClub.Application.Services
                     ClubId = request.ClubId,
                     Description = request.Description,
                     Title = request.Title,
+                    Priority = request.Priority,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     IsPrivate = request.IsPrivate,
@@ -62,6 +63,7 @@ namespace StudentClub.Application.Services
                     Description = ev.Description,
                     Title = ev.Title,
                     EventDate = ev.EventDate,
+                    Priority = ev.Priority
                 };
 
                 return ApiResponse<CreateEventResponseDto>.Success(evDto, "Tạo sự kiện thành công");

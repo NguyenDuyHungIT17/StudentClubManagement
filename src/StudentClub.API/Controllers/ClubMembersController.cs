@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StudentClub.Application.DTOs.Filter;
 using StudentClub.Application.DTOs.request.ClubMember;
+using StudentClub.Application.DTOs.response.Club;
+using StudentClub.Application.DTOs.response.ClubMember;
 using StudentClub.Application.IServices;
+using StudentClub.Shared.ApiResponse;
+using System.Text.Json;
 
 namespace StudentClub.API.Controllers
 {
@@ -41,10 +46,20 @@ namespace StudentClub.API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "admin, leader")]
-        public async Task<IActionResult> GetAllClubMembers()
+        public async Task<IActionResult> GetAllClubMembers([FromQuery] ClubMemberFilter filter)
         {
-            var result = await _memberService.GetAllClubMemberAsync();
-            return Ok(result);
+            var result = await _memberService.GetAllClubMemberAsync(filter);
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(new
+            {
+                result.PageNumber,
+                result.PageSize,
+                result.TotalPages,
+                result.TotalCount,
+                result.HasPreviousPage,
+                result.HasNextPage
+            }));
+
+            return Ok(ApiResponse<List<CreateClubMemberResponseDto>>.Success(result.Items));
         }
 
         [HttpPut("{id}")]
@@ -64,6 +79,14 @@ namespace StudentClub.API.Controllers
             {
                 return NotFound(new { message = ex.Message });
             }
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "admin, leader")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _memberService.DeleteAsync(id);
+            return Ok(result);
         }
     }
 }

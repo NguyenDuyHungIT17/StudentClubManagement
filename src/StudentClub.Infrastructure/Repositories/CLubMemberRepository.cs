@@ -18,6 +18,12 @@ namespace StudentClub.Infrastructure.Repositories
             await _context.ClubMembers.AddAsync(clubMember);
         }
 
+        public async Task Delete(int id)
+        {
+            var cl = _context.ClubMembers.Where(x => x.ClubMemberId == id).FirstOrDefault();
+            _context.ClubMembers.RemoveRange(cl);
+        }
+
         public async Task<List<ClubMember>> GetAllClubMemberAsync()
         {
             var clubMembers = await _context.ClubMembers

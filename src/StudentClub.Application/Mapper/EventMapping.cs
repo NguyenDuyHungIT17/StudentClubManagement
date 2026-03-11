@@ -19,6 +19,8 @@ namespace StudentClub.Application.Mapper
                 Description = ev.Description,
                 Title = ev.Title,
                 EventDate = ev.EventDate,
+                Id = ev.EventId,
+                Priority = ev.Priority,
             };
         }
         public async virtual Task<List<GetAllEventsResponseDto>> ToDtoList(List<Event> ev)
