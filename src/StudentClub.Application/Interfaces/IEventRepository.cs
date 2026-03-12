@@ -17,5 +17,6 @@ namespace StudentClub.Application.Interfaces
         Task<string> GetEventNameByIdAsync(int eventId);
         //Task<List<Event>> GetEventsByUserIdAsync(int userId);  eventregister 
         Task<Event?> GetByEventIdAsync(int eventId);
+        Task UpdateAsync(Event e);
     }
 }

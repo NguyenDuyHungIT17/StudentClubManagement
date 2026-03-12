@@ -77,5 +77,10 @@ namespace StudentClub.Infrastructure.Repositories
         {
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateAsync(Event e)
+        {
+            _context.Events.Update(e);
+        }
     }
 }

@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StudentClub.Application.DTOs.Filter;
 using StudentClub.Application.DTOs.request.Event;
+using StudentClub.Application.DTOs.response.ClubMember;
+using StudentClub.Application.DTOs.response.Event;
 using StudentClub.Application.IServices;
+using StudentClub.Shared.ApiResponse;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace StudentClub.API.Controllers
 {
@@ -119,13 +124,24 @@ namespace StudentClub.API.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> GetAllEvents()
+        public async Task<IActionResult> GetAllEvents([FromQuery] EventFilterRequest filter)
         {
             try
             {
                 var (userId, role) = GetUserContext();
-                var result = await _eventService.GetAllEventsAsync(role, userId);
-                return Ok(result);
+                var result = await _eventService.GetAllEventsAsync(filter, role, userId);
+
+                Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(new
+                {
+                    result.PageNumber,
+                    result.PageSize,
+                    result.TotalPages,
+                    result.TotalCount,
+                    result.HasPreviousPage,
+                    result.HasNextPage
+                }));
+
+                return Ok(ApiResponse<List<CreateEventResponseDto>>.Success(result.Items));
             }
             catch (UnauthorizedAccessException ex)
             {

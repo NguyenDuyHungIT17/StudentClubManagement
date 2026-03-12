@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentClub.Application.DTOs.request.Event
+﻿namespace StudentClub.Application.DTOs.request.Event
 {
     public class CreateEventRequestDto
     {
@@ -14,7 +8,5 @@ namespace StudentClub.Application.DTOs.request.Event
         public DateTime EventDate { get; set; }
         public bool IsPrivate { get; set; }
         public int? Priority { get; set; }
-        public DateTime CreateAt { get; set; }
-        public DateTime UpdateAt { get; set; }
     }
 }

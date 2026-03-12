@@ -1,6 +1,9 @@
-﻿using StudentClub.Application.DTOs.response.Event;
+﻿using Org.BouncyCastle.Asn1.Mozilla;
+using StudentClub.Application.DTOs.request.Event;
+using StudentClub.Application.DTOs.response.Event;
 using StudentClub.Application.Interfaces;
 using StudentClub.Domain.Entities;
+using StudentClub.Domain.Enums;
 
 namespace StudentClub.Application.Mapper
 {
@@ -11,27 +14,44 @@ namespace StudentClub.Application.Mapper
         {
             _clubRepository = clubRepository;
         }
-        public async virtual Task<GetAllEventsResponseDto> ToDto(Event ev)
+        public async virtual Task<CreateEventResponseDto> ToDto(Event ev)
         {
-            return new GetAllEventsResponseDto
+            return new CreateEventResponseDto
             {
-                ClubName = await _clubRepository.GetCLubNameByClubIdAsync(ev.ClubId),
+                ClubId = ev.ClubId,
+                IsPrivate = ev.IsPrivate,
                 Description = ev.Description,
                 Title = ev.Title,
                 EventDate = ev.EventDate,
                 Id = ev.EventId,
-                Priority = ev.Priority,
+                Priority = (int?)ev.Priority,
             };
         }
-        public async virtual Task<List<GetAllEventsResponseDto>> ToDtoList(List<Event> ev)
+        public async virtual Task<List<CreateEventResponseDto>> ToDtoList(List<Event> ev)
         {
-            var result = new List<GetAllEventsResponseDto>();
+            var result = new List<CreateEventResponseDto>();
             foreach (var item in ev)
             {
                 var dto = await ToDto(item);
                 result.Add(dto);
             }
             return result;
+        }
+
+        public async virtual Task<Event> ToEntity(CreateEventRequestDto dto)
+        {
+            return new Event
+            {
+                ClubId = dto.ClubId,
+                IsPrivate = dto.IsPrivate,
+                Description = dto.Description,
+                Title = dto.Title,
+                EventDate = dto.EventDate,
+                CreatedAt = DateTime.UtcNow,
+                Priority = dto.Priority.HasValue
+                            ? (EventPriority)dto.Priority.Value
+                            : null
+            };
         }
     }
 }

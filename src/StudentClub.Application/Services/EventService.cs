@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
+using StudentClub.Application.DTOs.Filter;
 using StudentClub.Application.DTOs.request.Event;
 using StudentClub.Application.DTOs.response.Event;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Application.Mapper;
 using StudentClub.Domain.Entities;
-using StudentClub.Shared.ApiResponse; // Thêm namespace này
+using StudentClub.Shared.ApiResponse;
 
 namespace StudentClub.Application.Services
 {
@@ -42,29 +43,12 @@ namespace StudentClub.Application.Services
                         return ApiResponse<CreateEventResponseDto>.Failure(403, "Bạn không có quyền truy cập");
                 }
 
-                var ev = new Event
-                {
-                    EventDate = request.EventDate,
-                    ClubId = request.ClubId,
-                    Description = request.Description,
-                    Title = request.Title,
-                    Priority = request.Priority,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow,
-                    IsPrivate = request.IsPrivate,
-                };
+                var ev = await _eventMapper.ToEntity(request);
 
                 await _eventRepository.AddEventAsync(ev);
                 await _eventRepository.SaveChangeAsync();
 
-                var evDto = new CreateEventResponseDto
-                {
-                    ClubName = await _clubRepository.GetCLubNameByClubIdAsync(request.ClubId),
-                    Description = ev.Description,
-                    Title = ev.Title,
-                    EventDate = ev.EventDate,
-                    Priority = ev.Priority
-                };
+                var evDto = await _eventMapper.ToDto(ev);
 
                 return ApiResponse<CreateEventResponseDto>.Success(evDto, "Tạo sự kiện thành công");
             }
@@ -90,11 +74,13 @@ namespace StudentClub.Application.Services
             }
         }
 
-        public async Task<ApiResponse<List<GetAllEventsResponseDto>>> GetAllEventsAsync(string role, int userId)
+        public async Task<PagedResponse<CreateEventResponseDto>> GetAllEventsAsync(EventFilterRequest filter, string role, int userId)
         {
             try
             {
-                var evDto = new List<GetAllEventsResponseDto>();
+                var evDto = new List<CreateEventResponseDto>();
+
+                // LẤY DATA THEO ROLE (GIỮ NGUYÊN LOGIC)
                 if (role == "admin")
                 {
                     var ev = await _eventRepository.GetAllEventsAsync();
@@ -106,49 +92,106 @@ namespace StudentClub.Application.Services
                     var ev = await _eventRepository.GetEventsByCLubIdAsync(clubId);
                     evDto = await _eventMapper.ToDtoList(ev);
                 }
-                return ApiResponse<List<GetAllEventsResponseDto>>.Success(evDto);
+
+                // FILTER
+                if (!string.IsNullOrWhiteSpace(filter.Keyword))
+                {
+                    var keyword = filter.Keyword.Trim().ToLower();
+
+                    evDto = evDto
+                        .Where(x =>
+                            x.Description.ToLower().Contains(keyword) ||
+                            (x.Title != null && x.Title.ToLower().Contains(keyword)))
+                        .ToList();
+                }
+
+                if (filter.ClubId > 0)
+                {
+                    evDto = evDto
+                        .Where(x => x.ClubId == filter.ClubId)
+                        .ToList();
+                }
+
+                if (filter.IsPrivate.HasValue)
+                {
+                    evDto = evDto
+                        .Where(x => x.IsPrivate == filter.IsPrivate.Value)
+                        .ToList();
+                }
+
+                if (filter.Priority.HasValue)
+                {
+                    evDto = evDto
+                        .Where(x => x.Priority == filter.Priority.Value)
+                        .ToList();
+                }
+
+                var totalCount = evDto.Count;
+
+                var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
+                var pageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;
+
+                var items = evDto
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+                return new PagedResponse<CreateEventResponseDto>
+                {
+                    Items = items,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalPages = totalPages,
+                    TotalCount = totalCount
+                };
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi lấy tất cả sự kiện. UserId: {UserId}, Thời gian: {Time}", userId, DateTime.UtcNow);
-                return ApiResponse<List<GetAllEventsResponseDto>>.Failure(500, ex.Message);
+                _logger.LogError(ex,
+                    "Lỗi khi lấy danh sách sự kiện. UserId: {UserId}, Thời gian: {Time}",
+                    userId,
+                    DateTime.UtcNow);
+
+                throw;
             }
         }
 
-        public async Task<ApiResponse<GetAllEventsResponseDto>> GetEventByIdAsync(int eventId)
+        public async Task<ApiResponse<CreateEventResponseDto>> GetEventByIdAsync(int eventId)
         {
             try
             {
                 var ev = await _eventRepository.GetByEventIdAsync(eventId);
                 if (ev == null)
-                    return ApiResponse<GetAllEventsResponseDto>.Failure(404, "Sự kiện không tồn tại");
+                    return ApiResponse<CreateEventResponseDto>.Failure(404, "Sự kiện không tồn tại");
 
                 var evDto = await _eventMapper.ToDto(ev);
-                return ApiResponse<GetAllEventsResponseDto>.Success(evDto);
+                return ApiResponse<CreateEventResponseDto>.Success(evDto);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi lấy sự kiện theo ID. EventId: {EventId}, Thời gian: {Time}", eventId, DateTime.UtcNow);
-                return ApiResponse<GetAllEventsResponseDto>.Failure(500, ex.Message);
+                return ApiResponse<CreateEventResponseDto>.Failure(500, ex.Message);
             }
         }
 
-        public async Task<ApiResponse<List<GetAllEventsResponseDto>>> GetEventsByClubIdAsync(int clubId, string role)
+        public async Task<ApiResponse<List<CreateEventResponseDto>>> GetEventsByClubIdAsync(int clubId, string role)
         {
             try
             {
                 var ev = await _eventRepository.GetEventsByCLubIdAsync(clubId);
                 var evDto = await _eventMapper.ToDtoList(ev);
-                return ApiResponse<List<GetAllEventsResponseDto>>.Success(evDto);
+                return ApiResponse<List<CreateEventResponseDto>>.Success(evDto);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi lấy sự kiện theo câu lạc bộ. ClubId: {ClubId}, Thời gian: {Time}", clubId, DateTime.UtcNow);
-                return ApiResponse<List<GetAllEventsResponseDto>>.Failure(500, ex.Message);
+                return ApiResponse<List<CreateEventResponseDto>>.Failure(500, ex.Message);
             }
         }
 
-        public async Task<ApiResponse<List<GetAllEventsResponseDto>>> GetEventsByClubIdAsync(int userId)
+        public async Task<ApiResponse<List<CreateEventResponseDto>>> GetEventsByClubIdAsync(int userId)
         {
             try
             {
@@ -158,50 +201,50 @@ namespace StudentClub.Application.Services
 
                 var evDto = await _eventMapper.ToDtoList(evByClubId);
                 if (evDto.Count == 0)
-                    return ApiResponse<List<GetAllEventsResponseDto>>.Failure(404, "Không có sự kiện nào cho câu lạc bộ này");
+                    return ApiResponse<List<CreateEventResponseDto>>.Failure(404, "Không có sự kiện nào cho câu lạc bộ này");
 
-                return ApiResponse<List<GetAllEventsResponseDto>>.Success(evDto);
+                return ApiResponse<List<CreateEventResponseDto>>.Success(evDto);
             }
             catch (Exception ex)
             {
                 _logger.LogError("Không tìm thấy sự kiện của câu lạc bộ");
-                return ApiResponse<List<GetAllEventsResponseDto>>.Failure(500, "Lỗi hệ thống khi tìm kiếm sự kiện");
+                return ApiResponse<List<CreateEventResponseDto>>.Failure(500, "Lỗi hệ thống khi tìm kiếm sự kiện");
             }
         }
 
-        public async Task<ApiResponse<List<GetAllEventsResponseDto>>> GetPublicEventsAsync()
+        public async Task<ApiResponse<List<CreateEventResponseDto>>> GetPublicEventsAsync()
         {
             try
             {
                 var ev = await _eventRepository.GetPublicEventsAsync(false);
                 var evDto = await _eventMapper.ToDtoList(ev);
                 if (evDto.Count == 0)
-                    return ApiResponse<List<GetAllEventsResponseDto>>.Failure(404, "Không có sự kiện công khai nào");
+                    return ApiResponse<List<CreateEventResponseDto>>.Failure(404, "Không có sự kiện công khai nào");
 
-                return ApiResponse<List<GetAllEventsResponseDto>>.Success(evDto);
+                return ApiResponse<List<CreateEventResponseDto>>.Success(evDto);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi lấy sự kiện công khai. Thời gian: {Time}", DateTime.UtcNow);
-                return ApiResponse<List<GetAllEventsResponseDto>>.Failure(500, ex.Message);
+                return ApiResponse<List<CreateEventResponseDto>>.Failure(500, ex.Message);
             }
         }
 
-        public async Task<ApiResponse<List<GetAllEventsResponseDto>>> GetPublicEventsByClubIdAsync(int clubId)
+        public async Task<ApiResponse<List<CreateEventResponseDto>>> GetPublicEventsByClubIdAsync(int clubId)
         {
             try
             {
                 var ev = await _eventRepository.GetPublicEventsByCLubIdAsync(clubId, false);
                 var evDto = await _eventMapper.ToDtoList(ev);
                 if (evDto.Count == 0)
-                    return ApiResponse<List<GetAllEventsResponseDto>>.Failure(404, "Không có sự kiện công khai nào");
+                    return ApiResponse<List<CreateEventResponseDto>>.Failure(404, "Không có sự kiện công khai nào");
 
-                return ApiResponse<List<GetAllEventsResponseDto>>.Success(evDto);
+                return ApiResponse<List<CreateEventResponseDto>>.Success(evDto);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi khi lấy sự kiện công khai theo câu lạc bộ. ClubId: {ClubId}, Thời gian: {Time}", clubId, DateTime.UtcNow);
-                return ApiResponse<List<GetAllEventsResponseDto>>.Failure(500, ex.Message);
+                return ApiResponse<List<CreateEventResponseDto>>.Failure(500, ex.Message);
             }
         }
 
@@ -230,15 +273,10 @@ namespace StudentClub.Application.Services
                 ev.ClubId = requestDto.ClubId;
                 ev.IsPrivate = requestDto.IsPrivate;
 
+                await _eventRepository.UpdateAsync(ev);
                 await _eventRepository.SaveChangeAsync();
 
-                var evDto = new CreateEventResponseDto
-                {
-                    ClubName = await _clubRepository.GetCLubNameByClubIdAsync(requestDto.ClubId),
-                    Description = ev.Description,
-                    Title = ev.Title,
-                    EventDate = ev.EventDate,
-                };
+                var evDto = await _eventMapper.ToDto(ev);
 
                 return ApiResponse<CreateEventResponseDto>.Success(evDto, "Cập nhật sự kiện thành công");
             }

@@ -8,11 +8,12 @@ namespace StudentClub.Application.DTOs.response.Event
 {
     public class CreateEventResponseDto
     {
-        public int Id { get; set; }
-        public string ClubName { get; set; }
+        public int Id  {  get; set; }  
+        public int ClubId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int? Priority { get; set; }
+        public bool? IsPrivate { get; set; }
         public DateTime? EventDate { get; set; }
     }
 }

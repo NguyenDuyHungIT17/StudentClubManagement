@@ -14,6 +14,5 @@ namespace StudentClub.Application.DTOs.request.Event
         public DateTime EventDate { get; set; }
         public bool IsPrivate { get; set; }
         public int? Priority { get; set; }
-        public DateTime UpdateAt { get; set; }
     }
 }

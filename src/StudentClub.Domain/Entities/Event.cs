@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentClub.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace StudentClub.Domain.Entities;
@@ -22,7 +23,7 @@ public partial class Event
 
     public DateTime? UpdatedAt { get; set; }
 
-    public int? Priority { get; set; }
+    public EventPriority? Priority { get; set; }
 
     public virtual Club Club { get; set; } = null!;
 
