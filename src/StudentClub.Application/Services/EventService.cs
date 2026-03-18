@@ -6,6 +6,7 @@ using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Application.Mapper;
 using StudentClub.Domain.Entities;
+using StudentClub.Domain.Enums;
 using StudentClub.Shared.ApiResponse;
 
 namespace StudentClub.Application.Services
@@ -272,7 +273,9 @@ namespace StudentClub.Application.Services
                 ev.Description = requestDto.Description;
                 ev.ClubId = requestDto.ClubId;
                 ev.IsPrivate = requestDto.IsPrivate;
-
+                ev.Priority = requestDto.Priority.HasValue
+                            ? (EventPriority)requestDto.Priority.Value
+                            : null;
                 await _eventRepository.UpdateAsync(ev);
                 await _eventRepository.SaveChangeAsync();
 

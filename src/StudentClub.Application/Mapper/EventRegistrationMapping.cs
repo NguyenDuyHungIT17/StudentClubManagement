@@ -20,11 +20,16 @@ namespace StudentClub.Application.Mapper
             return new CreateEventRegistrationResponseDto
             {
                 Id = eventRegistration.RegistrationId,
-                EventName = await _eventRepository.GetEventNameByIdAsync(eventRegistration.EventId),
-                UserName = eventRegistration.CheckName,
+                EventId = eventRegistration.EventId,
+                UserId = eventRegistration.UserId,
                 CheckedIn = eventRegistration.CheckedIn,
+                CheckName = eventRegistration.CheckName,
+                GuestEmail = eventRegistration.GuestEmail,
+                GuestName = eventRegistration.GuestName,
+                IsCare = eventRegistration.IsCare,
                 RegisteredAt = eventRegistration.RegisteredAt,
-                EventDate = eventRegistration.Event.EventDate
+                CreatedAt = eventRegistration.CreatedAt,
+                UpdatedAt = eventRegistration.UpdatedAt,
             };
         }
 
@@ -49,6 +54,9 @@ namespace StudentClub.Application.Mapper
                 CheckName = ev.CheckName,
                 RegisteredAt = DateTime.UtcNow,
                 CreatedAt = DateTime.UtcNow,
+                GuestName = ev.GuestName,
+                GuestEmail = ev.GuestEmail,
+                IsCare= ev.IsCare,
             };
         }
     }
