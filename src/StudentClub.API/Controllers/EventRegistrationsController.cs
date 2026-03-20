@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StudentClub.Application.DTOs.Filter;
 using StudentClub.Application.DTOs.request.EventRegistration;
+using StudentClub.Application.DTOs.response.Event;
+using StudentClub.Application.DTOs.response.EventRegistration;
 using StudentClub.Application.IServices;
+using StudentClub.Shared.ApiResponse;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace StudentClub.API.Controllers
 {
@@ -18,49 +23,62 @@ namespace StudentClub.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin, leader")]
+        [Authorize(Roles = "admin,leader")]
         public async Task<IActionResult> DeleteEventRegistration(int id)
         {
             var (userId, role) = GetUserContext();
-            try
-            {
-                await _eventRegistrationService.DeleteEventRegistration(id, role, userId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+
+            var result = await _eventRegistrationService.DeleteEventRegistration(id, role, userId);
+
+            return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateEventRegistration([FromBody] CreateEventRegistrationRequestDto request)
         {
-            try
-            {
-                var (userId, _) = GetUserContext();
-                var result = await _eventRegistrationService.CreateEventRegistrationAsync(request, userId);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var (userId, _) = GetUserContext();
+
+            var result = await _eventRegistrationService.CreateEventRegistrationAsync(request, userId);
+
+            return Ok(result);
         }
 
         [HttpGet("event/{eventId}")]
-        [Authorize(Roles = "admin, leader")]
-        public async Task<IActionResult> GetAllEventRegistrationsByEventId(int eventId)
+        [Authorize(Roles = "admin,leader")]
+        public async Task<IActionResult> GetAllEventRegistrationsByEventId(int eventId, [FromQuery]EventRegistrationFilter filter)
         {
-            try
+            var result = await _eventRegistrationService.GetAllEventRegistrationsByEventId(eventId, filter);
+
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(new
             {
-                var result = await _eventRegistrationService.GetAllEventRegistrationsByEventId(eventId);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+                result.PageNumber,
+                result.PageSize,
+                result.TotalPages,
+                result.TotalCount,
+                result.HasPreviousPage,
+                result.HasNextPage
+            }));
+
+            return Ok(ApiResponse<List<CreateEventRegistrationResponseDto>>.Success(result.Items));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _eventRegistrationService.GetById(id);
+
+            return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "admin,leader,member")]
+        public async Task<IActionResult> Update(int id, [FromBody] CreateEventRegistrationRequestDto request)
+        {
+            var (userId, role) = GetUserContext();
+
+            var result = await _eventRegistrationService.Update(id, request, role, userId);
+
+            return Ok(result);
         }
 
         private (int userId, string role) GetUserContext()
@@ -70,15 +88,15 @@ namespace StudentClub.API.Controllers
 
             if (string.IsNullOrEmpty(userIdOnToken) || string.IsNullOrEmpty(roleUserOnToken))
             {
-                Unauthorized(new { message = "Token không hợp lệ" });
+                throw new UnauthorizedAccessException("Token không hợp lệ");
             }
 
             if (!int.TryParse(userIdOnToken, out int userIdFromToken))
             {
-                Unauthorized(new { message = "UserId trong token không hợp lệ" });
+                throw new UnauthorizedAccessException("UserId trong token không hợp lệ");
             }
 
-            return (userIdFromToken, roleUserOnToken);
+            return (userIdFromToken, roleUserOnToken.ToLower());
         }
     }
 }

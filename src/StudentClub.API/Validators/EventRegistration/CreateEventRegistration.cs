@@ -12,6 +12,10 @@ namespace StudentClub.API.Validators.EventRegistration
                 .NotEmpty()
                 .WithMessage("EventId không được để trống");
 
+            RuleFor(x => x.CheckName)
+                .MaximumLength(50)
+                .WithMessage("Ghi chú không được vượt quá 50 kí tự");
+
             // UserId >= 0
             RuleFor(x => x.UserId)
                 .GreaterThanOrEqualTo(0)

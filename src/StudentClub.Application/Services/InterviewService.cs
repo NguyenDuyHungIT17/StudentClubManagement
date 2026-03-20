@@ -1,9 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
-using StudentClub.Application.DTOs.request.Interview;
-using StudentClub.Application.DTOs.response.Interview;
+using StudentClub.Application.DTOs.Filter;
+using StudentClub.Application.DTOs.Request.Interview;
+using StudentClub.Application.DTOs.Response.Interview;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
+using StudentClub.Application.Mapper;
 using StudentClub.Domain.Entities;
+using StudentClub.Domain.Enums;
 using StudentClub.Shared.ApiResponse;
 
 namespace StudentClub.Application.Services
@@ -13,212 +16,275 @@ namespace StudentClub.Application.Services
         private readonly IInterviewRepository _repo;
         private readonly IClubRepository _clubRepo;
         private readonly ILogger<InterviewService> _logger;
+        private readonly IUserContext _userContext;
+        private readonly InterviewMapping _mapping;
 
-        public InterviewService(IInterviewRepository repo, IClubRepository clubRepo, IUserRepository userRepo, ILogger<InterviewService> logger)
+        public InterviewService(
+            IInterviewRepository repo,
+            IClubRepository clubRepo,
+            IUserContext userContext,
+            InterviewMapping mapping,
+            ILogger<InterviewService> logger)
         {
             _repo = repo;
             _clubRepo = clubRepo;
+            _userContext = userContext;
+            _mapping = mapping;
             _logger = logger;
         }
 
-        public async Task<ApiResponse<GetInterviewResponseDto>> CreateAsync(CreateInterviewRequestDto request, int userId, string role)
+        // Tạo interview (leader/member)  - walkin -- 
+        public async Task<ApiResponse<InterviewResponseDto>> CreateAsync(CreateInterviewRequestDto request)
         {
             try
             {
-                var interviewCheck = await _repo.GetByClubIdAndEmail(request.ClubId, request.ApplicantEmail);
-                if (interviewCheck != null)
-                {
-                    return ApiResponse<GetInterviewResponseDto>.Failure(400, "Email bạn đã đăng được đăng kí rồi");
-                }
+                var club = await _clubRepo.GetClubByClubIdAsync(request.ClubId);
+                if (club == null)
+                    return ApiResponse<InterviewResponseDto>.Failure(404, "CLB không tồn tại");
 
-                if (role == "leader")
-                {
-                    var club = await _clubRepo.GetClubByClubIdAsync(request.ClubId);
-                    if (club == null)
-                        return ApiResponse<GetInterviewResponseDto>.Failure(404, "Club not found");
+                var entity = _mapping.ToEntity(request, InterviewStatus.Registered, ApplicationType.WalkIn);
 
-                    if (club.LeaderId != userId)
-                        return ApiResponse<GetInterviewResponseDto>.Failure(403, "Bạn không có quyền tạo lịch phỏng vấn cho CLB này");
-                }
-
-                var interview = new Interview
-                {
-                    ClubId = request.ClubId,
-                    ApplicantName = request.ApplicantName,
-                    ApplicantEmail = request.ApplicantEmail,
-                    Evaluation = string.IsNullOrWhiteSpace(request.Evaluation) ? "0" : "0" + request.Evaluation,
-                    Result = "Pending"
-                };
-
-                await _repo.AddAsync(interview);
+                await _repo.AddAsync(entity);
                 await _repo.SaveChangesAsync();
 
-                var response = MapToDto(interview);
-                return ApiResponse<GetInterviewResponseDto>.Success(response, "Tạo lịch phỏng vấn thành công");
+                return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Tạo thành công");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi tạo lịch phỏng vấn. Tên ứng viên: {ApplicantName}", request.ApplicantName);
-                return ApiResponse<GetInterviewResponseDto>.Failure(500, ex.Message);
+                _logger.LogError(ex, "Lỗi create interview {Time}", DateTime.UtcNow);
+                return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
             }
         }
 
-        public async Task<ApiResponse<GetInterviewResponseDto>> CreateWebAsync(CreateInterviewRequestDto request)
+        // Tạo từ web (public) -- cho tất cả mọi người
+        public async Task<ApiResponse<InterviewResponseDto>> CreateWebAsync(CreateInterviewRequestDto request)
         {
             try
             {
-                var interviewCheck = await _repo.GetByClubIdAndEmail(request.ClubId, request.ApplicantEmail);
-                if (interviewCheck != null)
-                {
-                    return ApiResponse<GetInterviewResponseDto>.Failure(400, "Email bạn đã đăng được đăng kí rồi");
-                }
+                var club = await _clubRepo.GetClubByClubIdAsync(request.ClubId);
+                if (club == null)
+                    return ApiResponse<InterviewResponseDto>.Failure(404, "CLB không tồn tại");
 
-                var interview = new Interview
-                {
-                    ClubId = request.ClubId,
-                    ApplicantName = request.ApplicantName,
-                    ApplicantEmail = request.ApplicantEmail,
-                    Evaluation = string.IsNullOrWhiteSpace(request.Evaluation) ? "web" : "web" + request.Evaluation,
-                    Result = "Pending"
-                };
+                var entity = _mapping.ToEntity(request, InterviewStatus.Registered, ApplicationType.Online);
 
-                await _repo.AddAsync(interview);
+                await _repo.AddAsync(entity);
                 await _repo.SaveChangesAsync();
 
-                return ApiResponse<GetInterviewResponseDto>.Success(MapToDto(interview), "Đăng ký phỏng vấn qua Web thành công");
+                return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Đăng ký thành công");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi tạo lịch phỏng vấn Web.");
-                return ApiResponse<GetInterviewResponseDto>.Failure(500, ex.Message);
+                _logger.LogError(ex, "Lỗi create web interview {Time}", DateTime.UtcNow);
+                return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
             }
         }
 
-        public async Task<ApiResponse<GetInterviewResponseDto>> UpdateAsync(int id, UpdateInterviewRequestDto request, int userId, string role)
+        //// Cập nhật interview
+        public async Task<ApiResponse<InterviewResponseDto>> UpdateAsync(int id, UpdateInterviewRequestDto request)
         {
             try
             {
-                var interview = await _repo.GetByIdAsync(id);
-                if (interview == null) return ApiResponse<GetInterviewResponseDto>.Failure(404, "Interview not found");
+                var entity = await _repo.GetByIdAsync(id);
+                if (entity == null)
+                    return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
 
-                if (role == "leader")
-                {
-                    var club = await _clubRepo.GetClubByClubIdAsync(interview.ClubId);
-                    if (club == null) return ApiResponse<GetInterviewResponseDto>.Failure(404, "Club not found");
+                _mapping.UpdateEntity(entity, request);
 
-                    if (club.LeaderId != userId)
-                        return ApiResponse<GetInterviewResponseDto>.Failure(403, "Bạn không có quyền cập nhật lịch phỏng vấn của CLB này");
-                }
-
-                interview.Evaluation = request.Evaluation;
-                interview.Result = request.Result;
-                interview.UpdatedAt = DateTime.Now;
-
+                await _repo.UpdateAsync(entity);
                 await _repo.SaveChangesAsync();
-                return ApiResponse<GetInterviewResponseDto>.Success(MapToDto(interview), "Cập nhật thành công");
+
+                return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Cập nhật thành công");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi cập nhật lịch phỏng vấn ID: {InterviewId}", id);
-                return ApiResponse<GetInterviewResponseDto>.Failure(500, ex.Message);
+                _logger.LogError(ex, "Lỗi update interview {Time}", DateTime.UtcNow);
+                return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
             }
         }
 
-        public async Task<ApiResponse<List<GetInterviewResponseDto>>> GetByClubIdAsync(int clubId, int userId, string role)
-        {
-            try
-            {
-                if (role == "leader")
-                {
-                    var club = await _clubRepo.GetClubByClubIdAsync(clubId);
-                    if (club == null) return ApiResponse<List<GetInterviewResponseDto>>.Failure(404, "Club not found");
+        //// Xóa interview
+        //public async Task<ApiResponse> DeleteAsync(int id)
+        //{
+        //    try
+        //    {
+        //        var entity = await _repo.GetByIdAsync(id);
+        //        if (entity == null)
+        //            return ApiResponse.Failure(404, "Không tìm thấy");
 
-                    if (club.LeaderId != userId)
-                        return ApiResponse<List<GetInterviewResponseDto>>.Failure(403, "Bạn không có quyền xem phỏng vấn của CLB này");
-                }
+        //        await _repo.DeleteAsync(entity);
+        //        await _repo.SaveChangeAsync();
 
-                var list = await _repo.GetByClubIdAsync(clubId);
-                var dtos = list.Select(MapToDto).ToList();
-                return ApiResponse<List<GetInterviewResponseDto>>.Success(dtos);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi lấy lịch phỏng vấn theo ClubId: {ClubId}", clubId);
-                return ApiResponse<List<GetInterviewResponseDto>>.Failure(500, ex.Message);
-            }
-        }
+        //        return ApiResponse.Success("Xóa thành công");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Lỗi delete interview {Time}", DateTime.UtcNow);
+        //        return ApiResponse.Failure(500, ex.Message);
+        //    }
+        //}
 
-        public async Task<ApiResponse> DeleteAsync(int id, int userId, string role)
-        {
-            try
-            {
-                var interview = await _repo.GetByIdAsync(id);
-                if (interview == null) return ApiResponse.Failure(404, "Interview not found");
+        //// Lấy chi tiết interview
+        //public async Task<ApiResponse<InterviewResponseDto>> GetByIdAsync(int id)
+        //{
+        //    try
+        //    {
+        //        var entity = await _repo.GetByIdAsync(id);
+        //        if (entity == null)
+        //            return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
 
-                if (role == "leader")
-                {
-                    var club = await _clubRepo.GetClubByClubIdAsync(interview.ClubId);
-                    if (club == null) return ApiResponse.Failure(404, "Club not found");
+        //        return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Lỗi getById interview {Time}", DateTime.UtcNow);
+        //        return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
+        //    }
+        //}
 
-                    if (club.LeaderId != userId)
-                        return ApiResponse.Failure(403, "Bạn không có quyền xóa phỏng vấn của CLB này");
-                }
+        //// Lấy danh sách + phân trang
+        //public async Task<PagedResponse<InterviewResponseDto>> GetAllInterviewsAsync(InterviewFilter filter)
+        //{
+        //    try
+        //    {
+        //        var list = await _repo.GetAllAsync();
 
-                await _repo.DeleteAsync(interview);
-                await _repo.SaveChangesAsync();
-                return ApiResponse.Success("Xóa lịch phỏng vấn thành công");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi xóa lịch phỏng vấn ID: {InterviewId}", id);
-                return ApiResponse.Failure(500, ex.Message);
-            }
-        }
+        //        if (!string.IsNullOrWhiteSpace(filter.KeyWord))
+        //        {
+        //            var keyword = filter.KeyWord.ToLower();
+        //            list = list.Where(x => x.ApplicantName.ToLower().Contains(keyword)).ToList();
+        //        }
 
-        public async Task<ApiResponse<List<GetInterviewResponseDto>>> GetAllAsync()
-        {
-            try
-            {
-                var list = await _repo.GetAllAsync();
-                var dtos = list.Select(MapToDto).ToList();
-                return ApiResponse<List<GetInterviewResponseDto>>.Success(dtos);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi lấy tất cả lịch phỏng vấn");
-                return ApiResponse<List<GetInterviewResponseDto>>.Failure(500, ex.Message);
-            }
-        }
+        //        var total = list.Count;
 
-        public async Task<ApiResponse<GetInterviewResponseDto>> GetByIdAsync(int id)
-        {
-            try
-            {
-                var interview = await _repo.GetByIdAsync(id);
-                if (interview == null) return ApiResponse<GetInterviewResponseDto>.Failure(404, "Không tìm thấy phỏng vấn");
+        //        var page = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
+        //        var size = filter.PageSize <= 0 ? 10 : filter.PageSize;
 
-                return ApiResponse<GetInterviewResponseDto>.Success(MapToDto(interview));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi lấy phỏng vấn ID: {id}", id);
-                return ApiResponse<GetInterviewResponseDto>.Failure(500, ex.Message);
-            }
-        }
+        //        var items = list.Skip((page - 1) * size).Take(size).ToList();
 
-        // Helper method nội bộ để tránh lặp code mapping
-        private GetInterviewResponseDto MapToDto(Interview interview)
-        {
-            return new GetInterviewResponseDto
-            {
-                InterviewId = interview.InterviewId,
-                ClubId = interview.ClubId,
-                ApplicantName = interview.ApplicantName,
-                ApplicantEmail = interview.ApplicantEmail,
-                Evaluation = interview.Evaluation,
-                Result = interview.Result,
-                CreatedAt = interview.CreatedAt
-            };
-        }
+        //        return new PagedResponse<InterviewResponseDto>
+        //        {
+        //            Items = _mapping.ToListResponse(items),
+        //            PageNumber = page,
+        //            PageSize = size,
+        //            TotalCount = total,
+        //            TotalPages = (int)Math.Ceiling(total / (double)size)
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Lỗi get list interview {Time}", DateTime.UtcNow);
+        //        throw;
+        //    }
+        //}
+
+        //// Check-in ứng viên
+        //public async Task<ApiResponse<InterviewResponseDto>> CheckInAsync(int id)
+        //{
+        //    try
+        //    {
+        //        var entity = await _repo.GetByIdAsync(id);
+        //        if (entity == null)
+        //            return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
+
+        //        _mapping.MapCheckIn(entity);
+
+        //        await _repo.SaveChangeAsync();
+
+        //        return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Check-in thành công");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Lỗi checkin {Time}", DateTime.UtcNow);
+        //        return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
+        //    }
+        //}
+
+        //// Bắt đầu phỏng vấn
+        //public async Task<ApiResponse<InterviewResponseDto>> StartAsync(int id, StartInterviewRequestDto request)
+        //{
+        //    try
+        //    {
+        //        var entity = await _repo.GetByIdAsync(id);
+        //        if (entity == null)
+        //            return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
+
+        //        _mapping.MapStart(entity, request);
+
+        //        await _repo.SaveChangeAsync();
+
+        //        return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Bắt đầu phỏng vấn");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Lỗi start interview {Time}", DateTime.UtcNow);
+        //        return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
+        //    }
+        //}
+
+        //// Kết thúc phỏng vấn
+        //public async Task<ApiResponse<InterviewResponseDto>> FinishAsync(int id, FinishInterviewRequestDto request)
+        //{
+        //    try
+        //    {
+        //        var entity = await _repo.GetByIdAsync(id);
+        //        if (entity == null)
+        //            return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
+
+        //        _mapping.MapFinish(entity, request);
+
+        //        await _repo.SaveChangeAsync();
+
+        //        return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Hoàn thành");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Lỗi finish interview {Time}", DateTime.UtcNow);
+        //        return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
+        //    }
+        //}
+
+        //// Đánh dấu no-show
+        //public async Task<ApiResponse<InterviewResponseDto>> NoShowAsync(int id)
+        //{
+        //    try
+        //    {
+        //        var entity = await _repo.GetByIdAsync(id);
+        //        if (entity == null)
+        //            return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
+
+        //        _mapping.MapNoShow(entity, "Không đến");
+
+        //        await _repo.SaveChangeAsync();
+
+        //        return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "No-show");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Lỗi noshow {Time}", DateTime.UtcNow);
+        //        return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
+        //    }
+        //}
+
+        //// Hủy interview
+        //public async Task<ApiResponse<InterviewResponseDto>> CancelAsync(int id)
+        //{
+        //    try
+        //    {
+        //        var entity = await _repo.GetByIdAsync(id);
+        //        if (entity == null)
+        //            return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
+
+        //        _mapping.MapCancel(entity);
+
+        //        await _repo.SaveChangeAsync();
+
+        //        return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Đã hủy");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Lỗi cancel interview {Time}", DateTime.UtcNow);
+        //        return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
+        //    }
+        //}
     }
 }

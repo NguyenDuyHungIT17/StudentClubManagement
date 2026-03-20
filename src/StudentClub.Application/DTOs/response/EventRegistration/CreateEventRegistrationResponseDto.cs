@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentClub.Application.DTOs.response.EventRegistration
+﻿namespace StudentClub.Application.DTOs.response.EventRegistration
 {
     public class CreateEventRegistrationResponseDto 
     {
@@ -28,5 +22,7 @@ namespace StudentClub.Application.DTOs.response.EventRegistration
         public string? GuestName { get; set; }
 
         public int? IsCare { get; set; }
+
+        public int? CLubId { get; set; }
     }
 }

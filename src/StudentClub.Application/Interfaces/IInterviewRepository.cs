@@ -12,6 +12,7 @@ namespace StudentClub.Application.Interfaces
         Task<List<Interview>> GetByClubIdAsync(int clubId);
         Task<List<Interview>> GetAllAsync();
         Task DeleteAsync(Interview interview);
+        Task UpdateAsync(Interview interview);
         Task SaveChangesAsync();
     }
 }

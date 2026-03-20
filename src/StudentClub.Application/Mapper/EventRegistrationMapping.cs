@@ -30,6 +30,7 @@ namespace StudentClub.Application.Mapper
                 RegisteredAt = eventRegistration.RegisteredAt,
                 CreatedAt = eventRegistration.CreatedAt,
                 UpdatedAt = eventRegistration.UpdatedAt,
+                CLubId = await _eventRepository.GetClubIdByEventId(eventRegistration.EventId),
             };
         }
 

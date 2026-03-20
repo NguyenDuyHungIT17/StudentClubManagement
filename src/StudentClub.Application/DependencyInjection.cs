@@ -24,11 +24,13 @@ namespace StudentClub.Application
             services.AddScoped<IEventRegistrationService, EventRegistrationService>();
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddSingleton<IRealtimeService, ChatService>();
+            services.AddScoped<IUserContext, UserContext>();
 
             services.AddScoped<EventMapping>();
             services.AddScoped<EventRegistrationMapping>();
             services.AddScoped<FeedbackMapping>();
             services.AddScoped<ClubMemberMapping>();
+            services.AddScoped<InterviewMapping>();
             return services;
         }
     }

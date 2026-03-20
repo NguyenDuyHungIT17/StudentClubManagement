@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using StudentClub.Domain.Entities;
+using StudentClub.Domain.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace StudentClub.Infrastructure.Persistence;
 
@@ -128,20 +129,50 @@ public partial class StudentClubDbContext : DbContext
 
         modelBuilder.Entity<Interview>(entity =>
         {
-            entity.HasKey(e => e.InterviewId).HasName("PK__Intervie__C97C585249254C1F");
+            entity.HasKey(e => e.InterviewId);
 
-            entity.Property(e => e.ApplicantEmail).HasMaxLength(100);
-            entity.Property(e => e.ApplicantName).HasMaxLength(100);
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.ApplicantName)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            entity.Property(e => e.ApplicantEmail)
+                .HasMaxLength(100);
+
+            entity.Property(e => e.ApplicantPhone)
+                .HasMaxLength(20);
+
+            entity.Property(e => e.Evaluation)
+                .HasMaxLength(500);
+
+            entity.Property(e => e.EvaluatorName)
+                .HasMaxLength(100);
+
+            entity.Property(e => e.CVUrl)
+                .HasMaxLength(255);
+
+            entity.Property(e => e.Note)
+                .HasMaxLength(500);
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("GETDATE()");
+
+            entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("GETDATE()");
+
+            // ✅ ENUM → INT
+            entity.Property(e => e.Status)
+                .HasConversion<int>();
+
             entity.Property(e => e.Result)
-                .HasMaxLength(20)
-                .HasDefaultValue("Pending");
-            entity.Property(e => e.UpdatedAt).HasDefaultValueSql("(getdate())");
+                .HasConversion<int>();
 
-            entity.HasOne(d => d.Club).WithMany(p => p.Interviews)
+            entity.Property(e => e.ApplicationType)
+                .HasConversion<int>();
+
+            entity.HasOne(d => d.Club)
+                .WithMany(p => p.Interviews)
                 .HasForeignKey(d => d.ClubId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Interview__ClubI__46E78A0C");
+                .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<User>(entity =>

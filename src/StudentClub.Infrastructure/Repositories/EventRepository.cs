@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Utilities;
 using StudentClub.Application.Interfaces;
 using StudentClub.Domain.Entities;
 using StudentClub.Infrastructure.Persistence;
+using System.ComponentModel;
 
 namespace StudentClub.Infrastructure.Repositories
 {
@@ -71,6 +73,12 @@ namespace StudentClub.Infrastructure.Repositories
         public Task<List<Event>> GetPublicEventsByCLubIdAsync(int clubId, bool check)
         {
             return _context.Events.Where(e => e.ClubId == clubId && e.IsPrivate == check).ToListAsync();
+        }
+
+        public async Task<int> GetClubIdByEventId(int eventId)
+        {
+            var ev = await _context.Events.Where(e => e.EventId == eventId).FirstOrDefaultAsync();
+            return ev.ClubId;
         }
 
         public async Task SaveChangeAsync()

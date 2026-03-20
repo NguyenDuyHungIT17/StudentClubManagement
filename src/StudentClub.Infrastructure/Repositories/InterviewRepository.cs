@@ -48,6 +48,12 @@ namespace StudentClub.Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
+        public async Task UpdateAsync(Interview interview)
+        {
+            _context.Interviews.Update(interview);
+            await Task.CompletedTask;
+        }
+
         public async Task<Interview?> GetByClubIdAndEmail(int clubId, string email)
         {
             var interview = await _context.Interviews.Where(u => u.ClubId == clubId && u.ApplicantEmail == email).FirstOrDefaultAsync();

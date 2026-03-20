@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StudentClub.Application.DTOs.request.Interview;
+using StudentClub.Application.DTOs.Request.Interview;
 using StudentClub.Application.IServices;
 using System.Security.Claims;
 
@@ -19,14 +19,14 @@ namespace StudentClub.API.Controllers
             _emailService = emailService;
         }
 
+        //tạo trực tiếp walk in
         [HttpPost]
         [Authorize(Roles = "admin,leader")]
         public async Task<IActionResult> Create([FromBody] CreateInterviewRequestDto request)
         {
             try
             {
-                var (userId, role) = GetUserContext();
-                var result = await _service.CreateAsync(request, userId, role);
+                var result = await _service.CreateAsync(request);
                 return Ok(result);
             }
             catch (UnauthorizedAccessException ex)
@@ -39,12 +39,13 @@ namespace StudentClub.API.Controllers
             }
         }
 
+        //create từ web - khách
         [HttpPost("web")]
+        [AllowAnonymous]
         public async Task<IActionResult> CreateWeb([FromBody] CreateInterviewRequestDto request)
         {
             try
             {
-
                 var result = await _service.CreateWebAsync(request);
                 return Ok(result);
             }
@@ -64,32 +65,7 @@ namespace StudentClub.API.Controllers
         {
             try
             {
-                var (userId, role) = GetUserContext();
-                var result = await _service.UpdateAsync(id, request, userId, role);
-                return Ok(result);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new { message = ex.Message });
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Forbid(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
-
-        [HttpGet("club/{clubId}")]
-        [Authorize(Roles = "admin,leader")]
-        public async Task<IActionResult> GetByClub(int clubId)
-        {
-            try
-            {
-                var (userId, role) = GetUserContext();
-                var result = await _service.GetByClubIdAsync(clubId, userId, role);
+                var result = await _service.UpdateAsync(id, request);
                 return Ok(result);
             }
             catch (UnauthorizedAccessException ex)
@@ -101,11 +77,10 @@ namespace StudentClub.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
-
         //email
         [HttpPost("club/{clubId}/send-email/{resultType}")]
         [Authorize(Roles = "admin,leader")]
-        public async Task<IActionResult> SendInterviewResultEmail(int clubId, string resultType)
+        public async Task<IActionResult> SendInterviewResultEmail(int clubId, int resultType)
         {
             try
             {
@@ -120,23 +95,6 @@ namespace StudentClub.API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            try
-            {
-                var result = await _service.GetByIdAsync(id);
-                if (result == null)
-                {
-                    return NotFound(new { message = "Không tìm thấy phỏng vấn" });
-                }
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
 
         private (int userId, string role) GetUserContext()
         {

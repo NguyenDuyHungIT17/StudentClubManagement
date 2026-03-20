@@ -1,13 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
-using System;
-using System.Collections.Generic;
+using StudentClub.Domain.Enums;
 using System.Net;
 using System.Net.Mail;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace StudentClub.Application.Services
 {
@@ -86,34 +83,54 @@ namespace StudentClub.Application.Services
             
         }
 
-        public async Task SendInterviewResultEmailAsync(int clubId, string resultType)
+        public async Task SendInterviewResultEmailAsync(int clubId, int resultType)
         {
             try
             {
                 var club = await _clubRepository.GetClubByClubIdAsync(clubId);
-                var interviews = await _interviewRepository.GetByClubIdAsync(clubId);
+                if (club == null)
+                {
+                    _logger.LogWarning("Không tìm thấy CLB {ClubId}", clubId);
+                    return;
+                }
 
-                string templateName = resultType == "Pass" ? "InterviewPass.html" : "InterviewFail.html";
+                var interviews = await _interviewRepository.GetByClubIdAsync(clubId);
+                if (interviews == null || !interviews.Any())
+                {
+                    _logger.LogWarning("Không có interview nào cho CLB {ClubId}", clubId);
+                    return;
+                }
+
+                var resultEnum = (InterviewResult)resultType;
+
+                string templateName = resultEnum == InterviewResult.Pass
+                    ? "InterviewPass.html"
+                    : "InterviewFail.html";
+
                 string subject = "Kết quả phỏng vấn CLB";
 
                 foreach (var interview in interviews)
                 {
-                    if (interview.Result == resultType)
-                    {
-                        var html = await RenderTemplateAsync(templateName, new Dictionary<string, string>
-                    {
-                        { "ApplicantName", interview.ApplicantName },
-                        { "ClubName", club.ClubName }
-                    });
-                        await SendEmailAsync(interview.ApplicantEmail, subject, html);
-                    }
-                }
-            }catch(Exception ex)
+                    if (interview.Result != resultEnum)
+                        continue;
+
+                    if (string.IsNullOrWhiteSpace(interview.ApplicantEmail))
+                        continue;
+
+                    var html = await RenderTemplateAsync(templateName, new Dictionary<string, string>
             {
-                _logger.LogError("Có lỗi khi gửi email thông báo");
+                { "ApplicantName", interview.ApplicantName },
+                { "ClubName", club.ClubName }
+            });
+
+                    await SendEmailAsync(interview.ApplicantEmail, subject, html);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi gửi email kết quả interview. ClubId: {ClubId}", clubId);
                 throw;
             }
-            
         }
     }
 }
