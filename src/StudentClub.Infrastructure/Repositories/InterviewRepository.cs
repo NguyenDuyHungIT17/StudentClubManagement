@@ -27,6 +27,7 @@ namespace StudentClub.Infrastructure.Repositories
         {
             return await _context.Interviews
                 .Where(i => i.ClubId == clubId)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
@@ -56,9 +57,9 @@ namespace StudentClub.Infrastructure.Repositories
 
         public async Task<Interview?> GetByClubIdAndEmail(int clubId, string email)
         {
-            var interview = await _context.Interviews.Where(u => u.ClubId == clubId && u.ApplicantEmail == email).FirstOrDefaultAsync();
-            return interview;
+            return await _context.Interviews
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.ClubId == clubId && u.ApplicantEmail == email);
         }
     }
-
 }
