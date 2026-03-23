@@ -33,7 +33,7 @@ namespace StudentClub.Application.Services
             _logger = logger;
         }
 
-        // Tạo interview (leader/member)  - walkin -- 
+        // Tạo interview (leader/member) - walkin
         public async Task<ApiResponse<InterviewResponseDto>> CreateAsync(CreateInterviewRequestDto request)
         {
             try
@@ -42,11 +42,12 @@ namespace StudentClub.Application.Services
                 if (club == null)
                     return ApiResponse<InterviewResponseDto>.Failure(404, "CLB không tồn tại");
 
-                var entity = _mapping.ToEntity(request, InterviewStatus.Registered, ApplicationType.WalkIn);
+                var entity = _mapping.ToEntity(request, InterviewStatus.CheckedIn, ApplicationType.WalkIn);
 
                 await _repo.AddAsync(entity);
                 await _repo.SaveChangesAsync();
 
+                _logger.LogInformation("Created walk-in interview {InterviewId} for club {ClubId}", entity.InterviewId, request.ClubId);
                 return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Tạo thành công");
             }
             catch (Exception ex)
@@ -65,11 +66,20 @@ namespace StudentClub.Application.Services
                 if (club == null)
                     return ApiResponse<InterviewResponseDto>.Failure(404, "CLB không tồn tại");
 
+                // Kiểm tra trùng email trong cùng club
+                if (!string.IsNullOrWhiteSpace(request.ApplicantEmail))
+                {
+                    var existingInterview = await _repo.GetByClubIdAndEmail(request.ClubId, request.ApplicantEmail);
+                    if (existingInterview != null)
+                        return ApiResponse<InterviewResponseDto>.Failure(409, "Email này đã đăng ký rồi");
+                }
+
                 var entity = _mapping.ToEntity(request, InterviewStatus.Registered, ApplicationType.Online);
 
                 await _repo.AddAsync(entity);
                 await _repo.SaveChangesAsync();
 
+                _logger.LogInformation("Created online interview {InterviewId} for club {ClubId}", entity.InterviewId, request.ClubId);
                 return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Đăng ký thành công");
             }
             catch (Exception ex)
@@ -79,7 +89,7 @@ namespace StudentClub.Application.Services
             }
         }
 
-        //// Cập nhật interview
+        // Cập nhật interview - chỉ cập nhật được khi status = Registered hoặc CheckedIn
         public async Task<ApiResponse<InterviewResponseDto>> UpdateAsync(int id, UpdateInterviewRequestDto request)
         {
             try
@@ -88,11 +98,24 @@ namespace StudentClub.Application.Services
                 if (entity == null)
                     return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
 
+                // Rule: Không sửa khi Done
+                if (entity.Status == InterviewStatus.Done)
+                    return ApiResponse<InterviewResponseDto>.Failure(409, "Không thể cập nhật khi đã hoàn thành");
+
+                // Rule: Không sửa khi Cancelled
+                if (entity.Status == InterviewStatus.Cancelled)
+                    return ApiResponse<InterviewResponseDto>.Failure(409, "Không thể cập nhật khi đã hủy");
+
+                // Rule: Không sửa khi NoShow
+                if (entity.Status == InterviewStatus.NoShow)
+                    return ApiResponse<InterviewResponseDto>.Failure(409, "Không thể cập nhật khi đã No-Show");
+
                 _mapping.UpdateEntity(entity, request);
 
                 await _repo.UpdateAsync(entity);
                 await _repo.SaveChangesAsync();
 
+                _logger.LogInformation("Updated interview {InterviewId}", id);
                 return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Cập nhật thành công");
             }
             catch (Exception ex)
@@ -102,7 +125,7 @@ namespace StudentClub.Application.Services
             }
         }
 
-        //// Xóa interview
+        // Xóa interview - chỉ xóa được nếu chưa Done
         public async Task<ApiResponse> DeleteAsync(int id)
         {
             try
@@ -111,9 +134,14 @@ namespace StudentClub.Application.Services
                 if (entity == null)
                     return ApiResponse.Failure(404, "Không tìm thấy");
 
+                // Rule: Không xóa khi Done
+                if (entity.Status == InterviewStatus.Done)
+                    return ApiResponse.Failure(409, "Không thể xóa khi đã hoàn thành");
+
                 await _repo.DeleteAsync(entity);
                 await _repo.SaveChangesAsync();
 
+                _logger.LogInformation("Deleted interview {InterviewId}", id);
                 return ApiResponse.Success("Xóa thành công");
             }
             catch (Exception ex)
@@ -123,7 +151,7 @@ namespace StudentClub.Application.Services
             }
         }
 
-        //// Lấy chi tiết interview
+        // Lấy chi tiết interview
         public async Task<ApiResponse<InterviewResponseDto>> GetByIdAsync(int id)
         {
             try
@@ -141,17 +169,39 @@ namespace StudentClub.Application.Services
             }
         }
 
-        //// Lấy danh sách + phân trang
+        // Lấy danh sách + phân trang + filter
         public async Task<PagedResponse<InterviewResponseDto>> GetAllInterviewsAsync(InterviewFilter filter)
         {
             try
             {
-                var list = await _repo.GetAllAsync();
+                // Nếu có filter ClubId, lấy interviews của club đó
+                List<Interview> list;
+                if (filter.ClubId > 0)
+                {
+                    list = await _repo.GetByClubIdAsync(filter.ClubId);
+                }
+                else
+                {
+                    list = await _repo.GetAllAsync();
+                }
 
+                // Filter by keyword
                 if (!string.IsNullOrWhiteSpace(filter.Keyword))
                 {
                     var keyword = filter.Keyword.ToLower();
                     list = list.Where(x => x.ApplicantName.ToLower().Contains(keyword)).ToList();
+                }
+
+                // Filter by status
+                if (filter.Status.HasValue)
+                {
+                    list = list.Where(x => (int)x.Status == filter.Status.Value).ToList();
+                }
+
+                // Filter by result
+                if (filter.Result.HasValue)
+                {
+                    list = list.Where(x => (int)x.Result == filter.Result.Value).ToList();
                 }
 
                 var total = list.Count;
@@ -177,7 +227,7 @@ namespace StudentClub.Application.Services
             }
         }
 
-        //// Check-in ứng viên
+        // Check-in ứng viên - chuyển từ Registered → CheckedIn
         public async Task<ApiResponse<InterviewResponseDto>> CheckInAsync(int id)
         {
             try
@@ -186,10 +236,15 @@ namespace StudentClub.Application.Services
                 if (entity == null)
                     return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
 
+                // Rule: Chỉ check-in được khi status = Registered
+                if (entity.Status != InterviewStatus.Registered)
+                    return ApiResponse<InterviewResponseDto>.Failure(409, $"Không thể check-in khi trạng thái là {entity.Status}");
+
                 _mapping.MapCheckIn(entity);
 
                 await _repo.SaveChangesAsync();
 
+                _logger.LogInformation("Checked in interview {InterviewId}", id);
                 return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Check-in thành công");
             }
             catch (Exception ex)
@@ -199,7 +254,7 @@ namespace StudentClub.Application.Services
             }
         }
 
-        //// Bắt đầu phỏng vấn
+        // Bắt đầu phỏng vấn - chuyển từ CheckedIn → Interviewing
         public async Task<ApiResponse<InterviewResponseDto>> StartAsync(int id, StartInterviewRequestDto request)
         {
             try
@@ -208,10 +263,15 @@ namespace StudentClub.Application.Services
                 if (entity == null)
                     return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
 
+                // Rule: Chỉ bắt đầu được khi status = CheckedIn
+                if (entity.Status != InterviewStatus.CheckedIn)
+                    return ApiResponse<InterviewResponseDto>.Failure(409, $"Không thể bắt đầu khi trạng thái là {entity.Status}. Phải Check-in trước");
+
                 _mapping.MapStart(entity, request);
 
                 await _repo.SaveChangesAsync();
 
+                _logger.LogInformation("Started interview {InterviewId}", id);
                 return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Bắt đầu phỏng vấn");
             }
             catch (Exception ex)
@@ -221,7 +281,7 @@ namespace StudentClub.Application.Services
             }
         }
 
-        //// Kết thúc phỏng vấn
+        // Kết thúc phỏng vấn - chuyển từ Interviewing → Done
         public async Task<ApiResponse<InterviewResponseDto>> FinishAsync(int id, FinishInterviewRequestDto request)
         {
             try
@@ -230,10 +290,19 @@ namespace StudentClub.Application.Services
                 if (entity == null)
                     return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
 
+                // Rule: Chỉ kết thúc được khi status = Interviewing
+                if (entity.Status != InterviewStatus.Interviewing)
+                    return ApiResponse<InterviewResponseDto>.Failure(409, $"Không thể kết thúc khi trạng thái là {entity.Status}. Phải bắt đầu phỏng vấn trước");
+
+                // Rule: Phải có result (Pass/Fail)
+                if (request.Result < 1 || request.Result > 2)
+                    return ApiResponse<InterviewResponseDto>.Failure(400, "Result phải là 1 (Pass) hoặc 2 (Fail)");
+
                 _mapping.MapFinish(entity, request);
 
                 await _repo.SaveChangesAsync();
 
+                _logger.LogInformation("Finished interview {InterviewId} with result {Result}", id, request.Result);
                 return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Hoàn thành");
             }
             catch (Exception ex)
@@ -243,7 +312,7 @@ namespace StudentClub.Application.Services
             }
         }
 
-        //// Đánh dấu no-show
+        // Đánh dấu no-show - chuyển sang NoShow
         public async Task<ApiResponse<InterviewResponseDto>> NoShowAsync(int id)
         {
             try
@@ -252,10 +321,15 @@ namespace StudentClub.Application.Services
                 if (entity == null)
                     return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
 
+                // Rule: Chỉ No-Show được từ Registered hoặc CheckedIn
+                if (entity.Status != InterviewStatus.Registered && entity.Status != InterviewStatus.CheckedIn)
+                    return ApiResponse<InterviewResponseDto>.Failure(409, $"Không thể đánh dấu no-show khi trạng thái là {entity.Status}");
+
                 _mapping.MapNoShow(entity, "Không đến");
 
                 await _repo.SaveChangesAsync();
 
+                _logger.LogInformation("Marked interview {InterviewId} as no-show", id);
                 return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "No-show");
             }
             catch (Exception ex)
@@ -265,7 +339,7 @@ namespace StudentClub.Application.Services
             }
         }
 
-        //// Hủy interview
+        // Hủy interview
         public async Task<ApiResponse<InterviewResponseDto>> CancelAsync(int id)
         {
             try
@@ -274,10 +348,19 @@ namespace StudentClub.Application.Services
                 if (entity == null)
                     return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
 
+                // Rule: Không hủy được khi đã Done
+                if (entity.Status == InterviewStatus.Done)
+                    return ApiResponse<InterviewResponseDto>.Failure(409, "Không thể hủy khi đã hoàn thành");
+
+                // Rule: Không hủy lần thứ 2
+                if (entity.Status == InterviewStatus.Cancelled)
+                    return ApiResponse<InterviewResponseDto>.Failure(409, "Interview đã được hủy rồi");
+
                 _mapping.MapCancel(entity);
 
                 await _repo.SaveChangesAsync();
 
+                _logger.LogInformation("Cancelled interview {InterviewId}", id);
                 return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Đã hủy");
             }
             catch (Exception ex)

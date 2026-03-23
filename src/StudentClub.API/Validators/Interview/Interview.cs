@@ -19,19 +19,21 @@ namespace StudentClub.API.Validators.Interview
                 .MaximumLength(100)
                 .WithMessage("Tên ứng viên không được vượt quá 100 ký tự");
 
-            // Email đúng format nếu có
+            // Email nếu có thì phải đúng format (không bắt buộc)
             RuleFor(x => x.ApplicantEmail)
-                .NotEmpty()
-                .WithMessage("Email không được để trống")
                 .EmailAddress()
-                .WithMessage("Email không đúng định dạng");
+                .WithMessage("Email không đúng định dạng")
+                .When(x => !string.IsNullOrWhiteSpace(x.ApplicantEmail));
 
             // Phone max length
             RuleFor(x => x.ApplicantPhone)
                 .MaximumLength(20)
-                .WithMessage("Số điện thoại không được vượt quá 20 ký tự");
+                .WithMessage("Số điện thoại không được vượt quá 20 ký tự")
+                .Matches(@"^\d+$")
+                .WithMessage("Số điện thoại chỉ chứa chữ số")
+                .When(x => !string.IsNullOrWhiteSpace(x.ApplicantPhone));
 
-            // InterviewDate không được là quá khứ (optional nhưng nếu có thì phải đúng)
+            // InterviewDate không được là quá khứ (nếu có)
             RuleFor(x => x.InterviewDate)
                 .GreaterThanOrEqualTo(DateTime.Now.Date)
                 .WithMessage("Thời gian phỏng vấn không hợp lệ")
@@ -46,6 +48,34 @@ namespace StudentClub.API.Validators.Interview
             RuleFor(x => x.Note)
                 .MaximumLength(500)
                 .WithMessage("Ghi chú không được vượt quá 500 ký tự");
+        }
+    }
+
+    public class StartInterviewValidator : AbstractValidator<StartInterviewRequestDto>
+    {
+        public StartInterviewValidator()
+        {
+            RuleFor(x => x.EvaluatorId)
+                .GreaterThan(0)
+                .WithMessage("EvaluatorId không hợp lệ");
+
+            RuleFor(x => x.EvaluatorName)
+                .NotEmpty()
+                .WithMessage("Tên người phỏng vấn không được để trống");
+        }
+    }
+
+    public class FinishInterviewValidator : AbstractValidator<FinishInterviewRequestDto>
+    {
+        public FinishInterviewValidator()
+        {
+            RuleFor(x => x.Result)
+                .InclusiveBetween(1, 2)
+                .WithMessage("Result phải là 1 (Pass) hoặc 2 (Fail)");
+
+            RuleFor(x => x.Evaluation)
+                .MaximumLength(500)
+                .WithMessage("Đánh giá không được vượt quá 500 ký tự");
         }
     }
 }

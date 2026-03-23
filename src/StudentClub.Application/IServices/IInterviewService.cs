@@ -17,27 +17,27 @@ namespace StudentClub.Application.IServices
         Task<ApiResponse<InterviewResponseDto>> UpdateAsync(int id, UpdateInterviewRequestDto request);
 
         //// Xóa ứng viên phỏng vấn
-        //Task<ApiResponse> DeleteAsync(int id);
+        Task<ApiResponse> DeleteAsync(int id);
 
         //// Lấy chi tiết 1 ứng viên
-        //Task<ApiResponse<InterviewResponseDto>> GetByIdAsync(int id);
+        Task<ApiResponse<InterviewResponseDto>> GetByIdAsync(int id);
 
         //// Lấy danh sách interview có phân trang + filter
-        //Task<PagedResponse<InterviewResponseDto>> GetAllInterviewsAsync(InterviewFilter filter);
+        Task<PagedResponse<InterviewResponseDto>> GetAllInterviewsAsync(InterviewFilter filter);
 
         //// Check-in ứng viên khi đến
-        //Task<ApiResponse<InterviewResponseDto>> CheckInAsync(int id);
+        Task<ApiResponse<InterviewResponseDto>> CheckInAsync(int id);
 
         //// Bắt đầu phỏng vấn (gán người phỏng vấn)
-        //Task<ApiResponse<InterviewResponseDto>> StartAsync(int id, StartInterviewRequestDto request);
+        Task<ApiResponse<InterviewResponseDto>> StartAsync(int id, StartInterviewRequestDto request);
 
         //// Kết thúc phỏng vấn và chấm kết quả
-        //Task<ApiResponse<InterviewResponseDto>> FinishAsync(int id, FinishInterviewRequestDto request);
+        Task<ApiResponse<InterviewResponseDto>> FinishAsync(int id, FinishInterviewRequestDto request);
 
         //// Đánh dấu ứng viên không đến
-        //Task<ApiResponse<InterviewResponseDto>> NoShowAsync(int id);
+        Task<ApiResponse<InterviewResponseDto>> NoShowAsync(int id);
 
         //// Hủy phỏng vấn
-        //Task<ApiResponse<InterviewResponseDto>> CancelAsync(int id);
+        Task<ApiResponse<InterviewResponseDto>> CancelAsync(int id);
     }
 }
