@@ -69,10 +69,16 @@ namespace StudentClub.API.Validators.Interview
     {
         public FinishInterviewValidator()
         {
-            RuleFor(x => x.Result)
-                .InclusiveBetween(1, 2)
-                .WithMessage("Result phải là 1 (Pass) hoặc 2 (Fail)");
+            RuleFor(x => x.Evaluation)
+                .MaximumLength(500)
+                .WithMessage("Đánh giá không được vượt quá 500 ký tự");
+        }
+    }
 
+    public class UpdateInterviewAfterInterviewValidator : AbstractValidator<UpdateInterviewAfterInterview>
+    {
+        public UpdateInterviewAfterInterviewValidator()
+        {
             RuleFor(x => x.Evaluation)
                 .MaximumLength(500)
                 .WithMessage("Đánh giá không được vượt quá 500 ký tự");

@@ -32,6 +32,8 @@
 
         public string? Note { get; set; }
 
+        public int? CampaignId { get; set; }
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

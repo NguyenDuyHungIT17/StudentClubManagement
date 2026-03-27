@@ -10,6 +10,7 @@ namespace StudentClub.Application.DTOs.Filter
     {
         public int ClubId { get; set; }
 
+        public int? CampaignId { get; set; }
         public int? Status { get; set; }
 
         public int? Result { get; set; }

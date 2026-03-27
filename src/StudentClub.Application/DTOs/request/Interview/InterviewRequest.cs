@@ -16,6 +16,8 @@
         public string? CVUrl { get; set; }
 
         public string? Note { get; set; }
+
+        public int? CampaignId { get; set; }
     }
 
     //bắt đầu phỏng vấn
@@ -58,6 +60,17 @@
 
         public string? CVUrl { get; set; }
 
+        public string? Note { get; set; }
+    }
+
+    //update lại kết quả và đánh giá, sau khi phỏng vấn kết thúc
+    public class UpdateInterviewAfterInterview
+    {
+        /// <summary>
+        /// 1 = Pass, 2 = Fail
+        /// </summary>
+        public int Result { get; set; }
+        public string Evaluation { get; set; }
         public string? Note { get; set; }
     }
 }

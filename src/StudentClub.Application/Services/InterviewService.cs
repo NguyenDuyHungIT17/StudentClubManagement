@@ -185,6 +185,11 @@ namespace StudentClub.Application.Services
                     list = await _repo.GetAllAsync();
                 }
 
+                if (filter.CampaignId.HasValue && filter.CampaignId.Value > 0)
+                {
+                    list = list.Where(x => x.CampaignId == filter.CampaignId.Value).ToList();
+                }
+
                 // Filter by keyword
                 if (!string.IsNullOrWhiteSpace(filter.Keyword))
                 {
@@ -209,7 +214,9 @@ namespace StudentClub.Application.Services
                 var page = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
                 var size = filter.PageSize <= 0 ? 10 : filter.PageSize;
 
-                var items = list.Skip((page - 1) * size).Take(size).ToList();
+                var sortList = list.OrderByDescending(x => x.CreatedAt).ToList();
+
+                var items = sortList.Skip((page - 1) * size).Take(size).ToList();
 
                 return new PagedResponse<InterviewResponseDto>
                 {
@@ -294,9 +301,9 @@ namespace StudentClub.Application.Services
                 if (entity.Status != InterviewStatus.Interviewing)
                     return ApiResponse<InterviewResponseDto>.Failure(409, $"Không thể kết thúc khi trạng thái là {entity.Status}. Phải bắt đầu phỏng vấn trước");
 
-                // Rule: Phải có result (Pass/Fail)
-                if (request.Result < 1 || request.Result > 2)
-                    return ApiResponse<InterviewResponseDto>.Failure(400, "Result phải là 1 (Pass) hoặc 2 (Fail)");
+                //// Rule: Phải có result (Pass/Fail)
+                //if (request.Result < 1 || request.Result > 2)
+                //    return ApiResponse<InterviewResponseDto>.Failure(400, "Result phải là 1 (Pass) hoặc 2 (Fail)");
 
                 _mapping.MapFinish(entity, request);
 
@@ -366,6 +373,35 @@ namespace StudentClub.Application.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Lỗi cancel interview {Time}", DateTime.UtcNow);
+                return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
+            }
+        }
+
+        public async Task<ApiResponse<InterviewResponseDto>> UpdateResultAfterInterviewAsync(int id, UpdateInterviewAfterInterview request)
+        {
+            try
+            {
+                var entity = await _repo.GetByIdAsync(id);
+                if (entity == null)
+                    return ApiResponse<InterviewResponseDto>.Failure(404, "Không tìm thấy");
+
+                // Rule: Không hủy lần thứ 2
+                if (entity.Status == InterviewStatus.Registered || entity.Status == InterviewStatus.CheckedIn)
+                    return ApiResponse<InterviewResponseDto>.Failure(409, "Trạng thái không phù hợp");
+
+                entity.Result = (InterviewResult)request.Result;
+                entity.Evaluation = request.Evaluation;
+                entity.Note = request.Note;
+
+                await _repo.UpdateAsync(entity);
+                await _repo.SaveChangesAsync();
+
+                _logger.LogInformation("Update interview {InterviewId}", id);
+                return ApiResponse<InterviewResponseDto>.Success(_mapping.ToResponse(entity), "Đã Update");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi Update interview {Time}", DateTime.UtcNow);
                 return ApiResponse<InterviewResponseDto>.Failure(500, ex.Message);
             }
         }

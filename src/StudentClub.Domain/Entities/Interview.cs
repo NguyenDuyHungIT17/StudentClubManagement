@@ -70,6 +70,10 @@ namespace StudentClub.Domain.Entities
         /// </summary>
         public ApplicationType ApplicationType { get; set; } = ApplicationType.Online;
 
+        public int? CampaignId { get; set; }
+
+        [ForeignKey("CampaignId")]
+        public virtual Campaigns? Campaign { get; set; }
 
         // Navigation
         [ForeignKey("ClubId")]

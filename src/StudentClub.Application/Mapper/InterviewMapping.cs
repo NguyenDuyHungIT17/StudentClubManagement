@@ -26,7 +26,8 @@ namespace StudentClub.Application.Mapper
                 Note = dto.Note,
                 Status = status,
                 Result = 0,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                CampaignId = dto.CampaignId
             };
         }
 
@@ -104,6 +105,7 @@ namespace StudentClub.Application.Mapper
                 EvaluatorName = entity.EvaluatorName,
                 CVUrl = entity.CVUrl,
                 Note = entity.Note,
+                CampaignId = entity.CampaignId,
                 CreatedAt = entity.CreatedAt,
                 UpdatedAt = entity.UpdatedAt
             };

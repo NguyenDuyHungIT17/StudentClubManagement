@@ -26,6 +26,8 @@ namespace StudentClub.Infrastructure
             services.AddScoped<IEventRegistrationRepository, EventRegistrationRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddSingleton<IRealtimeConnectionManager ,WebSocketConnectionManager>();
+
+            services.AddScoped<ICampaignRepository, CampaignRepository>();
             return services;
         }
     }

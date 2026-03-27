@@ -25,7 +25,9 @@ namespace StudentClub.Application
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddSingleton<IRealtimeService, ChatService>();
             services.AddScoped<IUserContext, UserContext>();
+            services.AddScoped<ICampaignService, CampaignService>();
 
+            services.AddScoped<CampaignMapping>();
             services.AddScoped<EventMapping>();
             services.AddScoped<EventRegistrationMapping>();
             services.AddScoped<FeedbackMapping>();

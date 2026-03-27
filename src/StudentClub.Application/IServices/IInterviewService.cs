@@ -39,5 +39,8 @@ namespace StudentClub.Application.IServices
 
         //// Hủy phỏng vấn
         Task<ApiResponse<InterviewResponseDto>> CancelAsync(int id);
+
+        // Update khi phỏng vấn xong, pending -> pass/fail
+        Task<ApiResponse<InterviewResponseDto>> UpdateResultAfterInterviewAsync(int id, UpdateInterviewAfterInterview request);
     }
 }

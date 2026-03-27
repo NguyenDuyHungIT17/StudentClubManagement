@@ -21,7 +21,7 @@ namespace StudentClub.API.Controllers
         }
 
         //tạo trực tiếp walk in
-        [HttpPost]
+        [HttpPost("walkin")]
         [Authorize(Roles = "admin,leader")]
         public async Task<IActionResult> Create([FromBody] CreateInterviewRequestDto request)
         {
@@ -225,6 +225,20 @@ namespace StudentClub.API.Controllers
             }
         }
 
+        [HttpPut("{id}/after-result")]
+        [Authorize(Roles = "admin,leader")]
+        public async Task<IActionResult> UpdateResultAfterInterview(int id, [FromBody] UpdateInterviewAfterInterview request)
+        {
+            try
+            {
+                var result = await _service.UpdateResultAfterInterviewAsync(id, request);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
         private (int userId, string role) GetUserContext()
         {
             var userIdOnToken = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
