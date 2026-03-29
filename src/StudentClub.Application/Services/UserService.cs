@@ -83,6 +83,7 @@ namespace StudentClub.Application.Services
 
                 var result = new CreateUserResponseDto
                 {
+                    UserId = user.UserId,
                     Email = user.Email,
                     Role = user.Role,
                     ClubName = await _clubRepository.GetCLubNameByClubIdAsync(createUserRequset.ClubId)
@@ -211,6 +212,7 @@ namespace StudentClub.Application.Services
                         FullName = u.FullName,
                         Role = u.Role,
                         IsActive = u.IsActive,
+                        CreatedAt = u.CreatedAt
                     }).ToList();
                 }
                 else if (user.Role == "leader")
@@ -224,6 +226,7 @@ namespace StudentClub.Application.Services
                         FullName = u.FullName,
                         Role = u.Role,
                         IsActive = u.IsActive,
+                        CreatedAt = u.CreatedAt
                     }).ToList();
                 }
 
@@ -246,7 +249,9 @@ namespace StudentClub.Application.Services
                         .Where(x => x.Role == role)
                         .ToList();
                 }
-
+                userDtos = userDtos
+                    .OrderByDescending(x => x.CreatedAt)
+                    .ToList();
                 var total = userDtos.Count;
                 var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
                 var pageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;

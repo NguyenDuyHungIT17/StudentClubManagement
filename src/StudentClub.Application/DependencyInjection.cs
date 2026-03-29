@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using StudentClub.Application.IServices;
 using StudentClub.Application.IServices.IRealtimeService;
 using StudentClub.Application.Mapper;
+using StudentClub.Application.Mappings;
 using StudentClub.Application.Services;
 using StudentClub.Application.Services.RealtimeServices;
 
@@ -26,6 +27,7 @@ namespace StudentClub.Application
             services.AddSingleton<IRealtimeService, ChatService>();
             services.AddScoped<IUserContext, UserContext>();
             services.AddScoped<ICampaignService, CampaignService>();
+            services.AddScoped<IPhotoService, PhotoService>();
 
             services.AddScoped<CampaignMapping>();
             services.AddScoped<EventMapping>();
@@ -33,6 +35,7 @@ namespace StudentClub.Application
             services.AddScoped<FeedbackMapping>();
             services.AddScoped<ClubMemberMapping>();
             services.AddScoped<InterviewMapping>();
+            services.AddScoped<PhotoMapper>();
             return services;
         }
     }

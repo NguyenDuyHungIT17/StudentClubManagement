@@ -28,6 +28,7 @@ namespace StudentClub.Infrastructure
             services.AddSingleton<IRealtimeConnectionManager ,WebSocketConnectionManager>();
 
             services.AddScoped<ICampaignRepository, CampaignRepository>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
             return services;
         }
     }

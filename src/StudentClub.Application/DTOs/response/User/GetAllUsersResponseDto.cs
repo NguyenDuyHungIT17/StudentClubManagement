@@ -14,5 +14,6 @@ namespace StudentClub.Application.DTOs.response.User
 
         public string Role { get; set; } = string.Empty;
         public int? IsActive {get; set; }
+        public DateTime? CreatedAt { get; set; }
     }
 }
