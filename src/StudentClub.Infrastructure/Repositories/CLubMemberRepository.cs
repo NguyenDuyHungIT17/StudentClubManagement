@@ -60,5 +60,13 @@ namespace StudentClub.Infrastructure.Repositories
             _context.ClubMembers.Update(clubMember);
             return clubMember;
         }
+
+        public IQueryable<ClubMember> QueryClubMembers()
+        {
+            return _context.ClubMembers
+                .Include(x => x.Club)
+                .Include(x => x.User)
+                .AsNoTracking();
+        }
     }
 }

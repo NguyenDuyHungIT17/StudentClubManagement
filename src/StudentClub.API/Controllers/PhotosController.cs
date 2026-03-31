@@ -122,5 +122,16 @@ namespace StudentClub.API.Controllers
 
             return NotFound(result);
         }
+
+        [HttpGet("campaign/{campaignId}")]
+        public async Task<IActionResult> GetPhotosByCampaignId(int campaignId)
+        {
+            var result = await _photoService.GetPhotosByCampaignIdAsync(campaignId);
+
+            if (result.IsSuccess)
+                return Ok(result);
+
+            return NotFound(result);
+        }
     }
 }

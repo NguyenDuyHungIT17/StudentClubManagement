@@ -14,12 +14,18 @@ namespace StudentClub.Application.Services
     {
         private readonly ICampaignRepository _campaignRepository;
         private readonly IClubRepository _clubRepository;
+        private readonly IPhotoService _photoService;
         private readonly ILogger<CampaignService> _logger;
 
-        public CampaignService(ICampaignRepository campaignRepository, IClubRepository clubRepository, ILogger<CampaignService> logger)
+        public CampaignService(
+            ICampaignRepository campaignRepository,
+            IClubRepository clubRepository,
+            IPhotoService photoService,
+            ILogger<CampaignService> logger)
         {
             _campaignRepository = campaignRepository;
             _clubRepository = clubRepository;
+            _photoService = photoService;
             _logger = logger;
         }
 
@@ -59,6 +65,8 @@ namespace StudentClub.Application.Services
                 }
 
                 var result = CampaignMapping.ToDto(campaign);
+                // attach main photo url for this campaign
+                result.PhotoUrl = await _photoService.GetMainPhotoUrlAsync(null, null, null, null, campaign.CampaignId);
                 return ApiResponse<CampaignResponse>.Success(result);
             }
             catch (Exception ex)
@@ -115,6 +123,17 @@ namespace StudentClub.Application.Services
                     .Select(c => CampaignMapping.ToDto(c))
                     .ToList();
 
+                // Batch fetch main photo URLs for campaigns on this page
+                var campaignIds = items.Select(i => i.CampaignId).ToList();
+                var photoMap = campaignIds.Count > 0
+                    ? await _photoService.GetMainPhotoUrlsByCampaignIdsAsync(campaignIds)
+                    : new Dictionary<int, string?>();
+
+                foreach (var dto in items)
+                {
+                    dto.PhotoUrl = photoMap.ContainsKey(dto.CampaignId) ? photoMap[dto.CampaignId] : null;
+                }
+
                 var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
                 return new PagedResponse<CampaignResponse>
@@ -144,7 +163,7 @@ namespace StudentClub.Application.Services
                 }
 
                 // Verify club exists
-                var club = await _clubRepository.GetClubByClubIdAsync(request.ClubId);
+                var club = await _club_repository_getClubByClubIdAsync(request.ClubId);
                 if (club == null)
                 {
                     return ApiResponse<CampaignResponse>.Failure(404, "Câu lạc bộ không tồn tại");
@@ -155,6 +174,8 @@ namespace StudentClub.Application.Services
                 await _campaignRepository.SaveChangeAsync();
 
                 var result = CampaignMapping.ToDto(campaign);
+                // attach photo
+                result.PhotoUrl = await _photoService.GetMainPhotoUrlAsync(null, null, null, null, campaign.CampaignId);
                 return ApiResponse<CampaignResponse>.Success(result, "Cập nhật chiến dịch tuyển dụng thành công");
             }
             catch (Exception ex)
@@ -175,7 +196,7 @@ namespace StudentClub.Application.Services
                 }
 
                 await _campaignRepository.DeleteCampaignAsync(campaign);
-                await _campaignRepository.SaveChangeAsync();
+                await _campaign_repository_saveChangeAsync();
 
                 return ApiResponse.Success("Xóa chiến dịch tuyển dụng thành công");
             }
@@ -207,5 +228,9 @@ namespace StudentClub.Application.Services
                     : campaigns.OrderBy(c => c.CreatedAt).ToList(),
             };
         }
+
+        // small helpers to avoid many DI changes in other files
+        private Task<Club?> _club_repository_getClubByClubIdAsync(int id) => _clubRepository.GetClubByClubIdAsync(id);
+        private Task _campaign_repository_saveChangeAsync() => _campaignRepository.SaveChangeAsync();
     }
 }

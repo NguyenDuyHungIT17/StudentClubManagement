@@ -22,7 +22,8 @@ namespace StudentClub.Application.Mappings
                 UserId = request.UserId == 0 ? null : request.UserId,
                 ClubId = request.ClubId == 0 ? null : request.ClubId,
                 EventId = request.EventId == 0 ? null : request.EventId,
-                ClubMemberId = request.ClubMemberId == 0 ? null : request.ClubMemberId
+                ClubMemberId = request.ClubMemberId == 0 ? null : request.ClubMemberId,
+                CampaignsId = request.CampaignsId == 0 ? null : request.CampaignsId
             };
         }
 
@@ -39,7 +40,8 @@ namespace StudentClub.Application.Mappings
                 CreatedAt = photo.CreatedAt,
                 UserId = photo.UserId,
                 ClubId = photo.ClubId,
-                EventId = photo.EventId
+                EventId = photo.EventId,
+                CampaignsId = photo.CampaignsId
             };
         }
 

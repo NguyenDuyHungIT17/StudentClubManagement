@@ -190,65 +190,7 @@ namespace StudentClub.Application.Services
             }
         }
 
-        public async Task<ApiResponse<CreateEventRegistrationResponseDto>> CreateEventRegistrationAsync(CreateEventRegistrationRequestDto request, int currentUserId)
-        {
-            try
-            {
-                // Ưu tiên lấy UserId từ Frontend truyền lên. 
-                // Nếu Frontend truyền null và không nhập email khách -> lấy ID của người đang đăng nhập (trường hợp tự đăng ký)
-                int targetUserId = 0;
 
-                if (request.UserId.HasValue && request.UserId.Value > 0)
-                {
-                    targetUserId = request.UserId.Value;
-                }
-                else if (!request.UserId.HasValue && string.IsNullOrWhiteSpace(request.GuestEmail))
-                {
-                    targetUserId = currentUserId;
-                }
-
-                if (targetUserId > 0)
-                {
-                    var user = await _userRepository.GetUserByUserIdAsync(targetUserId);
-                    if (user == null)
-                    {
-                        return ApiResponse<CreateEventRegistrationResponseDto>
-                            .Failure(404, "Người dùng không tồn tại");
-                    }
-
-                    request.UserId = targetUserId;
-                    request.GuestEmail = null;
-                    request.GuestName = null;
-                }
-                else
-                {
-                    request.UserId = null; // Là khách vãng lai
-                    if (string.IsNullOrWhiteSpace(request.GuestEmail) ||
-                        string.IsNullOrWhiteSpace(request.GuestName))
-                    {
-                        return ApiResponse<CreateEventRegistrationResponseDto>
-                            .Failure(400, "Khách phải nhập Email và Tên");
-                    }
-                }
-
-                var entity = await _eventMapping.MapToEntity(request);
-
-                await _eventRegistrationRepository.AddEventRegistrationAsync(entity);
-                await _eventRegistrationRepository.SaveChangeAsynce();
-
-                var responseDto = await _eventMapping.MapToCreateEventRegistrationResponseDto(entity);
-
-                return ApiResponse<CreateEventRegistrationResponseDto>
-                    .Success(responseDto, "Đăng ký sự kiện thành công");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Lỗi khi thêm người tham gia sự kiện Thời gian: {Time}", DateTime.UtcNow);
-
-                return ApiResponse<CreateEventRegistrationResponseDto>
-                    .Failure(500, ex.Message);
-            }
-        }
 
         public async Task<ApiResponse<CreateEventRegistrationResponseDto>> Update(int id, CreateEventRegistrationRequestDto request, string role, int currentUserId)
         {
@@ -343,6 +285,68 @@ namespace StudentClub.Application.Services
                     .Failure(500, ex.Message);
             }
 
+        }
+
+        public async Task<ApiResponse<CreateEventRegistrationResponseDto>> CreateEventRegistrationWithUserAsync(CreateEventRegistrationRequestDto request, int currentUserId)
+        {
+            try
+            {
+                var user = await _userRepository.GetUserByUserIdAsync(currentUserId);
+                if (user == null)
+                {
+                    return ApiResponse<CreateEventRegistrationResponseDto>
+                        .Failure(404, "Người dùng không tồn tại");
+                }
+
+                request.UserId = currentUserId;
+                request.GuestEmail = null;
+                request.GuestName = null;
+
+                return await SaveEventRegistrationAsync(request);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi đăng ký sự kiện (user)");
+
+                return ApiResponse<CreateEventRegistrationResponseDto>
+                    .Failure(500, ex.Message);
+            }
+        }
+
+        public async Task<ApiResponse<CreateEventRegistrationResponseDto>> CreateEventRegistrationGuestAsync(CreateEventRegistrationRequestDto request)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(request.GuestEmail) ||
+                    string.IsNullOrWhiteSpace(request.GuestName))
+                {
+                    return ApiResponse<CreateEventRegistrationResponseDto>
+                        .Failure(400, "Khách phải nhập Email và Tên");
+                }
+
+                request.UserId = null;
+
+                return await SaveEventRegistrationAsync(request);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi đăng ký sự kiện (guest)");
+
+                return ApiResponse<CreateEventRegistrationResponseDto>
+                    .Failure(500, ex.Message);
+            }
+        }
+        private async Task<ApiResponse<CreateEventRegistrationResponseDto>> SaveEventRegistrationAsync(CreateEventRegistrationRequestDto request)
+        {
+            var entity = await _eventMapping.MapToEntity(request);
+
+            await _eventRegistrationRepository.AddEventRegistrationAsync(entity);
+            await _eventRegistrationRepository.SaveChangeAsynce();
+
+            var responseDto = await _eventMapping.MapToCreateEventRegistrationResponseDto(entity);
+
+            return ApiResponse<CreateEventRegistrationResponseDto>
+                .Success(responseDto, "Đăng ký sự kiện thành công");
         }
     }
 }

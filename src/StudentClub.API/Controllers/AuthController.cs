@@ -26,7 +26,7 @@ namespace StudentClub.API.Controllers
         {
             var result = await _authService.LoginAsync(request);
             if (result == null)
-                return Unauthorized(new { message = "Invalid email or password" });
+                return BadRequest(new { message = "Invalid email or password" });
 
             return Ok(result);
         }

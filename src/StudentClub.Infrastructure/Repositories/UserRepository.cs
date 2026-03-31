@@ -25,6 +25,11 @@ namespace StudentClub.Infrastructure.Repositories
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
+        public IQueryable<User> QueryUsers()
+        {
+            return _context.Users.AsNoTracking();
+        }
+
         public async Task<User> GetByFullnameAsync(string fullname)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.FullName == fullname);

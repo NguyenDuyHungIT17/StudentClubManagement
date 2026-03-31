@@ -13,6 +13,7 @@ namespace StudentClub.Application.DTOs.response.Campaign
         public string Title { get; set; } = null!;
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public string? PhotoUrl { get; set; }
         public bool IsActive { get; set; } = true;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

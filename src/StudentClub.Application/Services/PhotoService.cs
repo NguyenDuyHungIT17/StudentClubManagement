@@ -6,13 +6,9 @@ using StudentClub.Application.DTOs.request;
 using StudentClub.Application.DTOs.response;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
-using StudentClub.Application.Mappings; // Nhúng Mapper vào đây
+using StudentClub.Application.Mappings;
 using StudentClub.Domain.Entities;
 using StudentClub.Shared.ApiResponse;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentClub.Application.Services
 {
@@ -241,6 +237,7 @@ namespace StudentClub.Application.Services
                 return ApiResponse<PhotoResponseDto>.Failure(500, ex.Message);
             }
         }
+
         public async Task<ApiResponse<List<PhotoResponseDto>>> GetPhotosByClubMemberIdAsync(int clubMemberId)
         {
             try
@@ -257,6 +254,110 @@ namespace StudentClub.Application.Services
                 return ApiResponse<List<PhotoResponseDto>>.Failure(500, ex.Message);
             }
         }
+
+        public async Task<ApiResponse<List<PhotoResponseDto>>> GetPhotosByCampaignIdAsync(int campaignId)
+        {
+            try
+            {
+                var photos = await _photoRepository.GetPhotosByCampaignIdAsync(campaignId);
+                if (photos == null || !photos.Any())
+                    return ApiResponse<List<PhotoResponseDto>>.Failure(404, "Chiến dịch tuyển dụng này chưa có ảnh.");
+
+                return ApiResponse<List<PhotoResponseDto>>.Success(_photoMapper.ToListResponse(photos));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi lấy ảnh theo CampaignId: {CampaignId}", campaignId);
+                return ApiResponse<List<PhotoResponseDto>>.Failure(500, ex.Message);
+            }
+        }
+
+        // NEW: get main photo URL (single)
+        public async Task<string?> GetMainPhotoUrlAsync(int? userId = null, int? clubId = null, int? eventId = null, int? clubMemberId = null, int? campaignId = null)
+        {
+            try
+            {
+                var photo = await _photoRepository.GetMainPhotoAsync(userId, clubId, eventId, clubMemberId, campaignId);
+                return photo?.Url;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi lấy ảnh chính");
+                return null;
+            }
+        }
+
+        // NEW: batch map helpers
+        public async Task<Dictionary<int, string?>> GetMainPhotoUrlsByUserIdsAsync(List<int> userIds)
+        {
+            try
+            {
+                var map = await _photoRepository.GetMainPhotosByUserIdsAsync(userIds);
+                return map.ToDictionary(k => k.Key, v => v.Value?.Url);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi lấy ảnh chính cho UserIds");
+                return userIds.ToDictionary(id => id, id => (string?)null);
+            }
+        }
+
+        public async Task<Dictionary<int, string?>> GetMainPhotoUrlsByClubIdsAsync(List<int> clubIds)
+        {
+            try
+            {
+                var map = await _photoRepository.GetMainPhotosByClubIdsAsync(clubIds);
+                return map.ToDictionary(k => k.Key, v => v.Value?.Url);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi lấy ảnh chính cho ClubIds");
+                return clubIds.ToDictionary(id => id, id => (string?)null);
+            }
+        }
+
+        public async Task<Dictionary<int, string?>> GetMainPhotoUrlsByEventIdsAsync(List<int> eventIds)
+        {
+            try
+            {
+                var map = await _photoRepository.GetMainPhotosByEventIdsAsync(eventIds);
+                return map.ToDictionary(k => k.Key, v => v.Value?.Url);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi lấy ảnh chính cho EventIds");
+                return eventIds.ToDictionary(id => id, id => (string?)null);
+            }
+        }
+
+        public async Task<Dictionary<int, string?>> GetMainPhotoUrlsByClubMemberIdsAsync(List<int> clubMemberIds)
+        {
+            try
+            {
+                var map = await _photoRepository.GetMainPhotosByClubMemberIdsAsync(clubMemberIds);
+                return map.ToDictionary(k => k.Key, v => v.Value?.Url);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi lấy ảnh chính cho ClubMemberIds");
+                return clubMemberIds.ToDictionary(id => id, id => (string?)null);
+            }
+        }
+
+        public async Task<Dictionary<int, string?>> GetMainPhotoUrlsByCampaignIdsAsync(List<int> campaignIds)
+        {
+            try
+            {
+                var map = await _photoRepository.GetMainPhotosByCampaignIdsAsync(campaignIds);
+                return map.ToDictionary(k => k.Key, v => v.Value?.Url);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi lấy ảnh chính cho CampaignIds");
+                return campaignIds.ToDictionary(id => id, id => (string?)null);
+            }
+        }
+
         private async Task<bool> IsUserAuthorizedToUpdatePhotoAsync(int userId, Photo photo)
         {
             // Get user to check role

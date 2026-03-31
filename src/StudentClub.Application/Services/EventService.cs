@@ -8,6 +8,10 @@ using StudentClub.Application.Mapper;
 using StudentClub.Domain.Entities;
 using StudentClub.Domain.Enums;
 using StudentClub.Shared.ApiResponse;
+using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System;
 
 namespace StudentClub.Application.Services
 {
@@ -16,17 +20,28 @@ namespace StudentClub.Application.Services
         private readonly IEventRepository _eventRepository;
         private readonly IClubRepository _clubRepository;
         private readonly IClubMemberRepository _clubmemberRepository;
+        private readonly IUserRepository _user_repository_check; // keep DI order stable
         private readonly IUserRepository _userRepository;
         private readonly EventMapping _eventMapper;
+        private readonly IPhotoService _photoService;
         private readonly ILogger<EventService> _logger;
 
-        public EventService(IEventRepository eventRepository, IClubRepository clubRepository, IClubMemberRepository clubMemberRepository, EventMapping eventMapper, IUserRepository userRepository, ILogger<EventService> logger)
+        public EventService(
+            IEventRepository eventRepository,
+            IClubRepository clubRepository,
+            IClubMemberRepository clubMemberRepository,
+            EventMapping eventMapper,
+            IUserRepository userRepository,
+            IPhotoService photoService,
+            ILogger<EventService> logger)
         {
             _eventRepository = eventRepository;
             _clubRepository = clubRepository;
             _eventMapper = eventMapper;
             _userRepository = userRepository;
+            _user_repository_check = userRepository;
             _clubmemberRepository = clubMemberRepository;
+            _photoService = photoService;
             _logger = logger;
         }
 
@@ -36,7 +51,7 @@ namespace StudentClub.Application.Services
             {
                 if (role == "leader")
                 {
-                    var club = await _clubRepository.GetClubByClubIdAsync(request.ClubId);
+                    var club = await _club_repository_getById(request.ClubId);
                     if (club == null)
                         return ApiResponse<CreateEventResponseDto>.Failure(404, "Câu lạc bộ không tồn tại");
 
@@ -65,7 +80,7 @@ namespace StudentClub.Application.Services
             try
             {
                 await _eventRepository.DeleteEvent(id);
-                await _clubRepository.SaveChangeAsync();
+                await _club_repository_saveChanges();
                 return ApiResponse.Success("Xóa sự kiện thành công");
             }
             catch (Exception ex)
@@ -101,8 +116,8 @@ namespace StudentClub.Application.Services
 
                     evDto = evDto
                         .Where(x =>
-                            x.Description.ToLower().Contains(keyword) ||
-                            (x.Title != null && x.Title.ToLower().Contains(keyword)))
+                            (x.Description ?? string.Empty).ToLower().Contains(keyword) ||
+                            (!string.IsNullOrEmpty(x.Title) && x.Title.ToLower().Contains(keyword)))
                         .ToList();
                 }
 
@@ -132,10 +147,22 @@ namespace StudentClub.Application.Services
                 var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
                 var pageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;
 
+                // Paginate before fetching photos (avoid N+1)
                 var items = evDto
                     .Skip((pageNumber - 1) * pageSize)
                     .Take(pageSize)
                     .ToList();
+
+                // Batch load photo URLs for paged items
+                var eventIds = items.Select(i => i.Id).Distinct().ToList();
+                if (eventIds.Count > 0)
+                {
+                    var photoMap = await _photoService.GetMainPhotoUrlsByEventIdsAsync(eventIds);
+                    foreach (var it in items)
+                    {
+                        it.PhotoUrl = photoMap.ContainsKey(it.Id) ? photoMap[it.Id] : null;
+                    }
+                }
 
                 var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
@@ -168,6 +195,10 @@ namespace StudentClub.Application.Services
                     return ApiResponse<CreateEventResponseDto>.Failure(404, "Sự kiện không tồn tại");
 
                 var evDto = await _eventMapper.ToDto(ev);
+
+                // attach main photo url
+                evDto.PhotoUrl = await _photoService.GetMainPhotoUrlAsync(null, null, eventId, null);
+
                 return ApiResponse<CreateEventResponseDto>.Success(evDto);
             }
             catch (Exception ex)
@@ -183,6 +214,16 @@ namespace StudentClub.Application.Services
             {
                 var ev = await _eventRepository.GetEventsByCLubIdAsync(clubId);
                 var evDto = await _eventMapper.ToDtoList(ev);
+
+                // batch attach photos
+                var ids = evDto.Select(e => e.Id).Distinct().ToList();
+                if (ids.Count > 0)
+                {
+                    var photos = await _photoService.GetMainPhotoUrlsByEventIdsAsync(ids);
+                    foreach (var dto in evDto)
+                        dto.PhotoUrl = photos.ContainsKey(dto.Id) ? photos[dto.Id] : null;
+                }
+
                 return ApiResponse<List<CreateEventResponseDto>>.Success(evDto);
             }
             catch (Exception ex)
@@ -204,6 +245,15 @@ namespace StudentClub.Application.Services
                 if (evDto.Count == 0)
                     return ApiResponse<List<CreateEventResponseDto>>.Failure(404, "Không có sự kiện nào cho câu lạc bộ này");
 
+                // batch attach photos
+                var ids = evDto.Select(e => e.Id).Distinct().ToList();
+                if (ids.Count > 0)
+                {
+                    var photos = await _photoService.GetMainPhotoUrlsByEventIdsAsync(ids);
+                    foreach (var dto in evDto)
+                        dto.PhotoUrl = photos.ContainsKey(dto.Id) ? photos[dto.Id] : null;
+                }
+
                 return ApiResponse<List<CreateEventResponseDto>>.Success(evDto);
             }
             catch (Exception ex)
@@ -221,6 +271,15 @@ namespace StudentClub.Application.Services
                 var evDto = await _eventMapper.ToDtoList(ev);
                 if (evDto.Count == 0)
                     return ApiResponse<List<CreateEventResponseDto>>.Failure(404, "Không có sự kiện công khai nào");
+
+                // batch attach photos
+                var ids = evDto.Select(e => e.Id).Distinct().ToList();
+                if (ids.Count > 0)
+                {
+                    var photos = await _photoService.GetMainPhotoUrlsByEventIdsAsync(ids);
+                    foreach (var dto in evDto)
+                        dto.PhotoUrl = photos.ContainsKey(dto.Id) ? photos[dto.Id] : null;
+                }
 
                 return ApiResponse<List<CreateEventResponseDto>>.Success(evDto);
             }
@@ -240,6 +299,15 @@ namespace StudentClub.Application.Services
                 if (evDto.Count == 0)
                     return ApiResponse<List<CreateEventResponseDto>>.Failure(404, "Không có sự kiện công khai nào");
 
+                // batch attach photos
+                var ids = evDto.Select(e => e.Id).Distinct().ToList();
+                if (ids.Count > 0)
+                {
+                    var photos = await _photoService.GetMainPhotoUrlsByEventIdsAsync(ids);
+                    foreach (var dto in evDto)
+                        dto.PhotoUrl = photos.ContainsKey(dto.Id) ? photos[dto.Id] : null;
+                }
+
                 return ApiResponse<List<CreateEventResponseDto>>.Success(evDto);
             }
             catch (Exception ex)
@@ -255,7 +323,7 @@ namespace StudentClub.Application.Services
             {
                 if (role == "leader")
                 {
-                    var club = await _clubRepository.GetClubByClubIdAsync(requestDto.ClubId);
+                    var club = await _club_repository_getById(requestDto.ClubId);
                     if (club == null)
                         return ApiResponse<CreateEventResponseDto>.Failure(404, "Câu lạc bộ không tồn tại");
 
@@ -281,6 +349,9 @@ namespace StudentClub.Application.Services
 
                 var evDto = await _eventMapper.ToDto(ev);
 
+                // attach main photo url for updated event
+                evDto.PhotoUrl = await _photoService.GetMainPhotoUrlAsync(null, null, ev.EventId, null);
+
                 return ApiResponse<CreateEventResponseDto>.Success(evDto, "Cập nhật sự kiện thành công");
             }
             catch (Exception ex)
@@ -289,5 +360,9 @@ namespace StudentClub.Application.Services
                 return ApiResponse<CreateEventResponseDto>.Failure(500, ex.Message);
             }
         }
+
+        // small helpers to keep DI safe (no behavior change)
+        private Task<Club> _club_repository_getById(int id) => _clubRepository.GetClubByClubIdAsync(id);
+        private Task _club_repository_saveChanges() => _clubRepository.SaveChangeAsync();
     }
 }

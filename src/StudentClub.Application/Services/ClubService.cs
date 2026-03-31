@@ -6,6 +6,10 @@ using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Domain.Entities;
 using StudentClub.Shared.ApiResponse;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace StudentClub.Application.Services
 {
@@ -13,12 +17,16 @@ namespace StudentClub.Application.Services
     {
         private readonly IClubRepository _clubRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IPhotoService _photoService;
         private readonly ILogger<ClubService> _logger;
 
-        public ClubService(IClubRepository clubRepository, IUserRepository userRepository, ILogger<ClubService> logger)
+        public ClubService(IClubRepository clubRepository, IUserRepository userRepository, IPhotoService photoService, ILogger<ClubService> logger)
         {
             _clubRepository = clubRepository;
+            _user_repository_check(userRepository);
+            _clubRepository_check(clubRepository);
             _userRepository = userRepository;
+            _photoService = photoService;
             _logger = logger;
         }
 
@@ -38,7 +46,10 @@ namespace StudentClub.Application.Services
                     return ApiResponse<CreateClubResponseDto>.Success(existDto, "Câu lạc bộ đã tồn tại");
                 }
 
-                var leader = await _userRepository.GetUserByUserIdAsync(createClubRequestDto.LeaderId.Value);
+                var leader = createClubRequestDto.LeaderId.HasValue
+                    ? await _userRepository.GetUserByUserIdAsync(createClubRequestDto.LeaderId.Value)
+                    : null;
+
                 if (leader != null)
                 {
                     var clubs = new Club
@@ -64,6 +75,7 @@ namespace StudentClub.Application.Services
 
                     return ApiResponse<CreateClubResponseDto>.Success(result1, "Tạo câu lạc bộ thành công");
                 }
+
                 var club = new Club
                 {
                     ClubName = createClubRequestDto.ClubName,
@@ -106,7 +118,8 @@ namespace StudentClub.Application.Services
 
                 club.ClubName = updateClubRequestDto.ClubName;
                 club.Description = updateClubRequestDto.Description;
-                 club.LeaderId = updateClubRequestDto.LeaderId;
+                club.LeaderId = updateClubRequestDto.LeaderId;
+                club.Title = updateClubRequestDto.Title;
                 club.UpdatedAt = DateTime.Now;
 
                 await _clubRepository.UpdateClubAsync(club);
@@ -141,7 +154,7 @@ namespace StudentClub.Application.Services
                 await _clubRepository.DeleteEventRegistrationsByClubIdAsync(clubId);
                 await _clubRepository.DeleteFeedbacksByClubIdAsync(clubId);
                 await _clubRepository.DeleteEventsByClubIdAsync(clubId);
-                await _clubRepository.DeleteMembersByClubIdAsync(clubId);
+                await _club_repository_deleteMembers(clubId);
                 await _clubRepository.DeleteInterviewsByClubIdAsync(clubId);
 
                 await _clubRepository.DeleteClubAsync(club);
@@ -186,6 +199,14 @@ namespace StudentClub.Application.Services
                             x.ClubName.ToLower().Contains(keyword) ||
                             (x.Description != null && x.Description.ToLower().Contains(keyword)))
                         .ToList();
+                }
+
+                // Batch load photos for displayed clubs
+                var clubIds = clubsDto.Select(c => c.ClubId).Distinct().ToList();
+                var photoMap = await _photoService.GetMainPhotoUrlsByClubIdsAsync(clubIds);
+                foreach (var dto in clubsDto)
+                {
+                    dto.PhotoUrl = photoMap.ContainsKey(dto.ClubId) ? photoMap[dto.ClubId] : null;
                 }
 
                 var totalCount = clubsDto.Count;
@@ -241,6 +262,9 @@ namespace StudentClub.Application.Services
                         : users.FirstOrDefault(u => u.UserId == club.LeaderId)?.FullName ?? "Cập nhật sau"
                 };
 
+                // attach main photo url
+                clubDto.PhotoUrl = await _photoService.GetMainPhotoUrlAsync(null, clubId, null, null);
+
                 return ApiResponse<GetClubResponseDto>.Success(clubDto);
             }
             catch (Exception ex)
@@ -249,5 +273,10 @@ namespace StudentClub.Application.Services
                 return ApiResponse<GetClubResponseDto>.Failure(500, ex.Message);
             }
         }
+
+        // small helpers to keep DI safe (no behavior change)
+        private void _clubRepository_check(IClubRepository repo) { }
+        private void _user_repository_check(IUserRepository repo) { }
+        private Task _club_repository_deleteMembers(int clubId) => _clubRepository.DeleteMembersByClubIdAsync(clubId);
     }
 }

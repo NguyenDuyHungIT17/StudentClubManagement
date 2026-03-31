@@ -33,5 +33,7 @@ namespace StudentClub.Domain.Entities
         public int? EventId { get; set; }
 
         public int? ClubMemberId { get; set; }
+
+        public int? CampaignsId { get; set; }
     }
 }

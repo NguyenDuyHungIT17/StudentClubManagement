@@ -17,5 +17,7 @@ namespace StudentClub.Application.Interfaces
         Task<ClubMember> UpdateClubMemberAsync(ClubMember clubMember);
         Task<int> GetClubIdByUserId(int userId);
         Task Delete(int id);
+
+        IQueryable<ClubMember> QueryClubMembers();
     }
 }

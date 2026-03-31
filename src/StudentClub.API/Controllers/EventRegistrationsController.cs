@@ -38,8 +38,16 @@ namespace StudentClub.API.Controllers
         {
             var (userId, _) = GetUserContext();
 
-            var result = await _eventRegistrationService.CreateEventRegistrationAsync(request, userId);
+            var result = await _eventRegistrationService.CreateEventRegistrationWithUserAsync(request, userId);
 
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register-guest")]
+        public async Task<IActionResult> RegisterGuest(CreateEventRegistrationRequestDto request)
+        {
+            var result = await _eventRegistrationService.CreateEventRegistrationGuestAsync(request);
             return Ok(result);
         }
 

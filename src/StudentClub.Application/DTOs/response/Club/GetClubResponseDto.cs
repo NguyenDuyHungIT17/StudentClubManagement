@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentClub.Application.DTOs.response.Club
 {
@@ -15,5 +11,8 @@ namespace StudentClub.Application.DTOs.response.Club
         public string LeaderName { get; set; } = string.Empty;
 
         public DateTime? CreatedAt { get; set; }
+
+        // New: main photo url (prioritize PhotoType.Main; fallback to first)
+        public string? PhotoUrl { get; set; }
     }
 }

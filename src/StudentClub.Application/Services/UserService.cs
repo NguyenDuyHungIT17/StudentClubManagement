@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using StudentClub.Application.DTOs.Filter;
 using StudentClub.Application.DTOs.request.User;
 using StudentClub.Application.DTOs.response.User;
 using StudentClub.Application.Interfaces;
 using StudentClub.Application.IServices;
 using StudentClub.Domain.Entities;
-using StudentClub.Shared.ApiResponse; // Thêm namespace này
+using StudentClub.Shared.ApiResponse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +20,22 @@ namespace StudentClub.Application.Services
         private readonly IClubMemberRepository _clubMemberRepository;
         private readonly IClubRepository _clubRepository;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly IPhotoService _photoService;
         private readonly ILogger<UserService> _logger;
 
-        public UserService(IClubRepository clubRepository, IUserRepository userRepository, IClubMemberRepository clubMemberRepository, IPasswordHasher passwordHasher, ILogger<UserService> logger)
+        public UserService(
+            IClubRepository clubRepository,
+            IUserRepository userRepository,
+            IClubMemberRepository clubMemberRepository,
+            IPasswordHasher passwordHasher,
+            IPhotoService photoService,
+            ILogger<UserService> logger)
         {
             _clubMemberRepository = clubMemberRepository;
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
             _clubRepository = clubRepository;
+            _photoService = photoService;
             _logger = logger;
         }
 
@@ -34,6 +43,7 @@ namespace StudentClub.Application.Services
         {
             return new GetUserResponseDto
             {
+                UserId = user.UserId,
                 Email = user.Email,
                 FullName = user.FullName,
                 Role = user.Role,
@@ -52,7 +62,7 @@ namespace StudentClub.Application.Services
                 }
 
                 var clubExisting = await _clubRepository.GetClubByClubIdAsync(createUserRequset.ClubId);
-                    
+
                 if (clubExisting == null)
                 {
                     return ApiResponse<CreateUserResponseDto>.Failure(400, "Câu lạc bộ không tồn tại");
@@ -198,74 +208,77 @@ namespace StudentClub.Application.Services
         {
             try
             {
-                var user = await _userRepository.GetUserByUserIdAsync(id);
+                var caller = await _userRepository.GetUserByUserIdAsync(id);
+                if (caller == null) throw new Exception("Caller not found");
 
-                var users = await _userRepository.GetAllUsersAsync();
-                var userDtos = new List<GetAllUsersResponseDto>();
+                // Build queryable and apply role-based scope BEFORE materializing
+                var q = _userRepository.QueryUsers();
 
-                if (user.Role == "admin")
-                {
-                    userDtos = users.Select(u => new GetAllUsersResponseDto
-                    {
-                        userId = u.UserId,
-                        Email = u.Email,
-                        FullName = u.FullName,
-                        Role = u.Role,
-                        IsActive = u.IsActive,
-                        CreatedAt = u.CreatedAt
-                    }).ToList();
-                }
-                else if (user.Role == "leader")
+                if (caller.Role == "leader")
                 {
                     var clubId = await _clubMemberRepository.GetClubIdByUserId(id);
-                    var usersLeader = await _userRepository.GetUserByLeader(clubId);
-                    userDtos = usersLeader.Select(u => new GetAllUsersResponseDto
-                    {
-                        userId = u.UserId,
-                        Email = u.Email,
-                        FullName = u.FullName,
-                        Role = u.Role,
-                        IsActive = u.IsActive,
-                        CreatedAt = u.CreatedAt
-                    }).ToList();
-                }
+                    // get member ids for the leader's club
+                    var memberIds = await _clubMemberRepository.QueryClubMembers()
+                        .Where(cm => cm.ClubId == clubId)
+                        .Select(cm => cm.UserId)
+                        .ToListAsync();
 
+                    q = q.Where(u => memberIds.Contains(u.UserId));
+                }
+                // if admin, keep all users
+
+                // Apply filters at DB level
                 if (!string.IsNullOrWhiteSpace(filter.KeyWord))
                 {
                     var keyword = filter.KeyWord.Trim().ToLower();
-
-                    userDtos = userDtos
-                        .Where(x =>
-                            x.Email.ToLower().Contains(keyword) ||
-                            (x.FullName != null && x.FullName.ToLower().Contains(keyword)))
-                        .ToList();
+                    q = q.Where(u => (u.Email != null && u.Email.ToLower().Contains(keyword)) ||
+                                     (u.FullName != null && u.FullName.ToLower().Contains(keyword)));
                 }
 
                 if (!string.IsNullOrWhiteSpace(filter.Role))
                 {
                     var role = filter.Role.Trim().ToLower();
-
-                    userDtos = userDtos
-                        .Where(x => x.Role == role)
-                        .ToList();
+                    q = q.Where(u => u.Role != null && u.Role.ToLower() == role);
                 }
-                userDtos = userDtos
-                    .OrderByDescending(x => x.CreatedAt)
-                    .ToList();
-                var total = userDtos.Count;
+
+                // Count before paging
+                var total = await q.CountAsync();
+
                 var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
                 var pageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;
 
-                var items = userDtos
+                // Project only needed fields and page in DB
+                var projected = await q
+                    .OrderByDescending(u => u.CreatedAt)
                     .Skip((pageNumber - 1) * pageSize)
                     .Take(pageSize)
-                    .ToList();
+                    .Select(u => new GetAllUsersResponseDto
+                    {
+                        userId = u.UserId,
+                        Email = u.Email,
+                        FullName = u.FullName,
+                        Role = u.Role,
+                        IsActive = u.IsActive,
+                        CreatedAt = u.CreatedAt
+                    })
+                    .ToListAsync();
+
+                // Batch load photos for the page
+                var userIds = projected.Select(u => u.userId).ToList();
+                var photoMap = userIds.Count > 0
+                    ? await _photoService.GetMainPhotoUrlsByUserIdsAsync(userIds)
+                    : new Dictionary<int, string?>();
+
+                foreach (var dto in projected)
+                {
+                    dto.PhotoUrl = photoMap.ContainsKey(dto.userId) ? photoMap[dto.userId] : null;
+                }
 
                 var totalPages = (int)Math.Ceiling(total / (double)pageSize);
 
                 return new PagedResponse<GetAllUsersResponseDto>
                 {
-                    Items = items,
+                    Items = projected,
                     PageNumber = pageNumber,
                     PageSize = pageSize,
                     TotalPages = totalPages,
@@ -288,7 +301,9 @@ namespace StudentClub.Application.Services
 
                 if (roleUser == "admin")
                 {
-                    return ApiResponse<GetUserResponseDto>.Success(MapToDto(user));
+                    var dto = MapToDto(user);
+                    dto.PhotoUrl = await _photoService.GetMainPhotoUrlAsync(userId, null, null, null);
+                    return ApiResponse<GetUserResponseDto>.Success(dto);
                 }
 
                 if (roleUser == "leader")
@@ -297,7 +312,9 @@ namespace StudentClub.Application.Services
 
                     if (user.Role == "leader" && userId == userIdOnToken)
                     {
-                        return ApiResponse<GetUserResponseDto>.Success(MapToDto(user));
+                        var dto = MapToDto(user);
+                        dto.PhotoUrl = await _photoService.GetMainPhotoUrlAsync(userId, null, null, null);
+                        return ApiResponse<GetUserResponseDto>.Success(dto);
                     }
 
                     var clubId = await _clubMemberRepository.GetClubIdByUserId(userIdOnToken);
@@ -305,13 +322,17 @@ namespace StudentClub.Application.Services
 
                     if (usersInClub.Any(u => u.UserId == userId))
                     {
-                        return ApiResponse<GetUserResponseDto>.Success(MapToDto(user));
+                        var dto = MapToDto(user);
+                        dto.PhotoUrl = await _photoService.GetMainPhotoUrlAsync(userId, null, null, null);
+                        return ApiResponse<GetUserResponseDto>.Success(dto);
                     }
                 }
 
                 if (roleUser == "member" && userId == userIdOnToken)
                 {
-                    return ApiResponse<GetUserResponseDto>.Success(MapToDto(user));
+                    var dto = MapToDto(user);
+                    dto.PhotoUrl = await _photoService.GetMainPhotoUrlAsync(userId, null, null, null);
+                    return ApiResponse<GetUserResponseDto>.Success(dto);
                 }
 
                 return ApiResponse<GetUserResponseDto>.Failure(403, "Bạn không có quyền truy cập thông tin này.");
@@ -345,5 +366,8 @@ namespace StudentClub.Application.Services
                 return ApiResponse.Failure(500, ex.Message);
             }
         }
+
+        private void _club_repository_check(IClubRepository repo) { }
+
     }
 }

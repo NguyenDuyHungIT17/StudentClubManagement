@@ -15,5 +15,6 @@ namespace StudentClub.Application.DTOs.response
         public int? UserId { get; set; }
         public int? ClubId { get; set; }
         public int? EventId { get; set; }
+        public int? CampaignsId { get; set; }
     }
 }

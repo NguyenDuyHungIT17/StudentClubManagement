@@ -19,6 +19,7 @@ namespace StudentClub.Application.DTOs.request
         public int? ClubId { get; set; }
         public int? EventId { get; set; }
         public int? ClubMemberId { get; set; }
+        public int? CampaignsId { get; set; }
     }
 
     /// <summary>
