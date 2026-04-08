@@ -22,6 +22,8 @@ namespace StudentClub.Application.Interfaces
         Task DeleteEventsByClubIdAsync(int clubId);
         Task DeleteMembersByClubIdAsync(int clubId);
         Task DeleteInterviewsByClubIdAsync(int clubId);
+        Task DeleteCampaignsByClubIdAsync(int clubId);
+        Task DeleteChatMessagesByClubIdAsync(int clubId);
         Task DeleteClubAsync(Club club);
         Task SaveChangeAsync();
     }

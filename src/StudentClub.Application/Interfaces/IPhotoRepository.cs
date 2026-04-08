@@ -25,6 +25,14 @@ namespace StudentClub.Application.Interfaces
 
         Task UpdatePhotoAsync(Photo photo);
         Task DeletePhotoAsync(Photo photo);
+
+        Task DeletePhotosByUserIdAsync(int userId);
+        Task DeletePhotosByClubIdAsync(int clubId);
+        Task DeletePhotosByEventIdAsync(int eventId);
+        Task DeletePhotosByClubMemberIdAsync(int clubMemberId);
+        Task DeletePhotosByCampaignIdAsync(int campaignId);
+
+        Task DeletePhotoByAnyway(int anyId, int type); // type: 1-user, 2-club, 3-event, 4-clubMember, 5-campaign
         Task SaveChangesAsync();
     }
 }

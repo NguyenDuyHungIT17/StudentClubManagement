@@ -64,14 +64,54 @@ namespace StudentClub.Infrastructure.Repositories
 
         public async Task DeleteEventsByClubIdAsync(int clubId)
         {
+            var eventIds = await _context.Events
+                .Where(e => e.ClubId == clubId)
+                .Select(e => e.EventId)
+                .ToListAsync();
+
+            await _context.Photos
+                .Where(p => p.EventId.HasValue && eventIds.Contains(p.EventId.Value))
+                .ExecuteDeleteAsync(); 
+
             var events = _context.Events.Where(e => e.ClubId == clubId);
             _context.Events.RemoveRange(events);
         }
 
         public async Task DeleteMembersByClubIdAsync(int clubId)
         {
+            var memberIds = await _context.ClubMembers
+                .Where(m => m.ClubId == clubId)
+                .Select(m => m.ClubMemberId)
+                .ToListAsync();
+
+            await _context.Photos
+                .Where(p => p.ClubMemberId.HasValue && memberIds.Contains(p.ClubMemberId.Value))
+                .ExecuteDeleteAsync(); 
+
             var members = _context.ClubMembers.Where(m => m.ClubId == clubId);
             _context.ClubMembers.RemoveRange(members);
+        }
+
+        public async Task DeleteCampaignsByClubIdAsync(int clubId)
+        {
+            var campaignIds = await _context.Campaigns
+                .Where(c => c.ClubId == clubId)
+                .Select(c => c.CampaignId)
+                .ToListAsync();
+
+            await _context.Photos
+                .Where(p => p.CampaignsId.HasValue && campaignIds.Contains(p.CampaignsId.Value))
+                .ExecuteDeleteAsync();
+
+            var campaigns = _context.Campaigns.Where(c => c.ClubId == clubId);
+            _context.Campaigns.RemoveRange(campaigns);
+        }
+
+        public async Task DeleteChatMessagesByClubIdAsync(int clubId)
+        {
+            await _context.ChatMessages
+                .Where(m => m.ClubId == clubId)
+                .ExecuteDeleteAsync(); 
         }
 
         public async Task DeleteInterviewsByClubIdAsync(int clubId)

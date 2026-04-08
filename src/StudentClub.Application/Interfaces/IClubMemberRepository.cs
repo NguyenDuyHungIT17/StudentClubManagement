@@ -15,7 +15,7 @@ namespace StudentClub.Application.Interfaces
         Task<List<ClubMember>> GetAllClubMemberAsync();
         Task<ClubMember> GetClubMemberByIdAsync(int id);
         Task<ClubMember> UpdateClubMemberAsync(ClubMember clubMember);
-        Task<int> GetClubIdByUserId(int userId);
+        Task<int?> GetClubIdByUserId(int userId);
         Task Delete(int id);
 
         IQueryable<ClubMember> QueryClubMembers();

@@ -151,12 +151,14 @@ namespace StudentClub.Application.Services
                     return ApiResponse.Failure(404, "Club không tìm thấy");
                 }
 
+                await _photoService.DeletePhotoByAnyway(clubId, 2); // xóa ảnh liên quan đến club
                 await _clubRepository.DeleteEventRegistrationsByClubIdAsync(clubId);
                 await _clubRepository.DeleteFeedbacksByClubIdAsync(clubId);
                 await _clubRepository.DeleteEventsByClubIdAsync(clubId);
                 await _club_repository_deleteMembers(clubId);
                 await _clubRepository.DeleteInterviewsByClubIdAsync(clubId);
-
+                await _clubRepository.DeleteCampaignsByClubIdAsync(clubId);
+                await _clubRepository.DeleteChatMessagesByClubIdAsync(clubId);
                 await _clubRepository.DeleteClubAsync(club);
                 await _clubRepository.SaveChangeAsync();
 

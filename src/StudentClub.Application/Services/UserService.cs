@@ -241,6 +241,11 @@ namespace StudentClub.Application.Services
                     q = q.Where(u => u.Role != null && u.Role.ToLower() == role);
                 }
 
+                if (filter.IsActive.HasValue)
+                {
+                    q = q.Where(u => u.IsActive == filter.IsActive);
+                }
+
                 // Count before paging
                 var total = await q.CountAsync();
 

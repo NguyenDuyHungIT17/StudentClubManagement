@@ -10,6 +10,7 @@ namespace StudentClub.Application.DTOs.Filter
     {
         public string? KeyWord { get; set; }
         public string? Role { get; set; }
+        public int? IsActive { get; set; }
         
     }
 }

@@ -14,7 +14,7 @@ namespace StudentClub.Application.IServices
         Task<ApiResponse<PhotoResponseDto>> UpdatePhotoAsync(int photoId, UpdatePhotoRequestDto request, int userId);
         Task<ApiResponse<List<PhotoResponseDto>>> GetPhotosByClubMemberIdAsync(int clubMemberId);
         Task<ApiResponse<List<PhotoResponseDto>>> GetPhotosByCampaignIdAsync(int campaignId);
-
+        Task<ApiResponse> DeletePhotoByAnyway(int anyId, int type); // type: 1-user, 2-club, 3-event, 4-clubMember, 5-campaign
         // NEW: helpers to return main photo URL(s)
         Task<string?> GetMainPhotoUrlAsync(int? userId = null, int? clubId = null, int? eventId = null, int? clubMemberId = null, int? campaignId = null);
 

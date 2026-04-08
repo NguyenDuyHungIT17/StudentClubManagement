@@ -79,6 +79,7 @@ namespace StudentClub.Application.Services
         {
             try
             {
+                await _photoService.DeletePhotoByAnyway(id, 3); // delete all photos of this event (if any)
                 await _eventRepository.DeleteEvent(id);
                 await _club_repository_saveChanges();
                 return ApiResponse.Success("Xóa sự kiện thành công");

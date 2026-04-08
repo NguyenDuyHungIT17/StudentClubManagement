@@ -382,5 +382,20 @@ namespace StudentClub.Application.Services
 
             return false;
         }
+
+        public async Task<ApiResponse> DeletePhotoByAnyway(int anyId, int type)
+        {
+            try
+            {
+                await _photoRepository.DeletePhotoByAnyway(anyId, type);
+                await _photoRepository.SaveChangesAsync();
+                return ApiResponse.Success("Xóa ảnh thành công");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi xóa ảnh theo bất kỳ Id nào. AnyId: {AnyId}, Type: {Type}", anyId, type);
+                return ApiResponse.Failure(500, ex.Message);
+            }
+        }
     }
 }

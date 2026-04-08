@@ -20,6 +20,7 @@ namespace StudentClub.Infrastructure.Repositories
 
         public async Task Delete(int id)
         {
+           
             var cl = _context.ClubMembers.Where(x => x.ClubMemberId == id).FirstOrDefault();
             _context.ClubMembers.RemoveRange(cl);
         }
@@ -32,12 +33,18 @@ namespace StudentClub.Infrastructure.Repositories
             return clubMembers;
         }
 
-        public async Task<int> GetClubIdByUserId(int userId)
+        public async Task<int?> GetClubIdByUserId(int userId)
         {
-            var clubMember = await _context.ClubMembers.
-                Include(x => x.Club)
-                .Include(x => x.User)
-                .Where(u => u.UserId == userId).FirstOrDefaultAsync();
+            var clubMember = await _context.ClubMembers
+                .Where(u => u.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            if (clubMember == null)
+            {
+                // Không tìm thấy club cho user này
+                return null;
+            }
+
             return clubMember.ClubId;
         }
 

@@ -60,7 +60,7 @@ namespace StudentClub.Infrastructure.Repositories
             return ev.Title;
         }
 
-        public async Task<List<Event>> GetEventsByCLubIdAsync(int clubId)
+        public async Task<List<Event>> GetEventsByCLubIdAsync(int? clubId)
         {
             return await _context.Events.Where(e => e.ClubId == clubId).ToListAsync();
         }

@@ -1,37 +1,37 @@
 ﻿using StudentClub.Application.Interfaces;
-using StudentClub.Application.Realtime;
 using System.Collections.Concurrent;
 using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
 
-namespace StudentClub.Infrastructure.Realtime
+namespace StudentClub.Application.Realtime
 {
     /// <summary>
-    /// Manages WebSocket connections for real-time chat
+    /// Quản lý WebSocket connections
     /// </summary>
-    public class WebSocketConnectionManager : IRealtimeConnectionManager
+    public class RealtimeConnectionManager : IRealtimeConnectionManager
     {
-        private readonly ConcurrentDictionary<Guid, WebSocketConnection> _connections = new();
+        private readonly ConcurrentDictionary<Guid, WebSocketConnection> _connections =
+            new ConcurrentDictionary<Guid, WebSocketConnection>();
 
         /// <summary>
-        /// Add a new connection
+        /// Thêm connection mới
         /// </summary>
         public void Add(WebSocketConnection connection)
         {
-            // Disconnect old connection of same user if exists
+            // Disconnect connection cũ của user nếu có
             var oldConnection = _connections.Values.FirstOrDefault(c => c.UserId == connection.UserId);
             if (oldConnection != null)
             {
                 Remove(oldConnection.ConnectionId);
             }
 
-            _connections[connection.ConnectionId] = connection;
-            Console.WriteLine($"✅ Added connection: {connection.ConnectionId} - User {connection.UserId}");
+            _connections.TryAdd(connection.ConnectionId, connection);
+            Console.WriteLine($"Added connection: {connection.ConnectionId} - User {connection.UserId}");
         }
 
         /// <summary>
-        /// Remove a connection
+        /// Xóa connection
         /// </summary>
         public void Remove(Guid connectionId)
         {
@@ -42,16 +42,15 @@ namespace StudentClub.Infrastructure.Realtime
         }
 
         /// <summary>
-        /// Get connection by user ID
+        /// Lấy connection của user
         /// </summary>
         public WebSocketConnection? GetByUser(int userId)
         {
-            return _connections.Values.FirstOrDefault(c =>
-                c.UserId == userId && c.IsConnected);
+            return _connections.Values.FirstOrDefault(c => c.UserId == userId && c.IsConnected);
         }
 
         /// <summary>
-        /// Get all connections in a club
+        /// Lấy tất cả connection của 1 CLB
         /// </summary>
         public List<WebSocketConnection> GetByClub(int clubId)
         {
@@ -61,7 +60,7 @@ namespace StudentClub.Infrastructure.Realtime
         }
 
         /// <summary>
-        /// Get all leader/admin connections in a club
+        /// Lấy tất cả leader/admin của 1 CLB
         /// </summary>
         public List<WebSocketConnection> GetLeaders(int clubId)
         {
@@ -73,7 +72,7 @@ namespace StudentClub.Infrastructure.Realtime
         }
 
         /// <summary>
-        /// Send message to a single connection
+        /// Gửi message đến 1 connection
         /// </summary>
         public async Task SendAsync(WebSocketConnection connection, object payload)
         {
@@ -102,19 +101,7 @@ namespace StudentClub.Infrastructure.Realtime
         }
 
         /// <summary>
-        /// Broadcast message to multiple connections
-        /// </summary>
-        public async Task BroadcastAsync(object payload, List<WebSocketConnection> connections)
-        {
-            if (connections.Count == 0)
-                return;
-
-            var tasks = connections.Select(c => SendAsync(c, payload)).ToList();
-            await Task.WhenAll(tasks);
-        }
-
-        /// <summary>
-        /// Get all active connections
+        /// Lấy tất cả connections đang active
         /// </summary>
         public List<WebSocketConnection> GetAll()
         {
@@ -122,7 +109,7 @@ namespace StudentClub.Infrastructure.Realtime
         }
 
         /// <summary>
-        /// Get count of active connections
+        /// Số lượng connections hiện tại
         /// </summary>
         public int Count()
         {

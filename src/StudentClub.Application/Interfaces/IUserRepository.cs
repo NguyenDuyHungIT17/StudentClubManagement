@@ -11,7 +11,7 @@ namespace StudentClub.Application.Interfaces
         Task<string?> GetEmailByUserIdAsync(int userId);
         Task<User> GetUserByUserIdAsync(int userId);
         Task<User> GetByFullnameAsync(string username);
-        Task<List<User>> GetUserByLeader(int clubId);
+        Task<List<User>> GetUserByLeader(int? clubId);
         Task<List<User>?> GetAllUsersAsync();
         Task<string> GetUserNameByIdAsync(int userId);
         Task AddAsync(User user);

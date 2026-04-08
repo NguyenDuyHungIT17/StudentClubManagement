@@ -221,6 +221,76 @@ namespace StudentClub.Infrastructure.Repositories
             await Task.CompletedTask;
         }
 
+        public async Task DeletePhotosByUserIdAsync(int userId)
+        {
+            var photos = await _context.Photos
+                .Where(p => p.UserId == userId)
+                .ToListAsync();
+
+            if (photos.Count == 0) return;
+
+            _context.Photos.RemoveRange(photos);
+        }
+
+        public async Task DeletePhotosByClubIdAsync(int clubId)
+        {
+            var photos = await _context.Photos
+                .Where(p => p.ClubId == clubId)
+                .ToListAsync();
+
+            if (photos.Count == 0) return;
+
+            _context.Photos.RemoveRange(photos);
+        }
+
+        public async Task DeletePhotosByEventIdAsync(int eventId)
+        {
+            var photos = await _context.Photos
+                .Where(p => p.EventId == eventId)
+                .ToListAsync();
+
+            if (photos.Count == 0) return;
+
+            _context.Photos.RemoveRange(photos);
+        }
+
+        public async Task DeletePhotosByClubMemberIdAsync(int clubMemberId)
+        {
+            var photos = await _context.Photos
+                .Where(p => p.ClubMemberId == clubMemberId)
+                .ToListAsync();
+
+            if (photos.Count == 0) return;
+
+            _context.Photos.RemoveRange(photos);
+        }
+
+        public async Task DeletePhotosByCampaignIdAsync(int campaignId)
+        {
+            var photos = await _context.Photos
+                .Where(p => p.CampaignsId == campaignId)
+                .ToListAsync();
+
+            if (photos.Count == 0) return;
+
+            _context.Photos.RemoveRange(photos);
+        }
+
+        public async Task DeletePhotoByAnyway(int anyId, int type)
+        {
+            var photos = type switch
+            {
+                1 => await _context.Photos.Where(p => p.UserId == anyId).ToListAsync(),
+                2 => await _context.Photos.Where(p => p.ClubId == anyId).ToListAsync(),
+                3 => await _context.Photos.Where(p => p.EventId == anyId).ToListAsync(),
+                4 => await _context.Photos.Where(p => p.ClubMemberId == anyId).ToListAsync(),
+                5 => await _context.Photos.Where(p => p.CampaignsId == anyId).ToListAsync(),
+                _ => new List<Photo>()
+            };
+            if (photos.Count == 0) return;
+            _context.Photos.RemoveRange(photos);
+        }
+
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();

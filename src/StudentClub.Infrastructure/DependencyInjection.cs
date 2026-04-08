@@ -14,21 +14,29 @@ namespace StudentClub.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<StudentClubDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(
+                    configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly(typeof(StudentClubDbContext).Assembly.FullName)
+                )
+            );
 
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IClubRepository, ClubRepository>();
             services.AddScoped<IClubMemberRepository, CLubMemberRepository>();
-            services.AddScoped<IInterviewRepository, InterviewRepository>();
+
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IEventRegistrationRepository, EventRegistrationRepository>();
+            services.AddScoped<IInterviewRepository, InterviewRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
-            services.AddSingleton<IRealtimeConnectionManager ,WebSocketConnectionManager>();
 
             services.AddScoped<ICampaignRepository, CampaignRepository>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
+
+            services.AddScoped<IChatRepository, ChatRepository>();
+            services.AddSingleton<IRealtimeConnectionManager, WebSocketConnectionManager>();
+
             return services;
         }
     }

@@ -248,6 +248,7 @@ namespace StudentClub.Application.Services
                     return ApiResponse.Failure(400, "không tồn tại thành viên");
                 }
 
+                await _photoService.DeletePhotoByAnyway(id, 4); // type 4 = clubMember
                 await _clubmemberRepository.Delete(id);
                 await _clubmemberRepository.SaveChangeAsync();
                 return ApiResponse.Success("Xóa thành công");

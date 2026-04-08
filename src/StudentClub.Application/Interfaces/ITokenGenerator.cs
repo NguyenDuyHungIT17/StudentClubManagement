@@ -2,6 +2,6 @@
 {
     public interface ITokenGenerator
     {
-        string GenerateToken(int userId, string email, string role);
+        string GenerateToken(int userId, string email, string role, int? clubId = null);
     }
 }

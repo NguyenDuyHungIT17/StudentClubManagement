@@ -9,6 +9,7 @@ namespace StudentClub.Application.Services
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IClubMemberRepository _clubMemberRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly ITokenGenerator _tokenGenerator;
         private readonly IMemoryCache _cache;
@@ -19,6 +20,7 @@ namespace StudentClub.Application.Services
             IUserRepository userRepository,
             IPasswordHasher passwordHasher,
             ITokenGenerator tokenGenerator,
+            IClubMemberRepository clubMemberRepository,
             IMemoryCache cache,
             IEmailService emailSender,
             ILogger<AuthService> logger
@@ -27,6 +29,7 @@ namespace StudentClub.Application.Services
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
             _tokenGenerator = tokenGenerator;
+            _clubMemberRepository = clubMemberRepository;
             _cache = cache;
             _emailSender = emailSender;
             _logger = logger;
@@ -47,7 +50,14 @@ namespace StudentClub.Application.Services
                 int isActive = await _userRepository.GetIsActiveByEmailAsync(request.Email);
                 if (isActive == 0) return null;
 
-                var token = _tokenGenerator.GenerateToken(user.UserId, user.Email, user.Role);
+                int? clubId = null;
+                var clubIdUser = await _clubMemberRepository.GetClubIdByUserId(user.UserId);
+                if (clubIdUser != null)
+                {
+                    clubId = clubIdUser;
+                }
+
+                var token = _tokenGenerator.GenerateToken(user.UserId, user.Email, user.Role, clubId);
 
                 return new LoginResponseDto
                 {

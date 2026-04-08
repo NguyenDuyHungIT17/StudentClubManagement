@@ -11,9 +11,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Cấu hình TokenValidationParameters (QUAN TRỌNG ĐỂ WEBSOCKET CHẠY ĐƯỢC)
-// Bạn cần lấy Key, Issuer, Audience từ appsettings.json giống hệt như lúc config JWT
-var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]); // Đảm bảo key trong appsettings.json khớp
+var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]);
 var tokenValidationParams = new TokenValidationParameters
 {
     ValidateIssuer = true,
@@ -23,10 +21,9 @@ var tokenValidationParams = new TokenValidationParameters
     ValidIssuer = builder.Configuration["Jwt:Issuer"],
     ValidAudience = builder.Configuration["Jwt:Audience"],
     IssuerSigningKey = new SymmetricSecurityKey(key),
-    ClockSkew = TimeSpan.Zero // Tùy chọn: bỏ độ trễ mặc định 5 phút
+    ClockSkew = TimeSpan.Zero
 };
 
-// Đăng ký Singleton để ChatWebSocketEndpoint có thể gọi ra dùng
 builder.Services.AddSingleton(tokenValidationParams);
 
 builder.Services
@@ -71,13 +68,12 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-// 2. Cập nhật lại JWT Auth để dùng chung biến tokenValidationParams (Code gọn hơn)
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.SaveToken = true;
         options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = tokenValidationParams; // Dùng lại biến bên trên
+        options.TokenValidationParameters = tokenValidationParams;
     });
 
 builder.Services.AddCors(options =>
@@ -88,25 +84,31 @@ builder.Services.AddCors(options =>
             policy.WithOrigins("http://localhost:5173")
                   .AllowAnyHeader()
                   .AllowAnyMethod()
-                  .AllowCredentials() // WebSocket thường cần cái này nếu có cookie, nhưng token query string thì ko bắt buộc
-                    .WithExposedHeaders("x-pagination");
+                  .AllowCredentials()
+                  .WithExposedHeaders("x-pagination");
         });
 });
+
 builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseWebSockets(); // Phải đặt trước Authentication/Authorization
-ChatWebSocketEndpoint.MapChat(app);
+//app.UseHttpsRedirection();
 
 app.UseCors("AllowFrontend");
+
+app.UseWebSockets(new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromMinutes(1)
+});
+
+ChatWebSocketEndpoint.MapChat(app);
 
 app.UseAuthentication();
 app.UseAuthorization();

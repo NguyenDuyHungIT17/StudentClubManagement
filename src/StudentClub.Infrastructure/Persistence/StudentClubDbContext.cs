@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentClub.Domain.Entities;
+using StudentClub.Domain.Entities.Realtime;
 using StudentClub.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -18,26 +19,22 @@ public partial class StudentClubDbContext : DbContext
     }
 
     public virtual DbSet<Club> Clubs { get; set; }
-
     public virtual DbSet<ClubMember> ClubMembers { get; set; }
-
     public virtual DbSet<Event> Events { get; set; }
-
     public virtual DbSet<EventRegistration> EventRegistrations { get; set; }
-
     public virtual DbSet<Feedback> Feedbacks { get; set; }
-
     public virtual DbSet<Interview> Interviews { get; set; }
-
     public virtual DbSet<User> Users { get; set; }
-
     public virtual DbSet<Campaigns> Campaigns { get; set; }
     public virtual DbSet<Photo> Photos { get; set; }
+    public virtual DbSet<ChatConversation> ChatConversations { get; set; }
+    public virtual DbSet<ChatMessage> ChatMessages { get; set; }
+    public virtual DbSet<ChatUnreadMessage> ChatUnreadMessages { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         //=> optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=StudentClubManagement;Trusted_Connection=True;TrustServerCertificate=True;");
-    => optionsBuilder.UseSqlServer("Server=localhost;Database=StudentClubManagement;User Id=sa;Password=Duyhung@18022004sqlserver;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=localhost;Database=StudentClubManagement;User Id=sa;Password=Duyhung@18022004sqlserver;TrustServerCertificate=True;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Club>(entity =>
@@ -101,6 +98,7 @@ public partial class StudentClubDbContext : DbContext
             entity.Property(e => e.CheckName)
                 .HasMaxLength(100)
                 .IsRequired(false);
+
             entity.HasOne(d => d.Event).WithMany(p => p.EventRegistrations)
                 .HasForeignKey(d => d.EventId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -162,15 +160,9 @@ public partial class StudentClubDbContext : DbContext
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("GETDATE()");
 
-            // ✅ ENUM → INT
-            entity.Property(e => e.Status)
-                .HasConversion<int>();
-
-            entity.Property(e => e.Result)
-                .HasConversion<int>();
-
-            entity.Property(e => e.ApplicationType)
-                .HasConversion<int>();
+            entity.Property(e => e.Status).HasConversion<int>();
+            entity.Property(e => e.Result).HasConversion<int>();
+            entity.Property(e => e.ApplicationType).HasConversion<int>();
 
             entity.HasOne(d => d.Club)
                 .WithMany(p => p.Interviews)
@@ -204,7 +196,102 @@ public partial class StudentClubDbContext : DbContext
 
             entity.Property(e => e.Type)
                 .HasConversion<int>();
+
+            // ========== CASCADE DELETE CHO PHOTO ==========
+
+            entity.HasOne<User>()
+                .WithMany()
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne<Club>()
+                .WithMany()
+                .HasForeignKey(p => p.ClubId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne<Event>()
+                .WithMany()
+                .HasForeignKey(p => p.EventId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne<ClubMember>()
+                .WithMany()
+                .HasForeignKey(p => p.ClubMemberId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne<Campaigns>()
+                .WithMany()
+                .HasForeignKey(p => p.CampaignsId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
+
+        modelBuilder.Entity<ChatMessage>(entity =>
+        {
+            entity.HasKey(e => e.MessageId);
+            entity.Property(e => e.MessageId).UseIdentityColumn();
+
+            entity.Property(e => e.Content)
+                .IsRequired()
+                .HasMaxLength(5000);
+
+            entity.Property(e => e.MessageType)
+                .IsRequired()
+                .HasConversion<int>();
+
+            entity.Property(e => e.Status)
+                .HasConversion<int>();
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("GETUTCDATE()");
+
+            entity.Property(e => e.IsDeleted)
+                .HasDefaultValue(false);
+
+            entity.HasIndex(e => e.SenderId);
+            entity.HasIndex(e => e.RecipientId);
+            entity.HasIndex(e => e.ClubId);
+            entity.HasIndex(e => e.CreatedAt);
+            entity.HasIndex(e => e.IsDeleted);
+
+            entity.ToTable("ChatMessages");
+        });
+
+        modelBuilder.Entity<ChatConversation>(entity =>
+        {
+            entity.HasKey(e => e.ConversationId);
+            entity.Property(e => e.ConversationId).UseIdentityColumn();
+
+            entity.HasIndex(e => new { e.User1Id, e.User2Id }).IsUnique();
+
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+            entity.Property(e => e.UpdatedAt).HasDefaultValueSql("GETUTCDATE()");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
+
+            entity.HasIndex(e => e.User1Id);
+            entity.HasIndex(e => e.User2Id);
+            entity.HasIndex(e => e.LastMessageTime);
+            entity.HasIndex(e => e.IsActive);
+
+            entity.ToTable("ChatConversations");
+        });
+
+        modelBuilder.Entity<ChatUnreadMessage>(entity =>
+        {
+            entity.HasKey(e => e.UnreadId);
+            entity.Property(e => e.UnreadId).UseIdentityColumn();
+
+            entity.HasIndex(e => new { e.UserId, e.MessageId }).IsUnique();
+
+            entity.Property(e => e.ReceivedAt).HasDefaultValueSql("GETUTCDATE()");
+            entity.Property(e => e.IsRead).HasDefaultValue(false);
+
+            entity.HasIndex(e => e.UserId);
+            entity.HasIndex(e => e.IsRead);
+            entity.HasIndex(e => e.ReceivedAt);
+
+            entity.ToTable("ChatUnreadMessages");
+        });
+
         OnModelCreatingPartial(modelBuilder);
     }
 

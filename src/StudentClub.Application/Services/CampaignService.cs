@@ -195,6 +195,7 @@ namespace StudentClub.Application.Services
                     return ApiResponse.Failure(404, "Chiến dịch tuyển dụng không tồn tại");
                 }
 
+                await _photoService.DeletePhotoByAnyway(campaignId, 5); 
                 await _campaignRepository.DeleteCampaignAsync(campaign);
                 await _campaign_repository_saveChangeAsync();
 
