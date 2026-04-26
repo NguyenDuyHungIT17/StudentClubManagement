@@ -30,7 +30,7 @@ namespace StudentClub.API.Controllers
         }
 
         [HttpGet("club/{clubId}")]
-        [Authorize(Roles = "admin, leader")]
+        [Authorize(Roles = "admin, leader, member")]
         public async Task<IActionResult> GetClubMembersByClubId(int clubId)
         {
             var result = await _memberService.GetAllClubMemberByClubIdAsync(clubId);

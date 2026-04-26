@@ -19,6 +19,7 @@ namespace StudentClub.Application.Mapper
         {
             return new CreateFeedbackResponseDto
             {
+                Id = feedback.FeedbackId,
                 EventName = await _eventRepository.GetEventNameByIdAsync(feedback.EventId),
                 Comment = feedback.Comment,
                 Rating = feedback.Rating,

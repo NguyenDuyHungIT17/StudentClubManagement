@@ -27,7 +27,7 @@ namespace StudentClub.Infrastructure.Realtime
             }
 
             _connections[connection.ConnectionId] = connection;
-            Console.WriteLine($"✅ Added connection: {connection.ConnectionId} - User {connection.UserId}");
+            Console.WriteLine($"Added connection: {connection.ConnectionId} - User {connection.UserId}");
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace StudentClub.Infrastructure.Realtime
         {
             if (_connections.TryRemove(connectionId, out var connection))
             {
-                Console.WriteLine($"❌ Removed connection: {connectionId} - User {connection.UserId}");
+                Console.WriteLine($"Removed connection: {connectionId} - User {connection.UserId}");
             }
         }
 

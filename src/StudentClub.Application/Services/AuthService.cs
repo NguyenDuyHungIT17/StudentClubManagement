@@ -50,14 +50,9 @@ namespace StudentClub.Application.Services
                 int isActive = await _userRepository.GetIsActiveByEmailAsync(request.Email);
                 if (isActive == 0) return null;
 
-                int? clubId = null;
-                var clubIdUser = await _clubMemberRepository.GetClubIdByUserId(user.UserId);
-                if (clubIdUser != null)
-                {
-                    clubId = clubIdUser;
-                }
+                int? clubIdUser = await _clubMemberRepository.GetClubIdByUserId(user.UserId);
 
-                var token = _tokenGenerator.GenerateToken(user.UserId, user.Email, user.Role, clubId);
+                var token = _tokenGenerator.GenerateToken(user.UserId, user.Email, user.Role, clubIdUser);
 
                 return new LoginResponseDto
                 {

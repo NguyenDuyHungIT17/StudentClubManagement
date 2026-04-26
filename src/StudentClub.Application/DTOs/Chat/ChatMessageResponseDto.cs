@@ -61,5 +61,10 @@ namespace StudentClub.Application.DTOs.Chat
         /// Đánh dấu tin nhắn bị xóa
         /// </summary>
         public bool IsDeleted { get; set; }
+
+        public string? FromUserName { get; set; }
+        public string? ToUserName { get; set; }
+
+        public string? ClubName { get; set; }
     }
 }

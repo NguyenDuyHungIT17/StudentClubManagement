@@ -32,7 +32,7 @@ namespace StudentClub.Infrastructure.Utils
 
             if (clubId.HasValue)
             {
-                new Claim("clubId", clubId.Value.ToString());
+                claims.Add(new Claim("clubId", clubId.Value.ToString()));
             }
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
