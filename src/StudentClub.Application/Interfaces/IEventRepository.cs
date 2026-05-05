@@ -19,5 +19,9 @@ namespace StudentClub.Application.Interfaces
         Task<int> GetClubIdByEventId(int eventId);
         Task<Event?> GetByEventIdAsync(int eventId);
         Task UpdateAsync(Event e);
+
+        //chạy nền tự động để cập nhật trạng thái sự kiện đã kết thúc hay chưa
+        Task<int> AutoFinishExpiredEventsAsync(DateTime today);
+
     }
 }

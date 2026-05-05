@@ -14,9 +14,12 @@ public partial class Event
     public string Title { get; set; } = null!;
 
     public string? Description { get; set; }
+    public DateTime? StartDate { get; set; }
 
-    public DateTime? EventDate { get; set; }
+    public DateTime? EventDate { get; set; } //ngày kết thúc
 
+    public string? Location { get; set; }
+    public bool? IsFinish { get; set; } = false;
     public bool? IsPrivate { get; set; }
 
     public DateTime? CreatedAt { get; set; }

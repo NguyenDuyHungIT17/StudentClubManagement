@@ -90,5 +90,28 @@ namespace StudentClub.Infrastructure.Repositories
         {
             _context.Events.Update(e);
         }
+
+        public async Task<int> AutoFinishExpiredEventsAsync(DateTime today)
+        {
+            var expiredEvents = await _context.Events
+                .Where(e =>
+                    e.EventDate.HasValue &&
+                    e.EventDate.Value.Date < today.Date &&
+                    (e.IsFinish == null || e.IsFinish == false))
+                .ToListAsync();
+
+            if (!expiredEvents.Any())
+                return 0;
+
+            foreach (var ev in expiredEvents)
+            {
+                ev.IsFinish = true;
+                ev.UpdatedAt = DateTime.UtcNow;
+            }
+
+            await _context.SaveChangesAsync();
+            return expiredEvents.Count;
+        }
+
     }
 }

@@ -11,6 +11,9 @@ namespace StudentClub.Application.DTOs.response.Event
         public int? Priority { get; set; }
         public bool? IsPrivate { get; set; }
         public DateTime? EventDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public string? Location { get; set; }
+        public bool IsFinish { get; set; }
 
         /// <summary>
         /// Main event photo URL (prioritize PhotoType.Main, fallback to first uploaded photo)

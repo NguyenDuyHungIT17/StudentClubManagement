@@ -33,7 +33,7 @@ namespace StudentClub.Application
             services.AddScoped<IChatService, ChatService>();
 
             services.AddScoped<IRealtimeService, RealtimeService>();
-
+            services.AddScoped<IVnPayService, VnPayService>();
             services.AddScoped<ChatMapper>();
             services.AddScoped<CampaignMapping>();
             services.AddScoped<EventMapping>();

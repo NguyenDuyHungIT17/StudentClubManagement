@@ -23,7 +23,7 @@ namespace StudentClub.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, leader")]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserRequestDto request)
         {
             var result = await _userService.CreateUserAsync(request);

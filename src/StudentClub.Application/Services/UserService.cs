@@ -214,17 +214,6 @@ namespace StudentClub.Application.Services
                 // Build queryable and apply role-based scope BEFORE materializing
                 var q = _userRepository.QueryUsers();
 
-                if (caller.Role == "leader")
-                {
-                    var clubId = await _clubMemberRepository.GetClubIdByUserId(id);
-                    // get member ids for the leader's club
-                    var memberIds = await _clubMemberRepository.QueryClubMembers()
-                        .Where(cm => cm.ClubId == clubId)
-                        .Select(cm => cm.UserId)
-                        .ToListAsync();
-
-                    q = q.Where(u => memberIds.Contains(u.UserId));
-                }
                 // if admin, keep all users
 
                 // Apply filters at DB level
@@ -333,7 +322,7 @@ namespace StudentClub.Application.Services
                     }
                 }
 
-                if (roleUser == "member" && userId == userIdOnToken)
+                if (roleUser == "member" )
                 {
                     var dto = MapToDto(user);
                     dto.PhotoUrl = await _photoService.GetMainPhotoUrlAsync(userId, null, null, null);

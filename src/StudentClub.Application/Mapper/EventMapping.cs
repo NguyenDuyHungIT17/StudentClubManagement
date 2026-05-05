@@ -24,6 +24,9 @@ namespace StudentClub.Application.Mapper
                 Title = ev.Title,
                 EventDate = ev.EventDate,
                 Id = ev.EventId,
+                StartDate = ev.StartDate,
+                Location = ev.Location,
+                IsFinish = ev.IsFinish ?? false,
                 Priority = (int?)ev.Priority,
             };
         }
@@ -48,6 +51,9 @@ namespace StudentClub.Application.Mapper
                 Title = dto.Title,
                 EventDate = dto.EventDate,
                 CreatedAt = DateTime.UtcNow,
+                    StartDate = dto.StartDate,
+                    Location = dto.Location,
+                    IsFinish = false,
                 Priority = dto.Priority.HasValue
                             ? (EventPriority)dto.Priority.Value
                             : null

@@ -341,6 +341,10 @@ namespace StudentClub.Application.Services
                 ev.UpdatedAt = DateTime.UtcNow;
                 ev.Description = requestDto.Description;
                 ev.ClubId = requestDto.ClubId;
+                ev.IsFinish = requestDto.IsFinish;
+                ev.Location = requestDto.Location;
+                ev.StartDate = requestDto.StartDate;
+                ev.EventDate = requestDto.EventDate;
                 ev.IsPrivate = requestDto.IsPrivate;
                 ev.Priority = requestDto.Priority.HasValue
                             ? (EventPriority)requestDto.Priority.Value
@@ -361,6 +365,25 @@ namespace StudentClub.Application.Services
                 return ApiResponse<CreateEventResponseDto>.Failure(500, ex.Message);
             }
         }
+
+        public async Task<ApiResponse<int>> AutoFinishExpiredEventsAsync()
+        {
+            try
+            {
+                var today = DateTime.Now.Date;
+                var updatedCount = await _eventRepository.AutoFinishExpiredEventsAsync(today);
+
+                return ApiResponse<int>.Success(
+                    updatedCount,
+                    $"Đã tự động cập nhật {updatedCount} sự kiện hết hạn");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi khi tự động finish các event hết hạn");
+                return ApiResponse<int>.Failure(500, ex.Message);
+            }
+        }
+
 
         // small helpers to keep DI safe (no behavior change)
         private Task<Club> _club_repository_getById(int id) => _clubRepository.GetClubByClubIdAsync(id);

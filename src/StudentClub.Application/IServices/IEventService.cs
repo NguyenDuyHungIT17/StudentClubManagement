@@ -16,5 +16,7 @@ namespace StudentClub.Application.IServices
         Task<ApiResponse<List<CreateEventResponseDto>>> GetEventsByClubIdAsync(int userId);
         Task<ApiResponse> DeleteEvent(int id);
         Task<ApiResponse<List<CreateEventResponseDto>>> GetEventsByClubIdAsync(int clubId, string role);
+        Task<ApiResponse<int>> AutoFinishExpiredEventsAsync();
+
     }
 }
